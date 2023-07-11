@@ -1,0 +1,28 @@
+
+$color1: #D92332;
+$color2: #D94350;
+$color3: #21B6A8;
+$color4: #262526;
+$color5: #F2F2F2;
+
+.screen {
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-y: auto;
+
+  main {
+    width: 100%;
+  }
+
+}
+
+.medium {
+
+  max-width:1200px;
+  margin-left: auto;
+  margin-right: auto;
+  
+}

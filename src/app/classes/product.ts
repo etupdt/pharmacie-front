@@ -1,4 +1,4 @@
-import { Type } from "../enums/type"
+import { ProductType } from "../enums/product-type"
 import { Brand } from "./brand"
 
 export class Product {
@@ -11,7 +11,7 @@ export class Product {
     private stock: number,
     private brand: Brand,
     private imagePath: string,
-    private type: Type
+    private type: ProductType
   ) {}
 
   get getId () { return this.id }
@@ -29,7 +29,7 @@ export class Product {
   get getImagePath () { return this.imagePath }
   set setImagePath (imagePath: string) {this.imagePath = imagePath}
   get getType () { return this.type }
-  set setType (type: Type) {this.type = type}
+  set setType (type: ProductType) {this.type = type}
 
   deserialize(data: any): Product {
 

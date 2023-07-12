@@ -1,5 +1,98 @@
-<div>
-  <img *ngFor="let product of products"
-    src="{{backendImages + '/products/' + product.getImagePath}}" alt=""
-  >
+
+<div class="product-page">
+
+  <div>
+    <h1>Filtres</h1>
+    <div *ngIf="!cart$.display" class="product-filters">
+      <p>Marques</p>
+      <ul class="product-filter-brand">
+        <li *ngFor="let brand of brands">
+            <input type="checkbox" [checked]="checked(brand.getId, brandsChecked)" (click)="check(brand.getId, brandsChecked)"/>
+            <label>{{brand.getBrandName}}</label>
+          </li>
+      </ul>
+      <p>Types</p>
+      <ul class="product-filter-brand">
+        <li *ngFor="let productType of productTypes; let i = index">
+            <input type="checkbox" [checked]="checked(i, typesChecked)" (click)="check(i, brandsChecked)"/>
+            <label>{{productType}}</label>
+          </li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <h1>Les meilleurs produits de beauté, santé et bien-être</h1>
+    <div *ngIf="!cart$.display" class="product-cards">
+      <div *ngFor="let product of products | filterProduct:brandsChecked:[]:filters:refresh" class="product-card">
+        <img
+          src="{{backendImages + '/products/' + product.getImagePath}}" alt=""
+        >
+        <p>{{product.getLabel}}</p>
+        <p class="card-price">{{product.getPrice | number: '1.2-2'}} €</p>
+        <button class="card-add" (click)="addToCart(product)">Ajouter</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="cart$.display" class="cart-cards">
+
+    <div *ngFor="let product of products | filterProduct:[]:cart$:filters:refresh" class="product-card">
+
+      <mat-grid-list cols="6" rowHeight="70px">
+
+        <mat-grid-tile colspan="1" rowspan="3">
+          <img
+            src="{{backendImages + '/products/' + product.getImagePath}}" alt=""
+          >
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="3" rowspan="3">
+          <p class="p-label">{{product.getLabel}}</p>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="2">
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <div class="delete-icon">
+            <svg (click)="deleteCartProduct(product)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+              <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+            </svg>
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <p> {{getCartProductNumber(product)}} x {{product.getPrice}} €</p>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="1">
+          <p>{{product.getPrice * getCartProductNumber(product) | number: '1.2-2'}} €</p>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+
+    </div>
+
+    <div class="product-card">
+      <mat-grid-list cols="6" rowHeight="70px">
+
+        <mat-grid-tile colspan="5">
+          <p>Total</p>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <p>{{getCartTotal() | number: '1.2-2'}} €</p>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+
+    </div>
+
+  </div>
+
 </div>

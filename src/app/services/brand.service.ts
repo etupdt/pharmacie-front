@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,13 @@ export class BrandService {
 
   constructor() { }
 
-  mockBrands: string = `[
+  getBrands(): Observable<any> {
+
+    return of(this.mockBrands)
+
+  }
+
+  mockBrands: {}[] = [
     {
       'id': 0,
       'brandName': 'LA ROCHE ROSAY',
@@ -15,12 +22,12 @@ export class BrandService {
     },
     {
       'id': 1,
-      'brandName': 'OXYFORM',
+      'brandName': 'ZZZQUIL',
       'imagePath': ''
     },
     {
       'id': 2,
-      'brandName': 'OENOBIOL',
+      'brandName': 'CERAVE',
       'imagePath': ''
     },
     {
@@ -33,6 +40,6 @@ export class BrandService {
       'brandName': 'VICHY',
       'imagePath': ''
     },
-  ]`
+  ]
 
 }

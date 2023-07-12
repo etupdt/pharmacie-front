@@ -63,6 +63,16 @@ mat-flat-button {
   display: none;
 }
 
+.cart-zone {
+  display: flex;
+  flex-direction: row;
+
+  p {
+    margin: 0px;
+  }
+
+}
+
 mat-menu-content button {
   padding-left: 30px;
 }

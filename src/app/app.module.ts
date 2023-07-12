@@ -14,6 +14,7 @@ import { AccueilComponent } from './components/accueil/accueil.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { FilterProductPipe } from './pipes/filter-product.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     HeaderComponent,
     ProductsComponent,
     AccueilComponent,
-    MessageDialogComponent
+    MessageDialogComponent,
+    FilterProductPipe
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 
-$color1: #D92332;
-$color2: #D94350;
+$color1: #A3EBB1;
+$color2: #18A558;
 $color3: #21B6A8;
 $color4: #262526;
 $color5: #F2F2F2;
@@ -12,17 +12,15 @@ $color5: #F2F2F2;
   flex-direction: column;
   position: relative;
   overflow-y: auto;
+  background-color: $color5;
 
-  main {
+  .medium {
+
+    max-width:1400px;
+    margin-left: auto;
+    margin-right: auto;
     width: 100%;
+
   }
 
-}
-
-.medium {
-
-  max-width:1200px;
-  margin-left: auto;
-  margin-right: auto;
-  
 }

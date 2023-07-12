@@ -8,7 +8,7 @@ export class Brand {
 
   get getId () { return this.id }
   set setId (id: number) {this.id = id}
-  get getProductName () { return this.brandName }
+  get getBrandName () { return this.brandName }
   set setBrandName (brandName: string) {this.brandName = brandName}
   get getImagePath () { return this.imagePath }
   set setImagePath (imagePath: string) {this.imagePath = imagePath}

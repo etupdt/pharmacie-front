@@ -12,8 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AuthComponent implements OnInit {
 
-  @Input() auth!: Auth
-  @Input() state: string = "create"
+  auth!: Auth
 
   authForm!: FormGroup
 
@@ -32,8 +31,7 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.auth = this.authService.auth
-    this.initForm(this.auth)
+    this.initForm(this.authService.auth)
 /*    if (this.data.delai !== 0) {
       const interval = setInterval(() => {
         this.dialogRef.close();
@@ -104,21 +102,6 @@ export class AuthComponent implements OnInit {
         ],
       })
 
-      switch (this.state) {
-        case 'display' : {
-          this.authForm.disable()
-          break
-        }
-        case 'update' : {
-          this.authForm.enable()
-          break
-        }
-        case 'create' : {
-          this.authForm.enable()
-          break
-        }
-      }
-
       this.authForm.valueChanges.subscribe(change => {
         this.isUpdated = this.checkChanges()
       })
@@ -131,13 +114,13 @@ export class AuthComponent implements OnInit {
 
   checkChanges(): boolean {
 
-    this.auth.getEmail !== this.authForm.get("email")!.value ||
-    this.auth.getFirstName !== this.authForm.get("firstname")!.value ||
-    this.auth.getLastName !== this.authForm.get("lastname")!.value ||
-    this.auth.getAddress1 !== this.authForm.get("address1")!.value ||
-    this.auth.getAddress2 !== this.authForm.get("address2")!.value ||
-    this.auth.getZip !== this.authForm.get("zip")!.value ||
-    this.auth.getLocality !== this.authForm.get("locality")!.value
+    this.authService.auth.getEmail !== this.authForm.get("email")!.value ||
+    this.authService.auth.getFirstName !== this.authForm.get("firstname")!.value ||
+    this.authService.auth.getLastName !== this.authForm.get("lastname")!.value ||
+    this.authService.auth.getAddress1 !== this.authForm.get("address1")!.value ||
+    this.authService.auth.getAddress2 !== this.authForm.get("address2")!.value ||
+    this.authService.auth.getZip !== this.authForm.get("zip")!.value ||
+    this.authService.auth.getLocality !== this.authForm.get("locality")!.value
 
     return this.isUpdated
 
@@ -145,10 +128,22 @@ export class AuthComponent implements OnInit {
 
   saveAuth = () => {
 
+    this.authService.auth = new Auth(
+      1,
+      this.authForm.get("email")!.value,
+      this.authForm.get("firstname")!.value,
+      this.authForm.get("lastname")!.value,
+      this.authForm.get("address1")!.value,
+      this.authForm.get("address2")!.value,
+      this.authForm.get("zip")!.value,
+      this.authForm.get("locality")!.value
+    )
+
   }
 
   cancel = () => {
-
+    this.authService.selectedTab = this.authService.lastSelectedTab
+    this.authService.callRoute()
   }
 
   onResizeTable = (event: UIEvent) => {

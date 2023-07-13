@@ -77,15 +77,6 @@ export class ProductsComponent implements OnInit{
   }
 
   addToCart = (product: Product) => {
-    this.dialog.open(AuthComponent, {
-      data: {
-        type: 'Erreur',
-        message1: `Erreur lors de la lecture des marques`,
-        message2: '',
-        delai: 0
-      }
-    })
-
     this.cart$.products.push(product)
   }
 

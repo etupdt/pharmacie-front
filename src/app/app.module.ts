@@ -15,6 +15,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { FilterProductPipe } from './pipes/filter-product.pipe';
+import { AuthComponent } from './components/auth/auth.component';
+import { MatFormFieldModule } from  '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormErrorComponent } from './components/form-error/form-error.component';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,9 @@ import { FilterProductPipe } from './pipes/filter-product.pipe';
     ProductsComponent,
     AccueilComponent,
     MessageDialogComponent,
-    FilterProductPipe
+    FilterProductPipe,
+    AuthComponent,
+    FormErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +41,11 @@ import { FilterProductPipe } from './pipes/filter-product.pipe';
     MatMenuModule,
     MatIconModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -24,3 +24,22 @@ $color5: #F2F2F2;
   }
 
 }
+
+.cache {
+  display: none;
+}
+
+mat-grid-list {
+  width: 100%;
+}
+
+button {
+  width: 80%;
+  height: 80%;
+  border: 1px solid $color4;
+  background-color: $color5;
+  span, svg {
+    color: $color4
+  }
+}
+

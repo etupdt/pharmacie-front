@@ -30,10 +30,6 @@ mat-toolbar {
   display: none;
 }
 
-.login-icon {
-  display: inline-block;
-}
-
 .burger-icon {
   display: none;
 }
@@ -87,10 +83,6 @@ mat-menu-content button {
     flex: 1 1 auto;
   }
 
-  .burger-visible {
-    display: none;
-  }
-
 }
 
 @media screen and (max-width: 800px) {
@@ -99,7 +91,7 @@ mat-menu-content button {
     display: none;
   }
 
-  .login-icon {
+  .large-menu {
     display: none;
   }
 

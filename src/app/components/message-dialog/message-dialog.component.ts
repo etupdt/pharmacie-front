@@ -7,7 +7,7 @@ import { DialogMessage } from 'src/app/interfaces/message';
   templateUrl: './message-dialog.component.html',
   styleUrls: ['./message-dialog.component.scss']
 })
-export class MessageDialogComponent implements OnInit{
+export class MessageDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<MessageDialogComponent>,

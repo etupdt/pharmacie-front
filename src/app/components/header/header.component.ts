@@ -10,9 +10,10 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class HeaderComponent implements OnInit {
 
-  burgerMenu = 'cache'
+  burgerMenu = false
 
   selectedTabIndex: number = 0
+  lastSelectedTabIndex: number = 0
 
   onglets!: Route[]
 
@@ -32,12 +33,31 @@ export class HeaderComponent implements OnInit {
     this.callRoute()
   }
 
+  toggleCartPage = () => {
+    if (this.selectedTabIndex === 1) {
+      if (this.cart$.display) {
+        this.cart$.display = false;
+        this.selectedTabIndex = this.lastSelectedTabIndex
+      } else if (this.cart$.products.length !== 0) {
+        this.cart$.display = true;
+        this.lastSelectedTabIndex = 1
+      }
+    } else {
+      if (this.cart$.products.length !== 0) {
+        this.cart$.display = true;
+        this.lastSelectedTabIndex = this.selectedTabIndex
+        this.selectedTabIndex = 1;
+        this.callRoute()
+      }
+    }
+  }
+
   callRoute = (target?: string) => {
 
     localStorage.setItem('selectedTabIndex', `${this.selectedTabIndex}`)
     localStorage.setItem('selectedTabIndexTime', `${(new Date()).getTime()}`)
 
-    this.burgerMenu = 'cache'
+    this.burgerMenu = false
     if (target)
       this.router.navigate([target])
     else

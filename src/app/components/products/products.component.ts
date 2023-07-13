@@ -9,6 +9,8 @@ import { Brand } from 'src/app/classes/brand';
 import { Filter } from 'src/app/interfaces/filter.interface';
 import { Cart } from 'src/app/interfaces/cart.interface';
 import { ProductType } from 'src/app/enums/product-type';
+import { AuthService } from 'src/app/services/auth.service';
+import { AuthComponent } from '../auth/auth.component';
 
 @Component({
   selector: 'app-products',
@@ -43,10 +45,13 @@ export class ProductsComponent implements OnInit{
   constructor (
     private productService: ProductService,
     private brandService: BrandService,
+    private authService: AuthService,
     private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
+
+    this.authService.auth = this.authService.authInit
 
     for (let productType in ProductType) {
       if (isNaN(Number(productType)))
@@ -72,6 +77,15 @@ export class ProductsComponent implements OnInit{
   }
 
   addToCart = (product: Product) => {
+    this.dialog.open(AuthComponent, {
+      data: {
+        type: 'Erreur',
+        message1: `Erreur lors de la lecture des marques`,
+        message2: '',
+        delai: 0
+      }
+    })
+
     this.cart$.products.push(product)
   }
 
@@ -150,5 +164,7 @@ export class ProductsComponent implements OnInit{
     })
 
   }
+
+  get getAuth () {return this.authService.auth}
 
 }

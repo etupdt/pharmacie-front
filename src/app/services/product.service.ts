@@ -20,7 +20,7 @@ export class ProductService {
   detail = false
 
   constructor(
-    private http: HttpClient,
+//    private http: HttpClient,
   ) { }
 
   getProducts(): Observable<any> {
@@ -29,12 +29,13 @@ export class ProductService {
 
   }
 
-  sendMail = (mail: Mail): Observable<any> => {
+/*  sendMail = (mail: Mail): Observable<any> => {
+    return null
     return this.http.post(
       environment.useBackend + `/sendmail`,
       mail
     )
-  }
+  }*/
 
   mockProducts: any[] = [
     {

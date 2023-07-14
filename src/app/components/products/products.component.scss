@@ -20,7 +20,8 @@
     width: 320px;
     min-width: 320px;
 
-    p {
+    > p {
+      margin-top: 50px;
       width: 100%;
     }
 
@@ -120,6 +121,28 @@
 
     }
 
+  }
+
+}
+
+mat-slider {
+  margin: 0px;
+}
+
+.filters-slider {
+  margin: 20px;
+  margin-top: 0px;
+  padding-right: 30px;
+  width: 220px;
+}
+
+.filter-slider {
+  width: 160px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  p {
+    margin: 0px;
   }
 
 }

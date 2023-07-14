@@ -23,8 +23,8 @@ export class Auth {
   set setAddress1 (address1: string) {this.address1 = address1}
   get getAddress2 () { return this.address2 }
   set setAddress2 (address2: string) {this.address2= this.address2}
-  get getZip () { return this.lastName }
-  set setZip (lastName: string) {this.lastName = lastName}
+  get getZip () { return this.zip }
+  set setZip (zip: string) {this.zip = zip}
   get getLocality () { return this.locality }
   set setLocality (locality: string) {this.locality = locality}
 

@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.authService.selectedTabIndexObs.subscribe((selectedTabIndex) => {this.selectedTabIndex$ = selectedTabIndex})
+    this.authService.listenSelectedTabIndex.subscribe((selectedTabIndex) => {this.selectedTabIndex$ = selectedTabIndex})
 
     this.productService.listenCart.subscribe((cart) => {this.cart$ = cart as Cart})
     this.onglets = this.router.config
@@ -35,16 +35,19 @@ export class HeaderComponent implements OnInit {
     if (selectedTabTime && (new Date()).getTime() - +selectedTabTime < 180000) {
       this.authService.selectedTab = localStorage.getItem('selectedTab')!
     }
-    this.callRoute()
+    this.authService.callRoute()
   }
 
   toggleCartPage = () => {
+    console.log(this.authService.selectedTab, this.authService.lastSelectedTab)
     if (this.authService.selectedTab === 'Produits') {
+      if (this.productService.detail && this.cart$.products.length !== 0)
+        this.productService.detail = false
       if (this.cart$.display) {
         this.cart$.display = false;
         this.authService.selectedTab = this.authService.lastSelectedTab
-        console.log(this.authService.lastSelectedTab)
-        this.callRoute()
+        console.log(this.authService.selectedTab, this.authService.lastSelectedTab)
+        this.authService.callRoute()
       } else if (this.cart$.products.length !== 0) {
         this.cart$.display = true;
         this.authService.lastSelectedTab = 'Produits'
@@ -54,23 +57,20 @@ export class HeaderComponent implements OnInit {
         this.cart$.display = true;
         this.authService.lastSelectedTab = this.authService.selectedTab
         this.authService.selectedTab = 'Produits';
-        this.callRoute()
+        this.authService.callRoute()
       }
     }
   }
 
-  callRoute = (target?: number) =>  {
+  callRoute = (target: number) =>  {
+    this.authService.lastSelectedTab = this.authService.selectedTab
     this.burgerMenu = false
-    if (!isNaN(Number(target))) {
-      this.authService.callRoute(target)
-    }
-    else
-      this.authService.callRoute()
-
+    this.authService.callRoute(target)
   }
 
   setSelectedIndex = (index: number) => {
-    this.authService.selectedTabIndex = index
+    this.authService.selectedTabIndex.next(index)
   }
 
+  get getSelectedTabIndex () {return this.authService.selectedTabIndex}
 }

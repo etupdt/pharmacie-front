@@ -1,5 +1,11 @@
 
-<div class="product-page">
+<app-product
+  *ngIf="getDetail"
+  [product]="product"
+  (addProductToCart)="addToCart($event)"
+></app-product>
+
+<div *ngIf="!getDetail" class="products-page">
 
   <div>
     <h1 *ngIf="!cart$.display">Filtres</h1>
@@ -44,6 +50,7 @@
     <div *ngIf="!cart$.display" class="product-cards">
       <div *ngFor="let product of products | filterProduct:brandsChecked:typesChecked:[]:filters:refresh" class="product-card">
         <img
+          (click)="showDetail(product.getId)"
           src="{{backendImages + '/products/' + product.getImagePath}}" alt=""
         >
         <p>{{product.getLabel}}</p>
@@ -109,6 +116,10 @@
 
       </mat-grid-list>
 
+    </div>
+
+    <div>
+      <button mat-button (click)="sendmail()">Commander</button>
     </div>
 
   </div>

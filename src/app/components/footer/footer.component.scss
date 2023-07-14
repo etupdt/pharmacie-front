@@ -17,7 +17,7 @@ ol, ul {
 }
 
 .wrapper {
-  background-color:  $color3; 
+  background-color:  $color3;
   padding-right: 24px;
   margin-right: auto;
   margin-left: auto;
@@ -77,9 +77,6 @@ ol, ul {
   font-size: .875rem;
   padding: 6px 0;
 }
-
-
-/* DIS MOI S'IL EST NECESSAIRE DE FAIRE DES MEDIAS QUERIES pour tablette et desktop */
 
 @media screen and (min-width: 800px) {
   .list-inline {

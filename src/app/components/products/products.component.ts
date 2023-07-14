@@ -167,7 +167,38 @@ export class ProductsComponent implements OnInit{
   }
 
   sendMail = () => {
-    this.productService.sendMail()
+
+    this.productService.sendMail({
+      auth: this.authService.auth,
+      command: [
+        {
+          qte: 0,
+          product: this.product
+        }
+      ]
+    }).subscribe({
+      next: (res: any[]) => {
+        res.forEach(b => {
+          this.brands.push(new Brand(
+            b.id,
+            b.brandName,
+            b.imagePath,
+          ))
+        })
+        this.getProducts()
+      },
+      error: (error: { error: { message: any; }; }) => {
+        this.dialog.open(MessageDialogComponent, {
+          data: {
+            type: 'Erreur',
+            message1: `Erreur lors de la lecture des marques`,
+            message2: error.error.message,
+            delai: 0
+          }
+        })
+      }
+    })
+
   }
 
   get getAuth () {return this.authService.auth}

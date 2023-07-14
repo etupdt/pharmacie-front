@@ -31,6 +31,8 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (!this.authService.auth)
+      this.authService.auth = this.authService.authInit
     this.initForm(this.authService.auth)
 /*    if (this.data.delai !== 0) {
       const interval = setInterval(() => {
@@ -138,6 +140,9 @@ export class AuthComponent implements OnInit {
       this.authForm.get("zip")!.value,
       this.authForm.get("locality")!.value
     )
+
+    this.authService.selectedTab = this.authService.lastSelectedTab
+    this.authService.callRoute()
 
   }
 

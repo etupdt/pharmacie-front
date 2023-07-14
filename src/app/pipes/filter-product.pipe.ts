@@ -13,8 +13,9 @@ export class FilterProductPipe implements PipeTransform {
   transform(products: Product[], ...args: unknown[]): Product[] {
 
     const brandsId = args[0] as number[]
-    const cart = args[1] as Cart
-    const filters = args[1] as Filter[]
+    const typesId = args[1] as number[]
+    const cart = args[2] as Cart
+    const filters = args[3] as Filter[]
 
     return products.filter((product: Product) => {
 
@@ -27,12 +28,17 @@ export class FilterProductPipe implements PipeTransform {
       }
       else if (brandsId.length > 0 && brandsId.findIndex(id => id === product.getBrand.getId) < 0) {
 
-          returnValue = false
+        returnValue = false
+
+      }
+      else if (typesId.length > 0 && typesId.findIndex(id => id === product.getType) < 0) {
+
+        returnValue = false
 
       }
       else {
 
-/*        filters.forEach(filter => {
+        filters.forEach(filter => {
 
         switch (filter.name) {
 
@@ -45,7 +51,7 @@ export class FilterProductPipe implements PipeTransform {
         }
 
       })
-*/
+
     }
 
       return returnValue

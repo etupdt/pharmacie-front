@@ -19,7 +19,7 @@ export class AuthService {
     private router: Router,
   ) { }
 
-  authInit = new Auth(0, '', '', '', '', '', '', '')
+  authInit = new Auth(0, 'marie.dubois@test.fr', 'Marie', 'Dubois', '1 rue de la Paix', '', '45000', 'BAYONNE')
 
   callRoute = (target?: number) => {
 

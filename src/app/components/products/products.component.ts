@@ -33,10 +33,10 @@ export class ProductsComponent implements OnInit{
       name: 'Prix',
       unit: '€',
       inf: 0,
-      sup: 200,
+      sup: 60,
       step: 5,
       startValue: 0,
-      endValue: 200
+      endValue: 60
     },
   ]
 
@@ -64,7 +64,7 @@ export class ProductsComponent implements OnInit{
   }
 
   check = (id: number, array: number[]) => {
-    const index = this.brandsChecked.findIndex(brandId => brandId === id)
+    const index = array.findIndex(arrayId => arrayId === id)
     if (index === -1)
       array.push(id)
     else
@@ -73,7 +73,7 @@ export class ProductsComponent implements OnInit{
   }
 
   checked = (id: number, array: number[]) => {
-    return array.findIndex(brandId => brandId === id) !== -1
+    return array.findIndex(arrayId => arrayId === id) !== -1
   }
 
   addToCart = (product: Product) => {

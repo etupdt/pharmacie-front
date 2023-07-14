@@ -24,6 +24,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { ProductComponent } from './components/product/product.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ProductComponent } from './components/product/product.component';
     ReactiveFormsModule,
     MatInputModule,
     MatSliderModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -168,24 +168,33 @@ export class ProductsComponent implements OnInit{
 
   sendMail = () => {
 
-/*    this.productService.sendMail({
+    let products: {qte: number, product: Product}[] = []
+
+    this.products.forEach(product => {
+      const qte = this.getCartProductNumber(product)
+      if (qte > 0) {
+        products.push({
+          qte: qte,
+          product: product
+        })
+      }
+    })
+
+    this.productService.sendMail({
       auth: this.authService.auth,
-      command: [
-        {
-          qte: 0,
-          product: this.product
-        }
-      ]
+      command: products
     }).subscribe({
       next: (res: any[]) => {
-        res.forEach(b => {
-          this.brands.push(new Brand(
-            b.id,
-            b.brandName,
-            b.imagePath,
-          ))
+        this.cart$.products = []
+        this.cart$.display = false
+        this.dialog.open(MessageDialogComponent, {
+          data: {
+            type: 'Information',
+            message1: `La commande a été expédiée`,
+            message2: '',
+            delai: 2000
+          }
         })
-        this.getProducts()
       },
       error: (error: { error: { message: any; }; }) => {
         this.dialog.open(MessageDialogComponent, {
@@ -197,7 +206,7 @@ export class ProductsComponent implements OnInit{
           }
         })
       }
-    })*/
+    })
 
   }
 

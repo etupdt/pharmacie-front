@@ -1,0 +1,45 @@
+
+$color1: #A3EBB1;
+$color2: #18A558;
+$color3: #21B6A8;
+$color4: #262526;
+$color5: #F2F2F2;
+
+.screen {
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-y: auto;
+  background-color: $color5;
+
+  .medium {
+
+    max-width:1400px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+
+  }
+
+}
+
+.cache {
+  display: none;
+}
+
+mat-grid-list {
+  width: 100%;
+}
+
+button {
+  width: 80%;
+  height: 80%;
+  border: 1px solid $color4;
+  background-color: $color5;
+  span, svg {
+    color: $color4
+  }
+}
+

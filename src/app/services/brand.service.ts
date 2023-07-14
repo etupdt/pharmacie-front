@@ -40,6 +40,11 @@ export class BrandService {
       'brandName': 'VICHY',
       'imagePath': ''
     },
+    {
+      'id': 5,
+      'brandName': 'HYLO',
+      'imagePath': ''
+    },
   ]
 
 }

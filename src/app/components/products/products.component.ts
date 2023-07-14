@@ -3,14 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { Product } from 'src/app/classes/product';
 import { ProductService } from 'src/app/services/product.service';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
-import { environment } from 'src/environments/environment.development';
 import { BrandService } from 'src/app/services/brand.service';
 import { Brand } from 'src/app/classes/brand';
 import { Filter } from 'src/app/interfaces/filter.interface';
 import { Cart } from 'src/app/interfaces/cart.interface';
 import { ProductType } from 'src/app/enums/product-type';
 import { AuthService } from 'src/app/services/auth.service';
-import { AuthComponent } from '../auth/auth.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-products',
@@ -26,6 +25,8 @@ export class ProductsComponent implements OnInit{
   brandsChecked: number[] = []
   typesChecked: number[] = []
 
+  product!: Product
+
   backendImages = environment.useBackendImages
 
   filters: Filter[] = [
@@ -33,10 +34,10 @@ export class ProductsComponent implements OnInit{
       name: 'Prix',
       unit: '€',
       inf: 0,
-      sup: 200,
+      sup: 60,
       step: 5,
       startValue: 0,
-      endValue: 200
+      endValue: 60
     },
   ]
 
@@ -63,8 +64,14 @@ export class ProductsComponent implements OnInit{
 
   }
 
+  showDetail = (id: number) => {
+    console.log(id)
+    this.product = this.products.find(product => id === product.getId)!
+    this.productService.detail = true
+  }
+
   check = (id: number, array: number[]) => {
-    const index = this.brandsChecked.findIndex(brandId => brandId === id)
+    const index = array.findIndex(arrayId => arrayId === id)
     if (index === -1)
       array.push(id)
     else
@@ -73,19 +80,10 @@ export class ProductsComponent implements OnInit{
   }
 
   checked = (id: number, array: number[]) => {
-    return array.findIndex(brandId => brandId === id) !== -1
+    return array.findIndex(arrayId => arrayId === id) !== -1
   }
 
   addToCart = (product: Product) => {
-    this.dialog.open(AuthComponent, {
-      data: {
-        type: 'Erreur',
-        message1: `Erreur lors de la lecture des marques`,
-        message2: '',
-        delai: 0
-      }
-    })
-
     this.cart$.products.push(product)
   }
 
@@ -103,6 +101,8 @@ export class ProductsComponent implements OnInit{
     const index = this.cart$.products.findIndex(p => p.getId === product.getId)
     if (index > -1)
       this.cart$.products.splice(index, 1)
+    if (this.getCartTotal() === 0)
+      this.cart$.display = false;
     this.refresh++
   }
 
@@ -116,6 +116,7 @@ export class ProductsComponent implements OnInit{
             p.id,
             p.productName,
             p.label,
+            p.description,
             p.price,
             p.stock,
             brand!,
@@ -165,6 +166,42 @@ export class ProductsComponent implements OnInit{
 
   }
 
+  sendMail = () => {
+
+    this.productService.sendMail({
+      auth: this.authService.auth,
+      command: [
+        {
+          qte: 0,
+          product: this.product
+        }
+      ]
+    }).subscribe({
+      next: (res: any[]) => {
+        res.forEach(b => {
+          this.brands.push(new Brand(
+            b.id,
+            b.brandName,
+            b.imagePath,
+          ))
+        })
+        this.getProducts()
+      },
+      error: (error: { error: { message: any; }; }) => {
+        this.dialog.open(MessageDialogComponent, {
+          data: {
+            type: 'Erreur',
+            message1: `Erreur lors de la lecture des marques`,
+            message2: error.error.message,
+            delai: 0
+          }
+        })
+      }
+    })
+
+  }
+
   get getAuth () {return this.authService.auth}
+  get getDetail () {return this.productService.detail}
 
 }

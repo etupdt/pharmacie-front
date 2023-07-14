@@ -5,14 +5,18 @@
 
     <mat-toolbar-row class="toolbar-text">
 
-      <img src="assets/images/logo.png">
+      <div class="logo-zone">
 
-      <p>Pharmacie Du Pont</p>
+        <img src="assets/images/logo.png">
+
+        <p>Pharmacie Du Pont</p>
+
+      </div>
 
       <mat-tab-group [color]="'primary'"
         class="tab-group large-menu"
-        [(selectedIndex)]="selectedTabIndex"
-        (selectedTabChange)="callRoute()"
+        [(selectedIndex)]="selectedTabIndex$"
+        (selectedTabChange)="callRoute(selectedTabIndex$)"
         mat-stretch-tabs="false"
         mat-align-tabs="center"
       >
@@ -38,7 +42,7 @@
     </mat-toolbar-row>
 
     <mat-toolbar-row *ngFor="let onglet of onglets | slice:0:3; let i = index;" [ngClass]="(!burgerMenu) ? 'cache' : 'burger-visible'">
-      <a (click)="lastSelectedTabIndex = selectedTabIndex = i; callRoute()" mat-button>{{onglet.path}}</a>
+      <a (click)="callRoute(i)" mat-button>{{onglet.path}}</a>
     </mat-toolbar-row>
 
     <mat-toolbar-row [ngClass]="(!burgerMenu) ? 'cache' : 'burger-visible'">

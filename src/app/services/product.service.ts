@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Product } from '../classes/product';
 import { Cart } from '../interfaces/cart.interface';
+import { Mail } from '../interfaces/mail.interface';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +17,23 @@ export class ProductService {
   })
   listenCart = this.cart.asObservable()
 
-  constructor() { }
+  detail = false
+
+  constructor(
+    private http: HttpClient,
+  ) { }
 
   getProducts(): Observable<any> {
 
     return of(this.mockProducts)
 
+  }
+
+  sendMail = (mail: Mail): Observable<any> => {
+    return this.http.post(
+      environment.useBackend + `/sendmail`,
+      mail
+    )
   }
 
   mockProducts: any[] = [
@@ -88,6 +102,39 @@ export class ProductService {
       'brand': {'id': 1},
       'imagePath': 'Freestyle_Libre.webp',
       'type': 1
+    },
+    {
+      'id': 6,
+      'productName': 'Hylo-Dual 10ml',
+      'label': 'Hylo-Dual® 10ml',
+      'description': 'Permet de soulager la sécheresse et les irritations oculaires',
+      'price': 18.37,
+      'stock': 4,
+      'brand': {'id': 5},
+      'imagePath': 'Hylo-Dual_10ml.webp',
+      'type': 1
+    },
+    {
+      'id': 7,
+      'productName': 'Bioderma Sébium Gel Moussant',
+      'label': 'Bioderma Sébium Gel Moussant 500ml',
+      'description': 'Aide à nettoyer et à purifier les peaux mixtes à grasses',
+      'price': 13.29,
+      'stock': 4,
+      'brand': {'id': 5},
+      'imagePath': 'Bioderma_Sebium_Gel_Moussant.webp',
+      'type': 2
+    },
+    {
+      'id': 8,
+      'productName': 'Nuxe Rêve de Miel',
+      'label': 'Nuxe Rêve de Miel Gel Lavant Surgras Visage et Corps 400ml',
+      'description': 'Idéal pour le nettoyage quotidien du visage et du corps',
+      'price': 13.43,
+      'stock': 4,
+      'brand': {'id': 5},
+      'imagePath': 'Nuxe_Reve_de_Miel.webp',
+      'type': 2
     },
   ]
 

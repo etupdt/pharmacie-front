@@ -168,7 +168,7 @@ export class ProductsComponent implements OnInit{
 
   sendMail = () => {
 
-    this.productService.sendMail({
+/*    this.productService.sendMail({
       auth: this.authService.auth,
       command: [
         {
@@ -197,7 +197,7 @@ export class ProductsComponent implements OnInit{
           }
         })
       }
-    })
+    })*/
 
   }
 

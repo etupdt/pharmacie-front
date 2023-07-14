@@ -19,7 +19,6 @@ ol, ul {
 .wrapper {
   background-color:  $color3; 
   padding-right: 24px;
-  padding-left: 24px;
   margin-right: auto;
   margin-left: auto;
   max-width: 100vw;
@@ -30,6 +29,8 @@ ol, ul {
 }
 
 .footer_column_item_title {
+  margin: 3px 0;
+  font-size: 1.1em;
   font-style: italic;
 }
 
@@ -43,7 +44,6 @@ ol, ul {
   padding-right: 10px;
   justify-content: space-around;
   align-items: start ;
-  // max-width: 75%;
   svg{
     width: 35px;
   }
@@ -51,6 +51,7 @@ ol, ul {
 
 .layout {
   display: flex;
+  justify-content: space-evenly;
   padding: 0;
   list-style: none;
 }
@@ -60,12 +61,12 @@ ol, ul {
   vertical-align: top;
   width: 100%;
   padding-left: 24px;
-  font-size: 16px;
   font-size: 1rem;
 }
 
 .footer_copyright {
-  margin-top: 0.1%;
+  margin-top: 1px;
+  padding-right: 10px;
   background-color: $color3;
   display: flex;
   align-items: center;
@@ -79,3 +80,26 @@ ol, ul {
 
 
 /* DIS MOI S'IL EST NECESSAIRE DE FAIRE DES MEDIAS QUERIES pour tablette et desktop */
+
+@media screen and (min-width: 800px) {
+  .list-inline {
+    display: flex;
+    gap: 20px;
+  }
+
+  .footer_column_item_title {
+    margin-left: 50px;
+    font-style: italic;
+  }
+
+  .social-media {
+    margin-top: 20px;
+    padding: 5px;
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    svg{
+      width: 35px;
+    }
+  }
+}

@@ -23,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { MatButtonModule } from '@angular/material/button';
     AuthComponent,
     FormErrorComponent,
     FooterComponent
+    ProductComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,26 @@
+
+<div class="return-button">
+  <button (click)="setDetail = false">< retour</button>
+</div>
+
+<div class="product-page">
+
+  <div class="cadre-left">
+    <h3 class="p-label">{{product.getLabel}}</h3>
+    <img
+      src="{{backendImages + '/products/' + product.getImagePath}}" alt=""
+    >
+  </div>
+  <div class="cadre-middle">
+    <p class="p-label">{{product.getDescription}}</p>
+  </div>
+  <div class="cadre-right">
+    <div class="cadre-prix">
+      <p class="card-price">{{product.getPrice | number: '1.2-2'}} €</p>
+      <p class="p-label">{{product.getLabel}}</p>
+      <button mat-button class="card-add" (click)="this.addProductToCart.emit(product)">Ajouter</button>
+    </div>
+  </div>
+
+
+</div>

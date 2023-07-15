@@ -3,14 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { Product } from 'src/app/classes/product';
 import { ProductService } from 'src/app/services/product.service';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
-import { environment } from 'src/environments/environment.development';
 import { BrandService } from 'src/app/services/brand.service';
 import { Brand } from 'src/app/classes/brand';
 import { Filter } from 'src/app/interfaces/filter.interface';
 import { Cart } from 'src/app/interfaces/cart.interface';
 import { ProductType } from 'src/app/enums/product-type';
 import { AuthService } from 'src/app/services/auth.service';
-import { AuthComponent } from '../auth/auth.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-products',
@@ -25,6 +24,8 @@ export class ProductsComponent implements OnInit{
   cart$!: Cart
   brandsChecked: number[] = []
   typesChecked: number[] = []
+
+  product!: Product
 
   backendImages = environment.useBackendImages
 
@@ -63,6 +64,12 @@ export class ProductsComponent implements OnInit{
 
   }
 
+  showDetail = (id: number) => {
+    console.log(id)
+    this.product = this.products.find(product => id === product.getId)!
+    this.productService.detail = true
+  }
+
   check = (id: number, array: number[]) => {
     const index = array.findIndex(arrayId => arrayId === id)
     if (index === -1)
@@ -94,6 +101,8 @@ export class ProductsComponent implements OnInit{
     const index = this.cart$.products.findIndex(p => p.getId === product.getId)
     if (index > -1)
       this.cart$.products.splice(index, 1)
+    if (this.getCartTotal() === 0)
+      this.cart$.display = false;
     this.refresh++
   }
 
@@ -107,6 +116,7 @@ export class ProductsComponent implements OnInit{
             p.id,
             p.productName,
             p.label,
+            p.description,
             p.price,
             p.stock,
             brand!,
@@ -156,6 +166,11 @@ export class ProductsComponent implements OnInit{
 
   }
 
+  sendMail = () => {
+    this.productService.sendMail()
+  }
+
   get getAuth () {return this.authService.auth}
+  get getDetail () {return this.productService.detail}
 
 }

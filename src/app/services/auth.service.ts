@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '../classes/auth';
 import { Router } from '@angular/router';
-import { Observable, Observer } from 'rxjs';
+import { BehaviorSubject, Observable, Observer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,8 @@ export class AuthService {
 
   selectedTab: string = 'Accueil'
   lastSelectedTab: string = 'Accueil'
-  selectedTabIndex: number = 0
-  selectedTabIndexObs: Observable<number> = new Observable<number>()
+  selectedTabIndex = new BehaviorSubject<number>(0)
+  listenSelectedTabIndex = this.selectedTabIndex.asObservable()
 
   constructor(
     private router: Router,
@@ -29,6 +29,8 @@ export class AuthService {
 
     localStorage.setItem('selectedTab', `${this.selectedTab}`)
     localStorage.setItem('selectedTabTime', `${(new Date()).getTime()}`)
+
+    this.selectedTabIndex.next(this.router.config.findIndex(route => route.path === this.selectedTab))
 
     this.router.navigate([this.selectedTab])
 

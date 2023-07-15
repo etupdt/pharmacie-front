@@ -147,6 +147,7 @@ export class AuthComponent implements OnInit {
   }
 
   cancel = () => {
+    console.log(this.authService.selectedTab, this.authService.lastSelectedTab)
     this.authService.selectedTab = this.authService.lastSelectedTab
     this.authService.callRoute()
   }

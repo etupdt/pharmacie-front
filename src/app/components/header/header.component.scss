@@ -69,6 +69,22 @@ mat-flat-button {
 
 }
 
+.logo-zone {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  img {
+    width: 72px;
+  }
+
+  p {
+    margin-left: 20px;
+  }
+
+}
+
 mat-menu-content button {
   padding-left: 30px;
 }

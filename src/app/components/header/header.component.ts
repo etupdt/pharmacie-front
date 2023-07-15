@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { Cart } from 'src/app/interfaces/cart.interface';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -12,57 +13,64 @@ export class HeaderComponent implements OnInit {
 
   burgerMenu = false
 
-  selectedTabIndex: number = 0
-  lastSelectedTabIndex: number = 0
-
   onglets!: Route[]
 
   cart$!: Cart
 
+  selectedTabIndex$: number = 0
+
   constructor (
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+
+    this.authService.listenSelectedTabIndex.subscribe((selectedTabIndex) => {this.selectedTabIndex$ = selectedTabIndex})
+
     this.productService.listenCart.subscribe((cart) => {this.cart$ = cart as Cart})
     this.onglets = this.router.config
-    const selectedTabIndexTime = localStorage.getItem('selectedTabIndexTime')
-    if (selectedTabIndexTime && (new Date()).getTime() - +selectedTabIndexTime < 180000)
-      this.selectedTabIndex = +localStorage.getItem('selectedTabIndex')!
-    this.callRoute()
+    const selectedTabTime = localStorage.getItem('selectedTabTime')
+    if (selectedTabTime && (new Date()).getTime() - +selectedTabTime < 180000) {
+      this.authService.selectedTab = localStorage.getItem('selectedTab')!
+    }
+    this.authService.callRoute()
   }
 
   toggleCartPage = () => {
-    if (this.selectedTabIndex === 1) {
+    console.log(this.authService.selectedTab, this.authService.lastSelectedTab)
+    if (this.authService.selectedTab === 'Produits') {
+      if (this.productService.detail && this.cart$.products.length !== 0)
+        this.productService.detail = false
       if (this.cart$.display) {
         this.cart$.display = false;
-        this.selectedTabIndex = this.lastSelectedTabIndex
+        this.authService.selectedTab = this.authService.lastSelectedTab
+        console.log(this.authService.selectedTab, this.authService.lastSelectedTab)
+        this.authService.callRoute()
       } else if (this.cart$.products.length !== 0) {
         this.cart$.display = true;
-        this.lastSelectedTabIndex = 1
+        this.authService.lastSelectedTab = 'Produits'
       }
     } else {
       if (this.cart$.products.length !== 0) {
         this.cart$.display = true;
-        this.lastSelectedTabIndex = this.selectedTabIndex
-        this.selectedTabIndex = 1;
-        this.callRoute()
+        this.authService.lastSelectedTab = this.authService.selectedTab
+        this.authService.selectedTab = 'Produits';
+        this.authService.callRoute()
       }
     }
   }
 
-  callRoute = (target?: string) => {
-
-    localStorage.setItem('selectedTabIndex', `${this.selectedTabIndex}`)
-    localStorage.setItem('selectedTabIndexTime', `${(new Date()).getTime()}`)
-
+  callRoute = (target: number) =>  {
+    this.authService.lastSelectedTab = this.authService.selectedTab
     this.burgerMenu = false
-    if (target)
-      this.router.navigate([target])
-    else
-      this.router.navigate([this.router.config[this.selectedTabIndex].path])
-
+    this.authService.callRoute(target)
   }
 
+  setSelectedIndex = (index: number) => {
+    this.authService.selectedTabIndex.next(index)
+  }
+
+  get getSelectedTabIndex () {return this.authService.selectedTabIndex}
 }

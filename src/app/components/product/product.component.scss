@@ -1,0 +1,71 @@
+
+@import '../../app.component.scss';
+
+.product-page {
+
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  align-items: center;
+
+  .cadre-left {
+
+    h3 {
+      text-align: center;
+    }
+
+    img {
+      text-align: center;
+    }
+
+  }
+
+  .cadre-middle {
+    width: 50%;
+  }
+
+  .cadre-right {
+
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+
+    .cadre-prix {
+
+      border: solid 1px black;
+      width: 300px;
+      height: 90%;
+      text-align: center;
+      margin: 15px;
+
+      p {
+        margin: 10px;
+      }
+
+      .card-price {
+        color: rgb(243, 63, 171);
+        font-size:x-large;
+        font-weight: 550;
+      }
+
+      .card-add {
+        color: black;
+        background-color: $color1;
+        width: 94%;
+        height: 36px;
+        border: 0px;
+        border-radius: 5px;
+        margin: 8px;
+        text-align: center;
+      }
+
+    }
+
+  }
+
+}
+
+.return-button {
+  width: 80px;
+  margin: 10px;
+}

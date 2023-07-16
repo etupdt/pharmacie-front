@@ -10,7 +10,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { ProductsComponent } from './components/products/products.component';
-import { AccueilComponent } from './components/accueil/accueil.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -25,19 +24,20 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { ProductComponent } from './components/product/product.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ProductsComponent,
-    AccueilComponent,
     MessageDialogComponent,
     FilterProductPipe,
     AuthComponent,
     FormErrorComponent,
     FooterComponent,
-    ProductComponent
+    ProductComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

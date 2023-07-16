@@ -1,10 +1,7 @@
 import { Auth } from "../classes/auth";
 import { Product } from "../classes/product";
 
-export interface Mail {
+export interface MailContact {
   auth: Auth,
-  command: {
-    qte: number,
-    product: Product
-  }[]
+  message: string
 }

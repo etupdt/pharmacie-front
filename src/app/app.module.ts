@@ -25,6 +25,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { ProductComponent } from './components/product/product.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ContactComponent } from './components/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
     AuthComponent,
     FormErrorComponent,
     FooterComponent,
-    ProductComponent
+    ProductComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

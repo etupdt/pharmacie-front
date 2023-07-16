@@ -61,6 +61,16 @@ mat-flat-button {
 
 .cart-zone {
   display: flex;
+  flex-direction: row-reverse;
+
+  p {
+    margin: 0px;
+  }
+
+}
+
+.burger-zone {
+  display: flex;
   flex-direction: row;
 
   p {

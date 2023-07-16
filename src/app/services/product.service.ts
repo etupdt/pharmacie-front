@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Product } from '../classes/product';
 import { Cart } from '../interfaces/cart.interface';
-import { Mail } from '../interfaces/mail.interface';
+import { MailCommand } from '../interfaces/mail-command.interface';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
@@ -29,9 +29,9 @@ export class ProductService {
 
   }
 
-  sendMail = (mail: Mail): Observable<any> => {
+  sendMail = (mail: MailCommand): Observable<any> => {
     return this.http.post(
-      environment.useBackend + `/sendmail`,
+      environment.useBackend + `/sendmail/command`,
       mail
     )
   }

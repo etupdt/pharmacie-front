@@ -1,0 +1,41 @@
+<div *ngIf="contactForm" [formGroup]="contactForm" class="content">
+
+  <div class="row">
+
+    <div class="col-1">
+
+      <h3>
+        Veuillez saisir votre message
+      </h3>
+
+      <div class="mat-elevation-z8 detail">
+
+        <mat-grid-list cols="{{sizeTable}}" rowHeight="70px" (window:resize)="onResizeTable($event)">
+
+          <mat-grid-tile colspan="{{sizeTable}}" rowspan="4">
+            <mat-form-field class="mat-area">
+              <mat-label>Message</mat-label>
+              <textarea style="height: 100%;" class="textarea" matInput formControlName="message" type="text" name="message" placeholder="Message"></textarea>
+              <app-form-error [field]="getMessage"></app-form-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="2">
+            <button mat-raised-button (click)="sendMail()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-record-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+              </svg>
+              <span> Envoyer</span>
+            </button>
+          </mat-grid-tile>
+
+        </mat-grid-list>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+

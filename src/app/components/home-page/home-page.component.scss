@@ -25,11 +25,20 @@ article {
   }
 }
 
+.article-picture:first-child {
+  margin-top: 10px;
+}
+
+.article-picture-last {
+  margin-bottom: 20px;
+}
+
 .content {
-  padding-left: 10px;
+  padding-left: 30px;
 }
 
 .events-picture {
+  padding-left: 10px;
   img {
     width: 100vw;
   }

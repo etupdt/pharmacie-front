@@ -14,6 +14,7 @@ ul {
 ol, ul {
   margin: 0;
   list-style: none;
+  padding-left: 0;
 }
 
 .wrapper {
@@ -34,6 +35,10 @@ ol, ul {
   font-style: italic;
 }
 
+.footer_column_item_title:last-child {
+  margin: 3px 12px;
+}
+
 .footer_social-networks-item {
   width: 100px;
   height: auto;
@@ -44,7 +49,7 @@ ol, ul {
   padding-right: 10px;
   justify-content: space-around;
   align-items: start ;
-  svg{
+  img {
     width: 35px;
   }
 }
@@ -53,7 +58,10 @@ ol, ul {
   display: flex;
   justify-content: space-evenly;
   padding: 0;
+  padding: 20px 0;
   list-style: none;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .layout_item {
@@ -62,6 +70,27 @@ ol, ul {
   width: 100%;
   padding-left: 24px;
   font-size: 1rem;
+  > div {
+    justify-content: center;
+  }
+}
+
+.layout_item:first-child {
+  > div {
+    justify-content: start;
+  }
+}
+
+.layout_item:last-child {
+  
+  > div {
+    justify-content: end;
+  }
+
+  .footer_column_item_title {
+    margin: 3px 12px;
+  }
+
 }
 
 .footer_copyright {
@@ -85,7 +114,7 @@ ol, ul {
   }
 
   .footer_column_item_title {
-    margin-left: 50px;
+//    margin-left: 50px;
     font-style: italic;
   }
 

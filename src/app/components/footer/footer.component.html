@@ -6,21 +6,9 @@
                     <div class="footer_column_item">
                      <div class="footer_column_item_title">Sommaire</div>
                         <ol class="footer_info-links">
-                            <li class="footer_info-link">
-                                <a href="../accueil/accueil.component.html" title="Accueil">Accueil</a>
-                            </li>
-                            <li class="footer_info-link">
-                                <a href="../products/products.component.html" title="produits">Produits</a>
-                            </li>
-                            <li class="footer_info-link">
-                                <a href="#a_adapter" title="a_adapter">A adapter</a>
-                            </li>
-                            <li class="footer_info-link">
-                                <a href="#a_adapter" title="a_adapter">A adapter</a>
-                            </li>
-                            <li class="footer_info-link">
-                                <a href="#a_adapter" title="a_adapter">A adapter</a>
-                            </li>
+                          <li *ngFor="let onglet of onglets; let i = index;" class="footer_info-link">
+                              <a (click)="callRoute(i)" href="" title="Accueil">{{onglet.path}}</a>
+                          </li>
                        </ol>
                   </div>
               </div>

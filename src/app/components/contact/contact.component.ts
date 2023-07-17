@@ -30,6 +30,9 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (!this.authService.auth)
+      this.authService.auth = this.authService.authInit
+
     this.message = ''
 
     this.initForm(this.message)
@@ -78,10 +81,11 @@ export class ContactComponent implements OnInit {
     }).subscribe({
       next: (res: any[]) => {
         this.message = ''
+        this.initForm(this.message)
         this.dialog.open(MessageDialogComponent, {
           data: {
             type: 'Information',
-            message1: `La commande a été expédiée`,
+            message1: `Le mail de contact a été envoyé`,
             message2: '',
             delai: 2000
           }
@@ -91,7 +95,7 @@ export class ContactComponent implements OnInit {
         this.dialog.open(MessageDialogComponent, {
           data: {
             type: 'Erreur',
-            message1: `Erreur lors de la lecture des marques`,
+            message1: `Erreur lors de l\'envoi du mail de contact`,
             message2: error.error.message,
             delai: 0
           }

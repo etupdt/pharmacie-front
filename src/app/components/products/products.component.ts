@@ -190,7 +190,7 @@ export class ProductsComponent implements OnInit{
         this.dialog.open(MessageDialogComponent, {
           data: {
             type: 'Information',
-            message1: `La commande a été expédiée`,
+            message1: `Le mail de commande a été envoyé`,
             message2: '',
             delai: 2000
           }
@@ -200,7 +200,7 @@ export class ProductsComponent implements OnInit{
         this.dialog.open(MessageDialogComponent, {
           data: {
             type: 'Erreur',
-            message1: `Erreur lors de la lecture des marques`,
+            message1: `Erreur lors de l\'envoi du mail de commande`,
             message2: error.error.message,
             delai: 0
           }

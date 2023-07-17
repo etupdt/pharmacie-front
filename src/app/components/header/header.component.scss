@@ -15,6 +15,7 @@ mat-toolbar {
   margin: auto;
   display: flex;
   justify-content: space-between;
+  min-height: 100px;
 }
 
 .tab-group {
@@ -61,7 +62,7 @@ mat-flat-button {
 
 .cart-zone {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
 
   p {
     margin: 0px;
@@ -143,6 +144,7 @@ mat-menu-content button {
 
   mat-toolbar {
     background-color: $color3;
+    height: inherit;
   }
 
 }

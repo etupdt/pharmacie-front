@@ -40,6 +40,7 @@ export class HeaderComponent implements OnInit {
 
   toggleCartPage = () => {
     console.log(this.authService.selectedTab, this.authService.lastSelectedTab)
+    this.burgerMenu = false
     if (this.authService.selectedTab === 'Produits') {
       if (this.productService.detail && this.cart$.products.length !== 0)
         this.productService.detail = false
@@ -63,6 +64,7 @@ export class HeaderComponent implements OnInit {
   }
 
   callRoute = (target: number) =>  {
+    this.productService.detail = false
     this.authService.lastSelectedTab = this.authService.selectedTab
     this.burgerMenu = false
     this.authService.callRoute(target)

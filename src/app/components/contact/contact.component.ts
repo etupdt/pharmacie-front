@@ -30,7 +30,7 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.message = 'toto'
+    this.message = ''
 
     this.initForm(this.message)
 

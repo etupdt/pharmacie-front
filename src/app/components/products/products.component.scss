@@ -29,6 +29,14 @@
       list-style-type: none;
     }
 
+    button {
+      width: 100%;
+    }
+
+    .filters-slider {
+      margin-left: 50px;
+    }
+
   }
 
   .product-cards {
@@ -149,7 +157,8 @@ mat-slider {
 
 .command-button {
   padding: 1px 10px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   > button {
     width: 100%;
   }

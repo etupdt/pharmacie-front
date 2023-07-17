@@ -22,3 +22,16 @@ textarea {
   width: 50%;
   margin: auto;
 }
+
+@media screen and (max-width: 900px) {
+
+  .col-1 {
+    width: 100%;
+    margin: 0px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+}

@@ -38,7 +38,6 @@ article {
 .opinion { // JE N'AI PAS TROUVÉ ENCORE COMMENT AJOUTER LES ETOILES //
   height: 50px;
   background-color: lightgreen;
-  margin: 1px auto;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -62,7 +61,7 @@ article {
     .events-picture {
       img {
         width: 45vw;
-      };
+      }
     }
 
     .article-picture {

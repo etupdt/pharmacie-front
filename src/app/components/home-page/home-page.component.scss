@@ -1,0 +1,83 @@
+// START - Mobile first style
+main {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1px 5px;
+}
+
+              // ==== COMMENTAIRE POUR DENIS ==== //
+/* pour éviter le débordement de la croix en affichage mobile il faudrait ajouter 
+la propriété "overflow: hidden" à la balise <mat-toolbar-row> du header ou sinon
+retravailler sur le header le comportement de l'icône*/
+
+article {
+  margin: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.article-picture {
+  img {
+    width: 50vw;
+  }
+}
+
+.content {
+  padding-left: 10px;
+}
+
+.events-picture {
+  img {
+    width: 100vw;
+  }
+}
+
+.opinion { // JE N'AI PAS TROUVÉ ENCORE COMMENT AJOUTER LES ETOILES //
+  height: 50px;
+  background-color: lightgreen;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 10px auto;
+  p {
+    display: block;
+    padding: 3px;
+  }
+}
+// END - Mobile first style
+
+@media screen and (min-width: 800px) {
+  .events {
+      display: flex;
+      gap: 20px;
+      flex-direction: row;
+      align-items: center;
+      margin: 20px auto;
+    }
+
+    .events-picture {
+      img {
+        width: 45vw;
+      }
+    }
+
+    .article-picture {
+      img {
+        width: 45vw;
+      }
+    }
+
+    .opinion {
+      height: 100px;
+      width: 400px;
+      margin: 30px auto;
+      p {
+        display: block;
+        padding-top: 20px;
+        font-size: small;
+      }
+    }
+}

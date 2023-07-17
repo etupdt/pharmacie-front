@@ -38,27 +38,23 @@ export class ContactComponent implements OnInit {
 
   initForm = (message: string) => {
 
-    if (message) {
+    this.contactForm = this.formBuilder.group({
+      message: [
+        message,
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(32),
+          Validators.pattern(/^[0-9a-zA-Z -']{0,}$/)
+        ]
+      ],
+    })
 
-      this.contactForm = this.formBuilder.group({
-        message: [
-          message,
-          [
-            Validators.required,
-            Validators.minLength(2),
-            Validators.maxLength(32),
-            Validators.pattern(/^[0-9a-zA-Z -']{0,}$/)
-          ]
-        ],
-      })
+    this.contactForm.valueChanges.subscribe(change => {
+      this.isUpdated = this.checkChanges()
+    })
 
-      this.contactForm.valueChanges.subscribe(change => {
-        this.isUpdated = this.checkChanges()
-      })
-
-      this.isUpdated = false
-
-    }
+    this.isUpdated = false
 
   }
 

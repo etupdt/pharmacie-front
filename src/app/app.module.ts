@@ -26,6 +26,7 @@ import { ProductComponent } from './components/product/product.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ContactComponent } from './components/contact/contact.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { OnSiteServicesComponent } from './components/on-site-services/on-site-services.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     FooterComponent,
     ProductComponent,
     ContactComponent,
-    HomePageComponent
+    HomePageComponent,
+    OnSiteServicesComponent
   ],
   imports: [
     BrowserModule,

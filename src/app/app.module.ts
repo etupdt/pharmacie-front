@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs'; 
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { ProductsComponent } from './components/products/products.component';
@@ -26,6 +26,7 @@ import { ProductComponent } from './components/product/product.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ContactComponent } from './components/contact/contact.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { EvenementsPageComponent } from './components/evenements-page/evenements-page.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     FooterComponent,
     ProductComponent,
     ContactComponent,
-    HomePageComponent
+    HomePageComponent,
+    EvenementsPageComponent
   ],
   imports: [
     BrowserModule,

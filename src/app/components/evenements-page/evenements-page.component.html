@@ -1,0 +1,19 @@
+
+  <div class="evenements-page">
+
+    <ul>   
+         
+        <ng-template   ngFor let-evenement [ngForOf]="evenements"  >        
+           
+             <article class="evenement-item">
+   
+            
+               <h3> <span *ngIf=" evenement.date != null">{{ evenement.date[0]|date:'W LLL YYYY'}}</span> {{ evenement.title }}</h3>
+               <p class="evenement-description" *ngIf="evenement.photo != null" >{{evenement.description}}</p>
+
+             </article>   
+
+            </ng-template>  
+    </ul>
+
+ </div>   

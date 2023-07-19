@@ -14,7 +14,7 @@ export class FooterComponent implements OnInit {
 
   langages: string[] = ['fr', 'en', 'de', 'it']
 
-  selectedLangage: string = 'de'
+  selectedLangage: string = 'fr'
 
   constructor (
     private router: Router,

@@ -23,11 +23,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { ProductComponent } from './components/product/product.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ContactComponent } from './components/contact/contact.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { OnSiteServicesComponent } from './components/on-site-services/on-site-services.component';
 import { MatSelectModule } from '@angular/material/select';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -61,10 +63,21 @@ import { MatSelectModule } from '@angular/material/select';
     MatSliderModule,
     MatButtonModule,
     HttpClientModule,
-    MatSelectModule
-
+    MatSelectModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
+

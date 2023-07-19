@@ -83,7 +83,6 @@ import { EvenementsPageComponent } from './components/evenements-page/evenements
   providers: [],
   bootstrap: [AppComponent]
 })
-<<<<<<< HEAD
 export class AppModule implements DoBootstrap {
 
   ngDoBootstrap(appRef: ApplicationRef): void {
@@ -94,11 +93,8 @@ export class AppModule implements DoBootstrap {
 
 
 }
-=======
-export class AppModule { }
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 
->>>>>>> feature/langage

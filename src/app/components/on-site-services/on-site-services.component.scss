@@ -3,15 +3,26 @@
 
 .onsiteservice {
 
+  max-width:1200px;
   display: flex;
   flex-direction: row;
-  margin: 20px;
+  margin: 20px auto;
   border-radius: 8px;
   font-size: 1em;
 
+  img {
+    width: 280px;
+    height: auto;
+  }
+
+  h3 {
+    margin: 10px;
+    margin-top: 5px;
+  }
+
   > div {
 
-    padding: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     min-height: 100%;
@@ -37,6 +48,12 @@
 
 }
 
-img {
-  width: 400px;
+@media screen and (max-width: 1000px) {
+
+  .onsiteservice {
+
+    flex-direction: column;
+
+  }
+
 }

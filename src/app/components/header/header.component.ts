@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Cart } from 'src/app/interfaces/cart.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -22,8 +23,12 @@ export class HeaderComponent implements OnInit {
   constructor (
     private router: Router,
     private productService: ProductService,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private translate: TranslateService
+  ) {
+    translate.setDefaultLang('fr');
+  }
+
 
   ngOnInit(): void {
 

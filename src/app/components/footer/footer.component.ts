@@ -23,7 +23,7 @@ export class FooterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.onglets = this.router.config
+    this.onglets = this.router.config.filter(onglet => onglet.path !== '**')
   }
 
   callRoute = (target: number) =>  {

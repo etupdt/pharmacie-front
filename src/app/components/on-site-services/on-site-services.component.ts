@@ -3,6 +3,7 @@ import { OnSiteService } from 'src/app/classes/on-site-service';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 import { OnSiteServiceService } from 'src/app/services/on-site-service.service';
 import { MatDialog } from '@angular/material/dialog';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-on-site-services',
@@ -12,6 +13,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class OnSiteServicesComponent implements OnInit {
 
   onSiteServices: OnSiteService[] = []
+
+  backendImages = environment.useBackendImages
 
   constructor (
     private onSiteService: OnSiteServiceService,
@@ -33,6 +36,7 @@ export class OnSiteServicesComponent implements OnInit {
             p.description,
             p.price,
             p.duree,
+            p.imagePath
           ));
         })
       },

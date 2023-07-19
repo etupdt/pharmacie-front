@@ -1,0 +1,28 @@
+
+<div class="evenements-page">
+    <div class="breadcrump" ><a routerLink="/Accueil" alt="Accueil">Accueil</a> > <a href="/evenements" alt="evenements">Événements</a></div>
+
+    <div class="content">   <ul>   
+
+         
+        <ng-template   ngFor let-evenement [ngForOf]="evenements"  >        
+           
+             <article class="evenement-item">
+   
+            
+
+               <h3> <span *ngIf=" evenement.date != null">Du {{ evenement.date[0]|date:'W LLL YYYY'}} au {{ evenement.date[1]|date:'W LLL YYYY'}}</span> -  {{ evenement.title }}</h3>
+               <article class="evenement-description" *ngIf="evenement.photo != null" >
+                
+                <img src="{{evenement.photo}}" alt="photo"/>
+                <p>{{evenement.description}}</p></article>   
+
+
+             </article>   
+
+            </ng-template>  
+       </ul>
+    </div>
+ 
+
+ </div>   

@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ContactComponent } from './components/contact/contact.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { OnSiteServicesComponent } from './components/on-site-services/on-site-services.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,9 @@ import { OnSiteServicesComponent } from './components/on-site-services/on-site-s
     MatInputModule,
     MatSliderModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

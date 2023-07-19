@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'Votre compte',
     component: AuthComponent,
   },
+  {
+    path: '**',
+    component: HomePageComponent,
+  },
 ];
 
 @NgModule({

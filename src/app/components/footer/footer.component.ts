@@ -12,6 +12,10 @@ export class FooterComponent implements OnInit {
 
   onglets!: Route[]
 
+  langages: string[] = ['fr', 'en', 'de', 'it']
+
+  selectedLangage: string = 'de'
+
   constructor (
     private router: Router,
     private productService: ProductService,
@@ -26,6 +30,10 @@ export class FooterComponent implements OnInit {
     this.productService.detail = false
     this.authService.lastSelectedTab = this.authService.selectedTab
     this.authService.callRoute(target)
+  }
+
+  setSelectedLangage = () => {
+    this.authService.selectedLangage.next(this.selectedLangage)
   }
 
 }

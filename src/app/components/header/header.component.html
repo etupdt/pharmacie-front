@@ -19,12 +19,12 @@
         (selectedTabChange)="callRoute(selectedTabIndex$)"
         mat-stretch-tabs="false"
         mat-align-tabs="center"
-      >
+      >JeSuisGoulu&
 
         <mat-tab *ngFor="let onglet of onglets"
-          label="{{onglet.path}}">
+          label="{{ 'header.' + onglet.path | translate }}">
         </mat-tab>
-
+        JeSuisGoulu1&
       </mat-tab-group>
 
       <div class="cart-zone">

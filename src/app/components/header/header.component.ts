@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
     this.authService.listenSelectedTabIndex.subscribe((selectedTabIndex) => {this.selectedTabIndex$ = selectedTabIndex})
 
     this.productService.listenCart.subscribe((cart) => {this.cart$ = cart as Cart})
-    this.onglets = this.router.config
+    this.onglets = this.router.config.filter(onglet => onglet.path !== '**')
     const selectedTabTime = localStorage.getItem('selectedTabTime')
     if (selectedTabTime && (new Date()).getTime() - +selectedTabTime < 180000) {
       this.authService.selectedTab = localStorage.getItem('selectedTab')!

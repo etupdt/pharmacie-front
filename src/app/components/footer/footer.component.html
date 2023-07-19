@@ -35,7 +35,8 @@
               <div class="footer_column">
                   <div class="footer_column_item">
                       <div class="footer_column_item_title">
-                          Suivez-nous sur</div>
+                          Suivez-nous sur
+                      </div>
                       <ol class="list-inline">
                           <li class="social-media">
                               <a target="_blank" class="footer_social-networks-item" href="https://www.facebook.com/pharmacie-de-la-mairie.suisse/" title="Pharmacie de la Mairie Facebook">
@@ -58,7 +59,13 @@
                               </a>
                           </li>
                       </ol>
-                  </div>
+                      <mat-form-field>
+                        <mat-label>Langages</mat-label>
+                        <mat-select  [(value)]="selectedLangage" (selectionChange)="setSelectedLangage()">
+                          <mat-option *ngFor="let langage of langages" value="{{langage}}">{{langage}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
               </div>
           </div>
       </div>

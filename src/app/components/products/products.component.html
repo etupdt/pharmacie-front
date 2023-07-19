@@ -48,7 +48,7 @@
 
     <h1 *ngIf="!cart$.display">Les meilleurs produits de beauté, santé et bien-être</h1>
     <div *ngIf="!cart$.display" class="product-cards">
-      <div *ngFor="let product of products | filterProduct:brandsChecked:typesChecked:[]:filters:refresh" class="product-card">
+      <div *ngFor="let product of products | filterProduct:brandsChecked:typesChecked:[]:filters:refresh" class="product-card mat-elevation-z8">
         <img
           (click)="showDetail(product.getId)"
           src="{{backendImages + '/products/' + product.getImagePath}}" alt=""
@@ -62,7 +62,7 @@
 
   <div *ngIf="cart$.display" class="cart-cards">
 
-  <div *ngFor="let product of products | filterProduct:[]:[]:cart$:filters:refresh" class="product-card">
+  <div *ngFor="let product of products | filterProduct:[]:[]:cart$:filters:refresh" class="product-card mat-elevation-z8">
 
       <mat-grid-list cols="6" rowHeight="70px">
 
@@ -103,7 +103,7 @@
 
     </div>
 
-    <div class="product-card">
+    <div class="product-card mat-elevation-z8">
       <mat-grid-list cols="6" rowHeight="70px">
 
         <mat-grid-tile colspan="5">

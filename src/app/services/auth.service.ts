@@ -15,6 +15,10 @@ export class AuthService {
   selectedTabIndex = new BehaviorSubject<number>(0)
   listenSelectedTabIndex = this.selectedTabIndex.asObservable()
 
+//  selectedLangage: string = 'fr'
+  selectedLangage = new BehaviorSubject<string>('fr')
+  listenSelectedLangage = this.selectedLangage.asObservable()
+
   constructor(
     private router: Router,
   ) { }

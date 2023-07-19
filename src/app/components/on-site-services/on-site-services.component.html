@@ -1,10 +1,14 @@
 
-<div *ngFor="let onSiteService of onSiteServices">
-  <ul>
-    <li>{{onSiteService.getOnSiteServiceName}}</li>
-  <!-- <li>{{ onSiteService.getOnSiteServiceType}}</li>  -->
-    <li>{{onSiteService.getDescription}}</li>
-    <li>{{onSiteService.getPrice}}</li>
-    <li>{{onSiteService.getDuree}}</li>
-  </ul>
+<div class="onsiteservice mat-elevation-z8" *ngFor="let onSiteService of onSiteServices">
+  <img
+    src="{{backendImages + '/onsiteservices/' + onSiteService.getImagePath}}" alt=""
+  >
+  <div>
+    <h3>{{onSiteService.getOnSiteServiceName}}</h3>
+    <p>{{onSiteService.getDescription}}</p>
+    <div>
+      <p class="card-price">{{onSiteService.getPrice}} €</p>
+      <p>{{onSiteService.getDuree}} minutes =></p>
+    </div>
+  </div>
 </div>

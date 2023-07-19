@@ -1,1 +1,13 @@
-{}
+{
+	"header.Accueil": "Accoglienza",
+	"header.Contact": "Contatto",
+	"header.Prestations": "Benefici",
+	"header.Produits": "Prodotti",
+	"header.Votre compte": "Il tuo account",
+	"home-page.article1-p-1": "La farmacia comunale è stata fondata nel 1866 a Montreux.",
+	"home-page.article1-p-2": "Con il vantaggio di un know-how aziendale, acquisito grazie a più di dieci anni di esperienza",
+	"home-page.article3-p-1": "Ti ascoltiamo e forniamo un servizio che va oltre la semplice vendita, con la massima discrezione e rispetto per il cliente.",
+	"home-page.events-li-1": "Saldi estivi, fino al -70%",
+	"home-page.events-li-2": "5 euro in offerta sul tuo primo acquisto",
+	"home-page.events-li-3": "Offerte speciali sulle creme solari"
+}

@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+
+import { NgModule, ApplicationRef, DoBootstrap } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,7 +27,12 @@ import { ProductComponent } from './components/product/product.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ContactComponent } from './components/contact/contact.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+
+//import { OnSiteServicesComponent } from './components/on-site-services/on-site-services.component';
 import { EvenementsPageComponent } from './components/evenements-page/evenements-page.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -41,6 +47,10 @@ import { EvenementsPageComponent } from './components/evenements-page/evenements
     ProductComponent,
     ContactComponent,
     HomePageComponent,
+<<<<<<< Updated upstream
+=======
+    OnSiteServicesComponent,
+>>>>>>> Stashed changes
     EvenementsPageComponent
   ],
   imports: [
@@ -60,8 +70,17 @@ import { EvenementsPageComponent } from './components/evenements-page/evenements
     MatSliderModule,
     MatButtonModule,
     HttpClientModule
-  ],
+  ], 
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule implements DoBootstrap { 
+
+  ngDoBootstrap(appRef: ApplicationRef): void {
+    // Manually bootstrap the AppComponent
+    // You can add your custom bootstrapping logic here if needed
+    appRef.bootstrap(AppComponent);
+  }
+
+
+}

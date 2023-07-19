@@ -1,9 +1,10 @@
 
-import { Component, Inject } from '@angular/core';
+
+import { Component, Inject} from '@angular/core';
+
 import {  NgIf, NgForOf, CommonModule} from '@angular/common';
 import { EVENEMENT_TOKEN, EvenementProvider } from '../../provider/evenementprovider';
 import { Evenement } from '../../classes/evenement';
-
 
 
 @Component({
@@ -18,6 +19,7 @@ import { Evenement } from '../../classes/evenement';
  
  
 })
+
 export class EvenementsPageComponent {
   public evenements: Evenement[]=[];
 
@@ -25,5 +27,4 @@ export class EvenementsPageComponent {
     this.evenements = evenements   ;       
 
     
- }  
-} 
+ } } 

@@ -15,7 +15,7 @@ export function evenementFactory(): Evenement[] {
  const evenement1: Evenement= { 
     id: 1,   
     title: 'Promotion crèmes hydratantes',      
-    date : [new Date(2023,9,13),new Date(2023,10,17)] ,
+    date : [new Date(2023,7,1),new Date(2023,7,31)] ,
     description : 'Nous offrons une promotion de 5% sur toutes les crèmes hydratantes',
     photo: 'assets/images/evenements/cremeshydratante.jpg', 
     
@@ -24,8 +24,8 @@ export function evenementFactory(): Evenement[] {
   const  evenement2:Evenement={ 
     id: 2,   
     title: 'Formation exclusive aux gestes qui sauvent',     
-    date : [new Date(2023,7,13),new Date(2023,8,31)] ,
-    description : 'L\'été étant propices aux accidents de toutes sortes, nous vous proposont chaque mercredi un stage de formation aux premiers secours. ',
+    date : [new Date(2023,6,4),new Date(2023,8,1)] ,
+    description : 'L\'été étant propices aux accidents de toutes sortes, nous vous proposont chaque mercredi un stage de formation aux premiers secours. Cette formation est accessible à partir de 10 ans. ',
     photo: 'assets/images/evenements/premiersecours.jpg'
  }
 

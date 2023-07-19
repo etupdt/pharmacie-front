@@ -16,15 +16,15 @@ import { Evenement } from '../../classes/evenement';
   providers: [
     EvenementProvider,  { provide: EVENEMENT_TOKEN, useValue: new EvenementProvider().evenements }
   ],
- 
- 
+
+
 })
 
 export class EvenementsPageComponent {
   public evenements: Evenement[]=[];
 
-  public  constructor(@Inject(EVENEMENT_TOKEN)  evenements: Evenement[]){ 
-    this.evenements = evenements   ;       
+  public  constructor(@Inject(EVENEMENT_TOKEN)  evenements: Evenement[]){
+    this.evenements = evenements   ;
 
-    
- } } 
+
+ } }

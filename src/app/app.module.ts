@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTabsModule } from '@angular/material/tabs'; 
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { ProductsComponent } from './components/products/products.component';
@@ -47,10 +47,6 @@ import { EvenementsPageComponent } from './components/evenements-page/evenements
     ProductComponent,
     ContactComponent,
     HomePageComponent,
-<<<<<<< Updated upstream
-=======
-    OnSiteServicesComponent,
->>>>>>> Stashed changes
     EvenementsPageComponent
   ],
   imports: [
@@ -70,11 +66,11 @@ import { EvenementsPageComponent } from './components/evenements-page/evenements
     MatSliderModule,
     MatButtonModule,
     HttpClientModule
-  ], 
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule implements DoBootstrap { 
+export class AppModule implements DoBootstrap {
 
   ngDoBootstrap(appRef: ApplicationRef): void {
     // Manually bootstrap the AppComponent

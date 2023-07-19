@@ -23,10 +23,6 @@ const routes: Routes = [
     component: EvenementsPageComponent,
   },
   {
-    path: 'Evenements',
-    component: EvenementsPageComponent,
-  },
-  {
     path: 'Contact',
     component: ContactComponent,
   },

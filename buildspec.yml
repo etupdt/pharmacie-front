@@ -1,0 +1,37 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    commands:
+
+      - pwd
+      - ls -lrt
+      - npm install
+      - npm install -g @angular/cli
+      - npm update
+
+      - ls -lrt
+
+  pre_build:
+    commands:
+      - echo pre-Build started on `date`
+      - echo "aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+  build:
+    commands:
+
+      - echo Build started on `date`
+
+      - ng build --configuration=production
+      - npm prune --production
+
+  post_build:
+    commands:
+      - echo post-Build started on `date`
+
+      - echo Build completed on `date`
+artifacts:
+  base-directory: dist/pharmacie-front
+  files:
+    - "**/*"

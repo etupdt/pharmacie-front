@@ -32,3 +32,25 @@ mat-form-field {
 button {
   width: 60%;
 }
+
+@media screen and (max-width: 900px) {
+
+  .col-1 {
+    width: 100%;
+    margin: 0px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+
+  .row {
+    width: 100%;
+    margin: 0;
+  }
+
+}

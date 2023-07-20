@@ -4,7 +4,7 @@
     src="{{backendImages + '/onsiteservices/' + onSiteService.getImagePath}}" alt=""
   >
   <div>
-    <h3>{{onSiteService.getOnSiteServiceName}}</h3>
+    <h3>{{ 'prestations.service.' + onSiteService.getOnSiteServiceName + '.h3' | translate }}</h3>
     <p>{{onSiteService.getDescription}}</p>
     <div>
       <p class="card-price">{{onSiteService.getPrice}} €</p>
@@ -12,3 +12,4 @@
     </div>
   </div>
 </div>
+ 

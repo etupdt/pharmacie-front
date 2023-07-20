@@ -4,6 +4,8 @@ import { MessageDialogComponent } from '../message-dialog/message-dialog.compone
 import { OnSiteServiceService } from 'src/app/services/on-site-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-on-site-services',
@@ -16,12 +18,22 @@ export class OnSiteServicesComponent implements OnInit {
 
   backendImages = environment.useBackendImages
 
+  selectedLangage$!: string
+
   constructor (
     private onSiteService: OnSiteServiceService,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private authService: AuthService,
+    private translate: TranslateService
+  ) {
+    translate.setDefaultLang('fr');
+  }
 
   ngOnInit(): void {
+    this.authService.listenSelectedLangage.subscribe((selectedLangage) => {
+      this.translate.use(selectedLangage);
+      this.selectedLangage$ = selectedLangage
+    })
     this.getOnSiteServices();
   }
 

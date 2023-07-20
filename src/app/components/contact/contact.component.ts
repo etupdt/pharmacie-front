@@ -4,6 +4,7 @@ import { ContactService } from 'src/app/services/contact.service';
 import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-contact',
@@ -20,15 +21,24 @@ export class ContactComponent implements OnInit {
 
   sizeTable = 4
 
+  selectedLangage$!: string
+
   constructor(
     private formBuilder: FormBuilder,
     private contactService: ContactService,
+    private dialog: MatDialog,
     private authService: AuthService,
-    private dialog: MatDialog
+    private translate: TranslateService
   ) {
+    translate.setDefaultLang('fr');
   }
 
   ngOnInit(): void {
+
+    this.authService.listenSelectedLangage.subscribe((selectedLangage) => {
+      this.translate.use(selectedLangage);
+      this.selectedLangage$ = selectedLangage
+    })
 
     if (!this.authService.auth)
       this.authService.auth = this.authService.authInit

@@ -1,7 +1,55 @@
 .evenements-page .evenement-item{margin-bottom:3em;}
 .evenements-page .breadcrump{margin:2em auto auto 2em ;}
-.content{margin:6em auto 0 ;}
+//.content{margin:6em auto 0 ;}
 .evenement-description  { & img {margin-right: 2 em;width:200px;height:auto; border-radius: 8px;}
-                          & p { max-width: 40em;}}  
+                          & p { max-width: 40em;}}
+
+.onsiteservice {
+
+  max-width:1200px;
+  display: flex;
+  flex-direction: row;
+  margin: 20px auto;
+  border-radius: 8px;
+  font-size: 1em;
+
+  img {
+    width: 280px;
+    height: auto;
+    border-radius: 8px 0 0 8px;
+  }
+
+  h3 {
+    margin: 10px;
+    margin-top: 5px;
+  }
+
+  > div {
+
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    p {
+      margin: 0 10px;
+    }
+
+    > div {
+
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: flex-end;
+      height: 100%;
+      .card-price {
+        color: rgb(243, 63, 171);
+        font-weight: 550;
+      }
+
+    }
+
+  }
+
+}
 
 

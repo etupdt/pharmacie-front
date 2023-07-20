@@ -20,7 +20,6 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.listenSelectedLangage.subscribe((selectedLangage) => {
-      console.log(selectedLangage)
       this.translate.use(selectedLangage);
       this.selectedLangage$ = selectedLangage
     })

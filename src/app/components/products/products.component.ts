@@ -10,6 +10,7 @@ import { Cart } from 'src/app/interfaces/cart.interface';
 import { ProductType } from 'src/app/enums/product-type';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-products',
@@ -43,14 +44,22 @@ export class ProductsComponent implements OnInit{
 
   refresh: number = 0
 
+  selectedLangage$!: string
+
   constructor (
     private productService: ProductService,
     private brandService: BrandService,
+    private dialog: MatDialog,
     private authService: AuthService,
-    private dialog: MatDialog
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
+
+    this.authService.listenSelectedLangage.subscribe((selectedLangage) => {
+      this.translate.use(selectedLangage);
+      this.selectedLangage$ = selectedLangage
+    })
 
     this.authService.auth = this.authService.authInit
 

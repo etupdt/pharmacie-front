@@ -20,6 +20,8 @@ export class HeaderComponent implements OnInit {
 
   selectedTabIndex$: number = 0
 
+  selectedLangage$!: string
+
   constructor (
     private router: Router,
     private productService: ProductService,
@@ -29,10 +31,13 @@ export class HeaderComponent implements OnInit {
     translate.setDefaultLang('fr');
   }
 
-
   ngOnInit(): void {
 
     this.authService.listenSelectedTabIndex.subscribe((selectedTabIndex) => {this.selectedTabIndex$ = selectedTabIndex})
+    this.authService.listenSelectedLangage.subscribe((selectedLangage) => {
+      this.translate.use(selectedLangage);
+      this.selectedLangage$ = selectedLangage
+    })
 
     this.productService.listenCart.subscribe((cart) => {this.cart$ = cart as Cart})
     this.onglets = this.router.config.filter(onglet => onglet.path !== '**')

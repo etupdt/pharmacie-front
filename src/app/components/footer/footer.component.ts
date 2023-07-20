@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -19,11 +20,15 @@ export class FooterComponent implements OnInit {
   constructor (
     private router: Router,
     private productService: ProductService,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private translate: TranslateService
+  ) {
+    translate.setDefaultLang('fr');
+  }
 
   ngOnInit(): void {
     this.onglets = this.router.config.filter(onglet => onglet.path !== '**')
+    this.selectedLangage = 'fr'
   }
 
   callRoute = (target: number) =>  {
@@ -32,8 +37,9 @@ export class FooterComponent implements OnInit {
     this.authService.callRoute(target)
   }
 
-  setSelectedLangage = () => {
-    this.authService.selectedLangage.next(this.selectedLangage)
+  setSelectedLangage = (langage: string) => {
+    this.selectedLangage = langage
+    this.authService.selectedLangage.next(langage)
   }
 
 }

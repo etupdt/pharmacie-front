@@ -82,7 +82,7 @@ ol, ul {
 }
 
 .layout_item:last-child {
-  
+
   > div {
     justify-content: end;
   }
@@ -107,10 +107,23 @@ ol, ul {
   padding: 6px 0;
 }
 
+img {
+  width: 40px;
+  margin: 2px;
+}
+
+.lang-selected {
+  border: solid 2px white;
+  margin:0;
+}
+
 @media screen and (min-width: 800px) {
+
   .list-inline {
+
     display: flex;
     gap: 20px;
+
   }
 
   .footer_column_item_title {
@@ -128,4 +141,5 @@ ol, ul {
       width: 35px;
     }
   }
+
 }

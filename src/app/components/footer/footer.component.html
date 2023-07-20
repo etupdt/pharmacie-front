@@ -7,7 +7,7 @@
                      <div class="footer_column_item_title">Sommaire</div>
                         <ol class="footer_info-links">
                           <li *ngFor="let onglet of onglets; let i = index;" class="footer_info-link">
-                              <a (click)="callRoute(i)" href="" title="Accueil">{{onglet.path}}</a>
+                              <a (click)="callRoute(i)" href="" title="Accueil">{{ 'header.' + onglet.path | translate }}</a>
                           </li>
                        </ol>
                   </div>
@@ -28,6 +28,13 @@
                                 <a href="#a_adapter/contactez-nous" title="Contactez-nous">Contactez-nous</a>
                             </li>
                       </ol>
+                      <div class="footer_column_item_title u-margin-bottom-small">Langue</div>
+                      <img
+                        *ngFor="let langage of langages"
+                        src="assets/images/{{langage}}.png" alt=""
+                        (click)="setSelectedLangage(langage)"
+                        [ngClass]="langage === selectedLangage ? 'lang-selected' : ''"
+                      >
                   </div>
               </div>
           </div>
@@ -59,12 +66,6 @@
                               </a>
                           </li>
                       </ol>
-                      <mat-form-field>
-                        <mat-label>Langages</mat-label>
-                        <mat-select  [(value)]="selectedLangage" (selectionChange)="setSelectedLangage()">
-                          <mat-option *ngFor="let langage of langages" value="{{langage}}">{{langage}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
                     </div>
               </div>
           </div>

@@ -1,5 +1,5 @@
 
-<div class="evenements-page">
+<!--<div class="evenements-page">
 
     <div class="breadcrump" ><a routerLink="/Accueil" alt="Accueil">Accueil</a> > <a href="/evenements" alt="evenements">Événements</a></div>
 
@@ -18,3 +18,19 @@
 
 
  </div>
+-->
+ <ion-content>
+  <ion-list>
+    <ion-item class="onsiteservice mat-elevation-z8" *ngFor="let evenement of evenements">
+      <ion-card>
+        <ion-img
+          src="{{evenement.photo}}" alt=""
+        ></ion-img>
+        <ion-card-content>
+          <ion-card-title class="ion-text-wrap">{{evenement.title}}</ion-card-title>
+          <ion-item class="card-description">{{evenement.description}}</ion-item>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

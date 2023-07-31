@@ -1,5 +1,5 @@
-import { Auth } from "../classes/auth";
-import { Product } from "../classes/product";
+import { Auth } from "../entities/auth";
+import { Product } from "../entities/product";
 
 export interface MailCommand {
   auth: Auth,

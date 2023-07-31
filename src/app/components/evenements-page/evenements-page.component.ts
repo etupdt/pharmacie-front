@@ -4,7 +4,7 @@ import { Component, Inject} from '@angular/core';
 
 import {  NgIf, NgForOf, CommonModule} from '@angular/common';
 import { EVENEMENT_TOKEN, EvenementProvider } from '../../provider/evenementprovider';
-import { Evenement } from '../../classes/evenement';
+import { Evenement } from '../../entities/evenement';
 
 
 @Component({

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OnSiteService } from 'src/app/classes/on-site-service';
-import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
+import { OnSiteService } from 'src/app/entities/on-site-service';
 import { OnSiteServiceService } from 'src/app/services/on-site-service.service';
-import { MatDialog } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -22,16 +20,12 @@ export class OnSiteServicesComponent implements OnInit {
 
   constructor (
     private onSiteService: OnSiteServiceService,
-    private dialog: MatDialog,
     private authService: AuthService,
-    private translate: TranslateService
   ) {
-    translate.setDefaultLang('fr');
   }
 
   ngOnInit(): void {
     this.authService.listenSelectedLangage.subscribe((selectedLangage) => {
-      this.translate.use(selectedLangage);
       this.selectedLangage$ = selectedLangage
     })
     this.getOnSiteServices();
@@ -53,14 +47,6 @@ export class OnSiteServicesComponent implements OnInit {
         })
       },
       error: (error: { error: { message: any; }; }) => {
-        this.dialog.open(MessageDialogComponent, {
-          data: {
-            type: 'Erreur',
-            message1: `Erreur lors de la lecture des produits`,
-            message2: error.error.message,
-            delai: 0
-          }
-        })
       }
     })
 

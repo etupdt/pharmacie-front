@@ -1,8 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Auth } from 'src/app/classes/auth';
-import { DialogMessage } from 'src/app/interfaces/message';
+import { Auth } from 'src/app/entities/auth';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -23,9 +21,6 @@ export class AuthComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-//    private dialog: MatDialog,
-//    public dialogRef: MatDialogRef<AuthComponent>,
-//    @Inject(MAT_DIALOG_DATA) public data: DialogMessage,
   ) {
   }
 
@@ -34,11 +29,7 @@ export class AuthComponent implements OnInit {
     if (!this.authService.auth)
       this.authService.auth = this.authService.authInit
     this.initForm(this.authService.auth)
-/*    if (this.data.delai !== 0) {
-      const interval = setInterval(() => {
-        this.dialogRef.close();
-      },this.data.delai)
-    }*/
+
   }
 
   initForm = (auth: Auth) => {
@@ -141,19 +132,6 @@ export class AuthComponent implements OnInit {
       this.authForm.get("locality")!.value
     )
 
-    this.authService.selectedTab = this.authService.lastSelectedTab
-    this.authService.callRoute()
-
-  }
-
-  cancel = () => {
-    console.log(this.authService.selectedTab, this.authService.lastSelectedTab)
-    this.authService.selectedTab = this.authService.lastSelectedTab
-    this.authService.callRoute()
-  }
-
-  onResizeTable = (event: UIEvent) => {
-    this.sizeTable = ((event.target! as Window).innerWidth <= 800) ? 2 : 4;
   }
 
   get getEmail () {return this.authForm.get("email")!.value}

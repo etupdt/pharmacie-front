@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth } from '../classes/auth';
+import { Auth } from '../entities/auth';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Observer } from 'rxjs';
 
@@ -8,7 +8,8 @@ import { BehaviorSubject, Observable, Observer } from 'rxjs';
 })
 export class AuthService {
 
-  auth!: Auth
+  authInit = new Auth(0, 'marie.dubois@test.fr', 'Marie', 'Dubois', '1 rue de la Paix', '', '45000', 'BAYONNE')
+  auth = this.authInit
 
   selectedTab: string = 'Accueil'
   lastSelectedTab: string = 'Accueil'
@@ -22,8 +23,6 @@ export class AuthService {
   constructor(
     private router: Router,
   ) { }
-
-  authInit = new Auth(0, 'marie.dubois@test.fr', 'Marie', 'Dubois', '1 rue de la Paix', '', '45000', 'BAYONNE')
 
   callRoute = (target?: number) => {
 

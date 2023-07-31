@@ -1,4 +1,4 @@
-<div *ngIf="contactForm" [formGroup]="contactForm" class="content">
+<!--<div *ngIf="contactForm" [formGroup]="contactForm" class="content">
 
   <div class="row">
 
@@ -38,4 +38,126 @@
   </div>
 
 </div>
+-->
+
+<!--
+
+  <div *ngIf="authForm" [formGroup]="authForm" class="content">
+
+    <div class="row">
+
+      <div class="col-1">
+
+        <h3>
+          Veuillez saisir vos coordonnées
+        </h3>
+
+        <div class="mat-elevation-z8 detail">
+
+          <mat-grid-list cols="{{sizeTable}}" rowHeight="70px" (window:resize)="onResizeTable($event)">
+
+            <mat-grid-tile colspan="{{sizeTable}}">
+              <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="email" name="email" placeholder="Email"/>
+                <app-form-error [field]="getEmail"></app-form-error>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="{{sizeTable}}">
+              <mat-form-field>
+                <mat-label>Prénom</mat-label>
+                <input matInput formControlName="firstname" type="firstname" name="firstname" placeholder="Prénom"/>
+                <app-form-error [field]="getFirstname"></app-form-error>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="{{sizeTable}}">
+              <mat-form-field>
+                <mat-label>Nom</mat-label>
+                <input matInput formControlName="lastname" type="lastname" name="laastname" placeholder="Nom"/>
+                <app-form-error [field]="getLastname"></app-form-error>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="{{sizeTable}}">
+              <mat-form-field>
+                <mat-label>Adresse</mat-label>
+                <input matInput formControlName="address1" type="address1" name="address1" placeholder="Adresse"/>
+                <app-form-error [field]="getAddress1"></app-form-error>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="{{sizeTable}}">
+              <mat-form-field>
+                <mat-label>Complément d'adresse</mat-label>
+                <input matInput formControlName="address2" type="address2" name="address2" placeholder="Complément d'adresse"/>
+                <app-form-error [field]="getAddress2"></app-form-error>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="{{sizeTable}}">
+              <mat-form-field>
+                <mat-label>Code postal</mat-label>
+                <input matInput formControlName="zip" type="zip" name="zip" placeholder="Code postal"/>
+                <app-form-error [field]="getZip"></app-form-error>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="{{sizeTable}}">
+              <mat-form-field>
+                <mat-label>Ville</mat-label>
+                <input matInput formControlName="locality" type="locality" name="locality" placeholder="Ville"/>
+                <app-form-error [field]="getLocality"></app-form-error>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="2">
+              <button *ngIf="!authForm.invalid" class="button" mat-raised-button (click)="saveAuth()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-record-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                </svg>
+                <span> Enregistrer</span>
+              </button>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="2">
+              <button mat-raised-button (click)="cancel()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+                <span> Abandonner</span>
+              </button>
+            </mat-grid-tile>
+
+            </mat-grid-list>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+-->
+
+<ion-content [formGroup]="contactForm">
+  <ion-list>
+    <ion-item>
+      <ion-textarea
+        formControlName="message"
+        label="Message"
+        labelPlacement="stacked"
+        fill="solid"
+        placeholder="Message"
+        required
+        clearInput
+      ></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="sendMail()">Envoyer</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
 

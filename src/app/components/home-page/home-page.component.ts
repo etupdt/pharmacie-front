@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-home-page',
@@ -9,18 +8,16 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class HomePageComponent implements OnInit {
 
+
   selectedLangage$!: string
 
   constructor (
     private authService: AuthService,
-    private translate: TranslateService
   ) {
-    translate.setDefaultLang('fr');
   }
 
   ngOnInit(): void {
     this.authService.listenSelectedLangage.subscribe((selectedLangage) => {
-      this.translate.use(selectedLangage);
       this.selectedLangage$ = selectedLangage
     })
   }

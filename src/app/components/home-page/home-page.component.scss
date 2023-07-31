@@ -1,3 +1,10 @@
+
+@import '../../app.component.scss';
+
+ion-content {
+  --padding-top: 70px;
+}
+
 // START - Mobile first style
 main {
   margin-top: 15px;
@@ -56,33 +63,33 @@ article {
 
 @media screen and (min-width: 800px) {
   .events {
-      display: flex;
-      gap: 20px;
-      flex-direction: row;
-      align-items: center;
-      margin: 20px auto;
-    }
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px auto;
+  }
 
-    .events-picture {
-      img {
-        width: 45vw;
-      }
+  .events-picture {
+    img {
+      width: 45vw;
     }
+  }
 
-    .article-picture {
-      img {
-        width: 45vw;
-      }
+  .article-picture {
+    img {
+      width: 45vw;
     }
+  }
 
-    .opinion {
-      height: 100px;
-      width: 400px;
-      margin: 30px auto;
-      p {
-        display: block;
-        padding-top: 20px;
-        font-size: small;
-      }
+  .opinion {
+    height: 100px;
+    width: 400px;
+    margin: 30px auto;
+    p {
+      display: block;
+      padding-top: 20px;
+      font-size: small;
     }
+  }
 }

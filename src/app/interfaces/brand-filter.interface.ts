@@ -1,4 +1,4 @@
-import { Brand } from "../classes/brand";
+import { Brand } from "../entities/brand";
 
 export interface BrandFilter {
   checked: boolean,

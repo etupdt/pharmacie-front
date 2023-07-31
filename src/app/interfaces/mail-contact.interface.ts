@@ -1,4 +1,4 @@
-import { Auth } from "../classes/auth";
+import { Auth } from "../entities/auth";
 
 export interface MailContact {
   auth: Auth,

@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">< Retour</ion-button>
+    </ion-buttons>
+    <ion-title>Panier</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let detail of cart$.detail">
+      <ion-img
+        src="{{backendImages + '/products/' + detail.product.getImagePath}}" alt="">
+      </ion-img>
+      <ion-list class="cart-product">
+        <ion-item  class="product-title">
+          <ion-label class="ion-text-wrap">{{detail.product.getProductName}}</ion-label>
+          <ion-icon
+            aria-hidden="true"
+            [ios]="'trash-outline'"
+            [md]="'trash-sharp'"
+            (click)="deleteCartProduct(detail.product)"
+          ></ion-icon>
+        </ion-item>
+        <ion-item class="product-description ion-text-wrap">{{detail.product.getDescription}}</ion-item>
+        <ion-item class="product-price">
+          <ion-label>
+            {{detail.qte}} x {{detail.product.getPrice | number: '1.2-2'}}
+            = {{detail.qte * detail.product.getPrice | number: '1.2-2'}} €</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item class="product-price">
+      <ion-label>
+        Total : {{getCartTotal() | number: '1.2-2'}} € </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="sendMail()">Commander</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

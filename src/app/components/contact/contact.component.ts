@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContactService } from 'src/app/services/contact.service';
-import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { MatDialog } from '@angular/material/dialog';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-contact',
@@ -19,29 +16,14 @@ export class ContactComponent implements OnInit {
 
   isUpdated = false
 
-  sizeTable = 4
-
-  selectedLangage$!: string
-
   constructor(
     private formBuilder: FormBuilder,
     private contactService: ContactService,
-    private dialog: MatDialog,
     private authService: AuthService,
-    private translate: TranslateService
   ) {
-    translate.setDefaultLang('fr');
   }
 
   ngOnInit(): void {
-
-    this.authService.listenSelectedLangage.subscribe((selectedLangage) => {
-      this.translate.use(selectedLangage);
-      this.selectedLangage$ = selectedLangage
-    })
-
-    if (!this.authService.auth)
-      this.authService.auth = this.authService.authInit
 
     this.message = ''
 
@@ -79,10 +61,6 @@ export class ContactComponent implements OnInit {
 
   }
 
-  onResizeTable = (event: UIEvent) => {
-    this.sizeTable = ((event.target! as Window).innerWidth <= 800) ? 2 : 4;
-  }
-
   sendMail = () => {
 
     this.contactService.sendMail({
@@ -92,24 +70,8 @@ export class ContactComponent implements OnInit {
       next: (res: any[]) => {
         this.message = ''
         this.initForm(this.message)
-        this.dialog.open(MessageDialogComponent, {
-          data: {
-            type: 'Information',
-            message1: `Le mail de contact a été envoyé`,
-            message2: '',
-            delai: 2000
-          }
-        })
       },
       error: (error: { error: { message: any; }; }) => {
-        this.dialog.open(MessageDialogComponent, {
-          data: {
-            type: 'Erreur',
-            message1: `Erreur lors de l\'envoi du mail de contact`,
-            message2: error.error.message,
-            delai: 0
-          }
-        })
       }
     })
 

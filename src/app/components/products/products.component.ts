@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Product } from 'src/app/classes/product';
+import { Product } from 'src/app/entities/product';
 import { ProductService } from 'src/app/services/product.service';
-import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 import { BrandService } from 'src/app/services/brand.service';
-import { Brand } from 'src/app/classes/brand';
+import { Brand } from 'src/app/entities/brand';
 import { Filter } from 'src/app/interfaces/filter.interface';
 import { Cart } from 'src/app/interfaces/cart.interface';
-import { ProductType } from 'src/app/enums/product-type';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
-import { TranslateService } from '@ngx-translate/core';
+import { InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { ProductComponent } from '../product/product.component';
+import { ProductsType } from 'src/app/interfaces/products-type.interface';
 
 @Component({
   selector: 'app-products',
@@ -20,12 +20,9 @@ import { TranslateService } from '@ngx-translate/core';
 export class ProductsComponent implements OnInit{
 
   products: Product[] = []
-  brands: Brand[] = []
-  productTypes: string[] = []
+  brands$: Brand[] = []
+  productTypes$: ProductsType[] = []
   cart$!: Cart
-  brandsChecked: number[] = []
-  typesChecked: number[] = []
-
   product!: Product
 
   backendImages = environment.useBackendImages
@@ -42,77 +39,59 @@ export class ProductsComponent implements OnInit{
     },
   ]
 
-  refresh: number = 0
+  refresh$: number = 0
 
   selectedLangage$!: string
 
   constructor (
     private productService: ProductService,
     private brandService: BrandService,
-    private dialog: MatDialog,
+    private modalCtrl: ModalController,
     private authService: AuthService,
-    private translate: TranslateService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
 
-    this.authService.listenSelectedLangage.subscribe((selectedLangage) => {
-      this.translate.use(selectedLangage);
-      this.selectedLangage$ = selectedLangage
-    })
-
-    this.authService.auth = this.authService.authInit
-
-    for (let productType in ProductType) {
-      if (isNaN(Number(productType)))
-        this.productTypes.push(productType)
-    }
     this.productService.listenCart.subscribe((cart) => {this.cart$ = cart as Cart})
 
-    this.getBrands()
+    this.brandService.listenBrands.subscribe((brands) => {this.brands$ = brands as Brand[]})
+    this.brandService.listenProductTypes.subscribe((productTypes) => {this.productTypes$ = productTypes as ProductsType[]})
+    this.brandService.listenRefresh.subscribe((refresh: number) => {this.refresh$ = refresh})
+
+    this.getProducts()
 
   }
 
-  showDetail = (id: number) => {
-    console.log(id)
-    this.product = this.products.find(product => id === product.getId)!
-    this.productService.detail = true
+  async showDetail(product: Product) {
+    this.product = product
+    const modal = await this.modalCtrl.create({
+      component: ProductComponent,
+      componentProps: {
+        product: product
+      }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      console.log(`Hello, ${data}!`);
+    }
   }
 
-  check = (id: number, array: number[]) => {
-    const index = array.findIndex(arrayId => arrayId === id)
-    if (index === -1)
-      array.push(id)
+  addProductToCart = (product: Product) => {
+    const index = this.cart$.detail.findIndex(detail => detail.product.getId === product.getId)
+    if (index !== -1)
+      this.cart$.detail[index].qte++
     else
-      array.splice(index, 1)
-    this.refresh++
-  }
-
-  checked = (id: number, array: number[]) => {
-    return array.findIndex(arrayId => arrayId === id) !== -1
-  }
-
-  addToCart = (product: Product) => {
-    this.cart$.products.push(product)
-  }
-
-  getCartProductNumber = (product: Product) => {
-    return this.cart$.products.filter(p => p.getId === product.getId).length
+      this.cart$.detail.push({qte: 1, product: product})
   }
 
   getCartTotal = () => {
     let total = 0
-    this.cart$.products.forEach(product => total += product.getPrice)
+    this.cart$.detail.forEach(detail => total += detail.product.getPrice * detail.qte)
     return total
-  }
-
-  deleteCartProduct (product: Product) {
-    const index = this.cart$.products.findIndex(p => p.getId === product.getId)
-    if (index > -1)
-      this.cart$.products.splice(index, 1)
-    if (this.getCartTotal() === 0)
-      this.cart$.display = false;
-    this.refresh++
   }
 
   getProducts = () => {
@@ -120,7 +99,7 @@ export class ProductsComponent implements OnInit{
     this.productService.getProducts().subscribe({
       next: (res: any[]) => {
         res.forEach(p => {
-          const brand = this.brands.find(brand => brand.getId === p.brand.id)
+          const brand = this.brands$.find(brand => brand.getId === p.brand.id)
           return this.products.push(new Product(
             p.id,
             p.productName,
@@ -135,88 +114,15 @@ export class ProductsComponent implements OnInit{
         })
       },
       error: (error: { error: { message: any; }; }) => {
-        this.dialog.open(MessageDialogComponent, {
-          data: {
-            type: 'Erreur',
-            message1: `Erreur lors de la lecture des produits`,
-            message2: error.error.message,
-            delai: 0
-          }
-        })
       }
     })
 
   }
 
-  getBrands = () => {
-
-    this.brandService.getBrands().subscribe({
-      next: (res: any[]) => {
-        res.forEach(b => {
-          this.brands.push(new Brand(
-            b.id,
-            b.brandName,
-            b.imagePath,
-          ))
-        })
-        this.getProducts()
-      },
-      error: (error: { error: { message: any; }; }) => {
-        this.dialog.open(MessageDialogComponent, {
-          data: {
-            type: 'Erreur',
-            message1: `Erreur lors de la lecture des marques`,
-            message2: error.error.message,
-            delai: 0
-          }
-        })
-      }
-    })
-
-  }
-
-  sendMail = () => {
-
-    let products: {qte: number, product: Product}[] = []
-
-    this.products.forEach(product => {
-      const qte = this.getCartProductNumber(product)
-      if (qte > 0) {
-        products.push({
-          qte: qte,
-          product: product
-        })
-      }
-    })
-
-    this.productService.sendMail({
-      auth: this.authService.auth,
-      command: products
-    }).subscribe({
-      next: (res: any[]) => {
-        this.cart$.products = []
-        this.cart$.display = false
-        this.dialog.open(MessageDialogComponent, {
-          data: {
-            type: 'Information',
-            message1: `Le mail de commande a été envoyé`,
-            message2: '',
-            delai: 2000
-          }
-        })
-      },
-      error: (error: { error: { message: any; }; }) => {
-        this.dialog.open(MessageDialogComponent, {
-          data: {
-            type: 'Erreur',
-            message1: `Erreur lors de l\'envoi du mail de commande`,
-            message2: error.error.message,
-            delai: 0
-          }
-        })
-      }
-    })
-
+  onIonInfinite(ev: Event) {
+    setTimeout(() => {
+      (ev as InfiniteScrollCustomEvent).target.complete();
+    }, 500);
   }
 
   get getAuth () {return this.authService.auth}

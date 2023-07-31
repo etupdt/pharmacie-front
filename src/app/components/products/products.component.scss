@@ -1,137 +1,4 @@
 
-@import '../../app.component.scss';
-
-.products-page {
-
-  width: 100%;
-  margin:auto;
-  display: flex;
-  flex-direction: row;
-
-  h1 {
-    font-weight: 300;
-    font-size: 26px;
-    color: black;
-  }
-
-  .product-filters {
-
-    margin: 30px;
-    width: 320px;
-    min-width: 320px;
-
-    > p {
-      margin-top: 50px;
-      width: 100%;
-    }
-
-    ul{
-      list-style-type: none;
-    }
-
-    button {
-      width: 100%;
-    }
-
-    .filters-slider {
-      margin-left: 50px;
-    }
-
-  }
-
-  .product-cards {
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    .product-card {
-
-      margin: 10px;
-      height: 360px;
-      width: 300px;
-      border-radius: 6px;
-      background-color: white;
-      text-align: center;
-
-      img {
-        height: 160px;
-      }
-
-      p {
-        text-align: center;
-        height: 40px;
-        padding-left: 20px;
-        padding-right: 20px;
-      }
-
-      .card-price {
-        color: rgb(243, 63, 171);
-        font-size:x-large;
-        font-weight: 550;
-      }
-
-      .card-add {
-        color: black;
-        background-color: $color1;
-        width: 94%;
-        height: 36px;
-        border: 0px;
-        border-radius: 5px;
-        margin: 8px;
-        text-align: center;
-      }
-
-    }
-
-  }
-
-  .cart-cards {
-
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
-    .product-card {
-
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      margin: 10px;
-      border-radius: 6px;
-      background-color: white;
-
-      img {
-        height: 160px;
-      }
-
-      .p-label {
-        height: 40px;
-        padding-left: 20px;
-        padding-right: 20px;
-        text-align: left;
-        width:100%;
-      }
-
-      p {
-        height: 40px;
-        padding-left: 20px;
-        padding-right: 20px;
-        text-align: right;
-        width:100%;
-      }
-
-      .delete-icon {
-        width: 100%;
-        text-align: right;
-        padding-right: 20px;
-      }
-
-    }
-
-  }
-
-}
 
 mat-slider {
   margin: 0px;
@@ -164,28 +31,149 @@ mat-slider {
   }
 }
 
-@media screen and (max-width: 1000px) {
+ion-content {
 
-  h1 {
-    display: none;
+  --padding-top: 70px;
+
+  ion-list {
+
+    width: 100%;
+    margin:auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    ion-item {
+
+      ion-card {
+
+        margin: 10px;
+        width: 300px;
+        border-radius: 6px;
+        background-color: white;
+        text-align: center;
+
+        ion-img {
+          height: 160px;
+        }
+
+        ion-card-content {
+
+          padding: 5px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          ion-card-title {
+            font-size: 1rem;
+            padding: 15px 0;
+          }
+
+          ion-card-subtitle {
+            color: rgb(243, 63, 171);
+            font-size:x-large;
+            font-weight: 550;
+            padding: 15px 0;
+          }
+
+          ion-button {
+            width: 94%;
+            height: 36px;
+            border: 0px;
+            border-radius: 5px;
+            margin: 8px;
+            text-align: center;
+            font-weight: bold;
+
+            --color: black;
+            --background: rgba(var(--ion-color-primary-rgb), 0.14);
+
+          }
+
+        }
+
+      }
+
+    }
+
   }
 
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 991px) {
 
-  .products-page {
+  ion-content {
 
-    flex-direction: column;
+    ion-list {
 
-    .product-filters {
+      display: flex;
+      flex-direction: column;
 
-      width: 100%;
+      ion-item {
+
+        ion-card {
+
+          display: flex;
+          flex-direction: row;
+          margin: 0px;
+          width: 100%;
+          height: auto;
+
+          ion-img {
+            height: 120px;
+          }
+
+          ion-card-content {
+
+            ion-card-title {
+              text-align: left;
+            }
+
+            ion-card-subtitle {
+              text-align: right;
+              font-size: 1rem;
+              font-weight: 550;
+              padding: 5px 0;
+            }
+
+            ion-button {
+              display: none;
+            }
+
+          }
+
+        }
+
+      }
 
     }
 
-    h1 {
-      display: none;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+
+  ion-content {
+
+    ion-list {
+
+      display: flex;
+      flex-direction: column;
+
+      ion-item {
+
+        ion-card {
+
+          ion-img {
+            height: 80px;
+          }
+
+        }
+
+      }
+
     }
 
   }

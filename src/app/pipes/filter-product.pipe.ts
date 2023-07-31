@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Brand } from '../classes/brand';
-import { Product } from '../classes/product';
+import { Product } from '../entities/product';
 import { Filter } from '../interfaces/filter.interface';
-import { BrandFilter } from '../interfaces/brand-filter.interface';
 import { Cart } from '../interfaces/cart.interface';
+import { Brand } from '../entities/brand';
+import { ProductsType } from '../interfaces/products-type.interface';
 
 @Pipe({
   name: 'filterProduct'
@@ -12,30 +12,32 @@ export class FilterProductPipe implements PipeTransform {
 
   transform(products: Product[], ...args: unknown[]): Product[] {
 
-    const brandsId = args[0] as number[]
-    const typesId = args[1] as number[]
-    const cart = args[2] as Cart
-    const filters = args[3] as Filter[]
+    let brands!: Brand[]
+    if ((args[0] as Brand[]).length > 0) {
+      brands = (args[0] as Brand[]).filter(brand => brand.checked)
+    }
+
+    let productTypes: ProductsType[] = []
+    if ((args[1] as ProductsType[]).length > 0) {
+      productTypes = (args[1] as ProductsType[]).filter(productType => productType.checked)
+    }
+
+    const filters = args[2] as Filter[]
 
     return products.filter((product: Product) => {
 
       let returnValue = true
 
-      if (cart.display && cart.products.findIndex(cartProduct => cartProduct.getId === product.getId) < 0) {
+      if (brands.length > 0 && brands.findIndex(brand => brand.getId === product.getBrand.getId) < 0) {
 
         returnValue = false
 
       }
-      else if (brandsId.length > 0 && brandsId.findIndex(id => id === product.getBrand.getId) < 0) {
+      else if (productTypes.length > 0 && productTypes.findIndex(productType => productType.productType === product.getType) < 0) {
 
         returnValue = false
 
-      }
-      else if (typesId.length > 0 && typesId.findIndex(id => id === product.getType) < 0) {
-
-        returnValue = false
-
-      }
+      }/*
       else {
 
         filters.forEach(filter => {
@@ -52,7 +54,7 @@ export class FilterProductPipe implements PipeTransform {
 
       })
 
-    }
+    }*/
 
       return returnValue
 

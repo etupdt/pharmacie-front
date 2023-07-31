@@ -26,7 +26,7 @@ export class OnSiteServiceService {
     {
       'id': 2,
       'onSiteServiceName': 'Manucure',
-      'description': 'C’est l’une des techniques de manucure les plus connues et la plus pratiquée ! La manucure classique commence par un nettoyage des ongles c’est-à-dire limer les ongles, polir les ongles, dégager les cuticules et hydrater la peau. Ensuite, on applique une base transparente afin de protéger votre ongle. Puis, c’est le moment du choix de la couleur ? ! Une voire deux couches de vernis sont appliquées avant de terminer par une couche de top coat qui prolongera la durée de vie de votre manucure. En salon ou en mode cocooning chez vous, à vous de choisir.',
+      'description': 'C’est l’une des techniques de manucure les plus connues et la plus pratiquée ! La manucure classique commence par un nettoyage des ongles c’est-à-dire limer les ongles, polir les ongles, dégager les cuticules et hydrater la peau. Ensuite, on applique une base transparente afin de protéger votre ongle.',
       'price': 55.21,
       'duree': 45,
       'imagePath': 'Manucure.jpg',

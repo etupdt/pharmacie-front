@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { Product } from '../classes/product';
+import { Product } from '../entities/product';
 import { Cart } from '../interfaces/cart.interface';
 import { MailCommand } from '../interfaces/mail-command.interface';
 import { environment } from 'src/environments/environment';
@@ -13,7 +13,7 @@ export class ProductService {
 
   cart = new BehaviorSubject<Cart>({
     display: false,
-    products: []
+    detail: []
   })
   listenCart = this.cart.asObservable()
 

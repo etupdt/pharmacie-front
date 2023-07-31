@@ -1,46 +1,72 @@
 
 @import '../../app.component.scss';
 
-.onsiteservice {
+ion-content {
 
-  max-width:1200px;
-  display: flex;
-  flex-direction: row;
-  margin: 20px auto;
-  border-radius: 8px;
-  font-size: 1em;
+  --background: var(--ion-color-primary-bkg);
+  --padding-top: 70px;
 
-  img {
-    width: 280px;
-    height: auto;
-    border-radius: 8px 0 0 8px;
-  }
+  ion-list {
 
-  h3 {
-    margin: 10px;
-    margin-top: 5px;
-  }
+    --background: var(--ion-color-primary-bkg);
 
-  > div {
-
-    padding: 10px;
+    width: 100%;
+    margin:auto;
     display: flex;
-    flex-direction: column;
-    min-height: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
 
-    p {
-      margin: 0 10px;
-    }
+    ion-item {
 
-    > div {
+      width: 100%;
 
-      display: flex;
-      flex-direction: row-reverse;
-      align-items: flex-end;
-      height: 100%;
-      .card-price {
-        color: rgb(243, 63, 171);
-        font-weight: 550;
+      ion-card {
+
+        display: flex;
+        flex-direction: row;
+        margin: 20px auto;
+        border-radius: 8px;
+        font-size: 1em;
+        width: 100%;
+
+        ion-img {
+          width: 350px;
+          border-radius: 8px 0 0 8px;
+        }
+
+        ion-card-content {
+
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          min-height: 100%;
+          width: 80%;
+
+          ion-card-title {
+            margin: 10px;
+            margin-top: 5px;
+          }
+
+          p {
+            margin: 0 10px;
+          }
+
+          .card-tarif {
+
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: right;
+
+            .card-price {
+              color: rgb(243, 63, 171);
+              font-weight: 550;
+            }
+
+          }
+
+        }
+
       }
 
     }
@@ -49,11 +75,59 @@
 
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 750px) {
 
-  .onsiteservice {
+  ion-content {
 
-    flex-direction: column;
+    ion-list {
+
+      ion-item {
+
+        ion-card {
+
+          flex-direction: column;
+          width: 100%;
+
+          ion-img {
+            width: 60%;
+            margin:auto;
+          }
+
+          ion-card-content {
+
+            width: 100%;
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+@media screen and (max-width: 550px) {
+
+  ion-content {
+
+    ion-list {
+
+      ion-item {
+
+        ion-card {
+
+          ion-img {
+            width: 100%;
+          }
+
+        }
+
+      }
+
+    }
 
   }
 

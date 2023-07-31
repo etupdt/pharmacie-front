@@ -1,6 +1,9 @@
-import { Product } from "../classes/product";
+import { Product } from "../entities/product";
 
 export interface Cart {
   display: boolean,
-  products: Product[]
+  detail: {
+    qte: number,
+    product: Product
+  }[]
 }

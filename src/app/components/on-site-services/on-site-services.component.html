@@ -1,15 +1,20 @@
 
-<div class="onsiteservice mat-elevation-z8" *ngFor="let onSiteService of onSiteServices">
-  <img
-    src="{{backendImages + '/onsiteservices/' + onSiteService.getImagePath}}" alt=""
-  >
-  <div>
-    <h3>{{ 'prestations.service.' + onSiteService.getOnSiteServiceName + '.h3' | translate }}</h3>
-    <p>{{onSiteService.getDescription}}</p>
-    <div>
-      <p class="card-price">{{onSiteService.getPrice}} €</p>
-      <p>{{onSiteService.getDuree}} minutes =></p>
-    </div>
-  </div>
-</div>
- 
+<ion-content>
+  <ion-list>
+    <ion-item class="onsiteservice mat-elevation-z8" *ngFor="let onSiteService of onSiteServices">
+      <ion-card>
+        <ion-img
+          src="{{backendImages + '/onsiteservices/' + onSiteService.getImagePath}}" alt=""
+        ></ion-img>
+        <ion-card-content>
+          <ion-card-title class="ion-text-wrap">{{ 'prestations.service.' + onSiteService.getOnSiteServiceName + '.h3'}}</ion-card-title>
+          <ion-item class="card-description">{{onSiteService.getDescription}}</ion-item>
+          <div class="card-tarif">
+            <span class="card-price">{{onSiteService.getPrice}} €</span>
+            <span>{{onSiteService.getDuree}} minutes => </span>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

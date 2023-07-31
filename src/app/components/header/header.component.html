@@ -1,67 +1,8 @@
-
-<header>
-
-  <mat-toolbar>
-
-    <mat-toolbar-row class="toolbar-text">
-
-      <div class="logo-zone">
-
-        <img src="assets/images/logo.png">
-
-        <p>Pharmacie Du Pont</p>
-
-      </div>
-
-      <mat-tab-group [color]="'primary'"
-        class="tab-group large-menu"
-        [(selectedIndex)]="selectedTabIndex$"
-        (selectedTabChange)="callRoute(selectedTabIndex$)"
-        mat-stretch-tabs="false"
-        mat-align-tabs="center"
-      >JeSuisGoulu&
-
-        <mat-tab *ngFor="let onglet of onglets"
-          label="{{ 'header.' + onglet.path | translate }}">
-        </mat-tab>
-        JeSuisGoulu1&
-      </mat-tab-group>
-
-      <div class="cart-zone">
-        <mat-icon class="large-menu">
-          <svg (click)="toggleCartPage()" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
-            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-          </svg>
-        </mat-icon>
-        <p class="large-menu">{{cart$.products.length}}</p>
-        <mat-icon class="burger-icon">
-          <svg (click)="burgerMenu = !burgerMenu" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16" id="burger">
-            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-          </svg>
-        </mat-icon>
-      </div>
-
-    </mat-toolbar-row>
-
-    <mat-toolbar-row *ngFor="let onglet of onglets | slice:0:3; let i = index;" [ngClass]="(!burgerMenu) ? 'cache' : 'burger-visible'">
-      <a (click)="callRoute(i)" mat-button>{{onglet.path}}</a>
-    </mat-toolbar-row>
-
-    <mat-toolbar-row [ngClass]="(!burgerMenu) ? 'cache' : 'burger-visible'">
-      <div class="cart-zone">
-        <ng-container [ngTemplateOutlet]="cart"></ng-container>
-      </div>
-    </mat-toolbar-row>
-
-  </mat-toolbar>
-
-</header>
-
-<ng-template #cart>
-  <mat-icon>
-    <svg (click)="toggleCartPage()" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
-      <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-    </svg>
-  </mat-icon>
-  <p>{{cart$.products.length}}</p>
-</ng-template>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{getActiveRoute}}</ion-title>
+  </ion-toolbar>
+</ion-header>

@@ -1,26 +1,28 @@
 
-<div class="return-button">
-  <button (click)="setDetail = false">< retour</button>
-</div>
-
-<div class="product-page mat-elevation-z8">
-
-  <div class="cadre-left">
-    <h3 class="p-label">{{product.getLabel}}</h3>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">< Retour</ion-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+    <ion-item slot="end" (click)="showCart()">
+      <ion-icon
+        aria-hidden="true"
+        [src]="'assets/icon/caddy.svg'"
+      ></ion-icon>
+      <ion-label>{{getCartTotalSize}}</ion-label>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen class="ion-padding">
+  <ion-item>
+    <ion-item position="stacked" class="product-name ion-text-wrap">{{product.getProductName}}</ion-item>
     <img
       src="{{backendImages + '/products/' + product.getImagePath}}" alt=""
     >
-  </div>
-  <div class="cadre-middle">
-    <p class="p-label">{{product.getDescription}}</p>
-  </div>
-  <div class="cadre-right">
-    <div class="cadre-prix">
-      <p class="card-price">{{product.getPrice | number: '1.2-2'}} €</p>
-      <p class="p-label">{{product.getLabel}}</p>
-      <button mat-button class="card-add" (click)="this.addProductToCart.emit(product)">Ajouter</button>
-    </div>
-  </div>
+    <ion-item position="floating" class="product-description ion-text-wrap">{{product.getDescription}}</ion-item>
+    <ion-label position="floating" class="product-price">{{product.getPrice | number: '1.2-2'}}  €</ion-label>
+    <ion-button (click)="addProductToCart(product)">Ajouter</ion-button>
+  </ion-item>
+</ion-content>
 
-
-</div>

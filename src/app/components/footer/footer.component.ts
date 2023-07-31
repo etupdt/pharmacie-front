@@ -21,14 +21,11 @@ export class FooterComponent implements OnInit {
     private router: Router,
     private productService: ProductService,
     private authService: AuthService,
-    private translate: TranslateService
   ) {
-    translate.setDefaultLang('fr');
   }
 
   ngOnInit(): void {
     this.onglets = this.router.config.filter(onglet => onglet.path !== '**')
-    this.selectedLangage = 'fr'
   }
 
   callRoute = (target: number) =>  {

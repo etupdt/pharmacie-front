@@ -9,6 +9,8 @@ import { BrandService } from './services/brand.service';
 import { Brand } from './entities/brand';
 import { ProductType } from './enums/product-type';
 import { ProductsType } from './interfaces/products-type.interface';
+import { AuthService } from './services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -28,11 +30,15 @@ export class AppComponent implements OnInit {
 
   backendImages = environment.useBackendImages
 
+  selectedLangage$!: string
+
   constructor(
     private router: Router,
     private modalCtrl: ModalController,
     private productService: ProductService,
+    private authService: AuthService,
     private brandService: BrandService,
+    private translate: TranslateService,
     private toastController: ToastController
   ) {}
 
@@ -47,6 +53,10 @@ export class AppComponent implements OnInit {
         index++
       }
     }
+    this.authService.listenSelectedLangage.subscribe((selectedLangage) => {
+      this.translate.use(selectedLangage);
+      this.selectedLangage$ = selectedLangage
+    })
   }
 
   checkBrand = (index: number) => {

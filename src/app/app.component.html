@@ -21,7 +21,7 @@
             <ion-menu-toggle auto-hide="false" *ngFor="let r of getRoutes; let i = index">
               <ion-item routerDirection="root" [routerLink]="[r.path]" lines="none" detail="false" routerLinkActive="selected">
                 <ion-icon aria-hidden="true" slot="start" [ios]="r.data!['icon'] + '-outline'" [md]="r.data!['icon'] + '-sharp'"></ion-icon>
-                <ion-label>{{ r.path }}</ion-label>
+                <ion-label>{{ 'app.' + r.path | translate }}</ion-label>
               </ion-item>
             </ion-menu-toggle>
           </ion-list>
@@ -76,7 +76,7 @@
             <ion-buttons slot="start">
               <ion-menu-button auto-hide="true"></ion-menu-button>
             </ion-buttons>
-            <ion-title>{{getActiveRoute}}</ion-title>
+            <ion-title>{{ 'app.' + getActiveRoute | translate }}</ion-title>
             <ion-item slot="end" (click)="showCart()">
               <ion-icon
                 aria-hidden="true"

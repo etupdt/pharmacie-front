@@ -1,36 +1,17 @@
 
-<!--<div class="evenements-page">
 
-    <div class="breadcrump" ><a routerLink="/Accueil" alt="Accueil">Accueil</a> > <a href="/evenements" alt="evenements">Événements</a></div>
-
-    <div class="onsiteservice mat-elevation-z8" *ngFor="let evenement of evenements">
-
-        <img *ngIf="evenement.photo" src="{{evenement.photo}}" alt="photo">
-
-        <div class="evenement-item">
-
-            <h3><span *ngIf=" evenement.date != null">Du {{ evenement.date[0]|date:'W LLL YYYY'}} au {{ evenement.date[1]|date:'W LLL YYYY'}}</span> -  {{ evenement.title }}</h3>
-            <p>{{evenement.description}}</p>
-
-        </div>
-
-    </div>
-
-
- </div>
--->
- <ion-content>
+<ion-content>
   <ion-list>
-    <ion-item class="onsiteservice mat-elevation-z8" *ngFor="let evenement of evenements">
+    <div class="onsiteservice mat-elevation-z8" *ngFor="let evenement of evenements">
       <ion-card>
         <ion-img
           src="{{evenement.photo}}" alt=""
         ></ion-img>
         <ion-card-content>
           <ion-card-title class="ion-text-wrap">{{evenement.title}}</ion-card-title>
-          <ion-item class="card-description">{{evenement.description}}</ion-item>
+          <p class="card-description">{{evenement.description}}</p>
         </ion-card-content>
       </ion-card>
-    </ion-item>
+    </div>
   </ion-list>
 </ion-content>

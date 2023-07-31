@@ -12,29 +12,31 @@
       <ion-img
         src="{{backendImages + '/products/' + detail.product.getImagePath}}" alt="">
       </ion-img>
-      <ion-list class="cart-product">
-        <ion-item  class="product-title">
-          <ion-label class="ion-text-wrap">{{detail.product.getProductName}}</ion-label>
+      <div class="cart-product">
+        <div  class="product-title">
+          <h3>{{detail.product.getProductName}}</h3>
           <ion-icon
             aria-hidden="true"
             [ios]="'trash-outline'"
             [md]="'trash-sharp'"
             (click)="deleteCartProduct(detail.product)"
           ></ion-icon>
-        </ion-item>
-        <ion-item class="product-description ion-text-wrap">{{detail.product.getDescription}}</ion-item>
-        <ion-item class="product-price">
-          <ion-label>
+        </div>
+        <p class="product-description">{{detail.product.getDescription}}</p>
+        <div class="cart-product">
+          <p class="product-price">
             {{detail.qte}} x {{detail.product.getPrice | number: '1.2-2'}}
-            = {{detail.qte * detail.product.getPrice | number: '1.2-2'}} €</ion-label>
-        </ion-item>
-      </ion-list>
+            = {{detail.qte * detail.product.getPrice | number: '1.2-2'}} €
+          </p>
+        </div>
+      </div>
     </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-item class="product-price">
-      <ion-label>
-        Total : {{getCartTotal() | number: '1.2-2'}} € </ion-label>
+    <ion-item>
+      <div class="cart-product">
+        <p class="product-price">
+          Total : {{getCartTotal() | number: '1.2-2'}} €
+        </p>
+      </div>
     </ion-item>
     <ion-item>
       <ion-button (click)="sendMail()">Commander</ion-button>

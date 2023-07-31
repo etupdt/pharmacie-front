@@ -15,14 +15,14 @@
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen class="ion-padding">
-  <ion-item>
+  <div>
     <ion-item position="stacked" class="product-name ion-text-wrap">{{product.getProductName}}</ion-item>
     <img
       src="{{backendImages + '/products/' + product.getImagePath}}" alt=""
     >
-    <ion-item position="floating" class="product-description ion-text-wrap">{{product.getDescription}}</ion-item>
+    <p position="floating" class="product-description ion-text-wrap">{{product.getDescription}}</p>
     <ion-label position="floating" class="product-price">{{product.getPrice | number: '1.2-2'}}  €</ion-label>
     <ion-button (click)="addProductToCart(product)">Ajouter</ion-button>
-  </ion-item>
+  </div>
 </ion-content>
 

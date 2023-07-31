@@ -19,7 +19,7 @@ ion-app {
   }
 
   > ion-content {
-    max-width: 1500px;
+    max-width: 1300px;
 
     ion-menu > ion-item, #brand-list {
       padding-top: 70px;
@@ -163,10 +163,6 @@ ion-menu-button {
   color: black;
 }
 
-app-home-page {
-  padding-top: 70px;
-}
-
 ion-header {
 
   --background: rgba(var(--ion-color-primary-rgb), 0.34);
@@ -207,7 +203,7 @@ ion-menu.md {
     --padding-bottom: 0px;
 
     ion-toggle {
-      margin: 10px 0;
+      margin: 10px 30px;
     }
 
     .brand-list {

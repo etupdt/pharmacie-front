@@ -33,9 +33,16 @@ mat-slider {
 
 ion-content {
 
-  --padding-top: 70px;
+  ion-card {
+    box-shadow: 10px 5px 10px lightgray;
+    border-radius: 8px;
+  }
+
+  --padding-top: 50px;
 
   ion-list {
+
+//    --background: var(--ion-color-primary-bkg);
 
     width: 100%;
     margin:auto;
@@ -43,12 +50,15 @@ ion-content {
     flex-direction: row;
     flex-wrap: wrap;
 
-    ion-item {
+    div {
+
+      --padding-start: 0;
+      padding: 8px;
 
       ion-card {
 
-        margin: 10px;
-        width: 300px;
+        margin: 0;
+        width: 290px;
         border-radius: 6px;
         background-color: white;
         text-align: center;
@@ -59,7 +69,7 @@ ion-content {
 
         ion-card-content {
 
-          padding: 5px;
+          padding: 0px;
           width: 100%;
           display: flex;
           flex-direction: column;
@@ -68,13 +78,14 @@ ion-content {
           ion-card-title {
             font-size: 1rem;
             padding: 15px 0;
+            font-weight: 500;
           }
 
           ion-card-subtitle {
             color: rgb(243, 63, 171);
             font-size:x-large;
             font-weight: 550;
-            padding: 15px 0;
+            margin: 15px 30px;
           }
 
           ion-button {
@@ -110,7 +121,7 @@ ion-content {
       display: flex;
       flex-direction: column;
 
-      ion-item {
+      div {
 
         ion-card {
 
@@ -138,7 +149,8 @@ ion-content {
             }
 
             ion-button {
-              display: none;
+              width: 280px;
+              text-align: right;
             }
 
           }
@@ -162,12 +174,17 @@ ion-content {
       display: flex;
       flex-direction: column;
 
-      ion-item {
+      div {
 
         ion-card {
 
-          ion-img {
-            height: 80px;
+          ion-card-content {
+
+            ion-button {
+              width: 160px;
+              text-align: right;
+            }
+
           }
 
         }

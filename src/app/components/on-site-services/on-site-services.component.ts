@@ -21,6 +21,7 @@ export class OnSiteServicesComponent implements OnInit {
   constructor (
     private onSiteService: OnSiteServiceService,
     private authService: AuthService,
+    private translate: TranslateService
   ) {
   }
 
@@ -29,7 +30,11 @@ export class OnSiteServicesComponent implements OnInit {
       this.selectedLangage$ = selectedLangage
     })
     this.getOnSiteServices();
-  }
+    this.authService.listenSelectedLangage.subscribe((selectedLangage) => {
+      this.translate.use(selectedLangage);
+      this.selectedLangage$ = selectedLangage
+    })
+}
 
   getOnSiteServices = () => {
 

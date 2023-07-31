@@ -8,7 +8,7 @@
                        <div class="footer_column_item_title">Sommaire</div>
                           <ol class="footer_info-links">
                             <li *ngFor="let onglet of onglets; let i = index;" class="footer_info-link">
-                                <a (click)="callRoute(i)" href="" title="{{onglet.path}}">{{ 'header.' + onglet.path}}</a>
+                              <a routerDirection="root" [routerLink]="[onglet.path]" href="#">{{ 'app.' + onglet.path | translate }}</a>
                             </li>
                          </ol>
                     </div>
@@ -20,13 +20,13 @@
                         <div class="footer_column_item_title u-margin-bottom-small infos-pratique">Infos pratiques</div>
                         <ol class="footer_info-links infos-pratique">
                             <li class="footer_info-link">
-                                <a href="#a_adapter/equipe" title="L'équipe">L'équipe</a>
+                                <a href="#" title="L'équipe">L'équipe</a>
                             </li>
                             <li class="c-footer__info-link">
-                                <a href="#a_adapter/cookies" title="Utilisation des cookies">Utilisation des cookies</a>
+                                <a href="#" title="Utilisation des cookies">Utilisation des cookies</a>
                             </li>
                             <li class="c-footer__info-link">
-                                <a href="#a_adapter/contactez-nous" title="Contactez-nous">Contactez-nous</a>
+                                <a routerDirection="root" [routerLink]="['Contact']" href="#" title="Contactez-nous">Contactez-nous</a>
                             </li>
                         </ol>
                         <div class="footer_column_item_title u-margin-bottom-small">Langue</div>

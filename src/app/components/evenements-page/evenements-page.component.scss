@@ -9,12 +9,17 @@
 
 ion-content {
 
-  --background: var(--ion-color-primary-bkg);
+  ion-card {
+    box-shadow: 10px 5px 10px lightgray;
+    border-radius: 8px;
+  }
+
+//  --background: var(--ion-color-primary-bkg);
   --padding-top: 70px;
 
   ion-list {
 
-    --background: var(--ion-color-primary-bkg);
+//    --background: var(--ion-color-primary-bkg);
 
     width: 100%;
     margin:auto;
@@ -22,7 +27,7 @@ ion-content {
     flex-direction: row;
     flex-wrap: wrap;
 
-    ion-item {
+    div {
 
       width: 100%;
 
@@ -30,10 +35,9 @@ ion-content {
 
         display: flex;
         flex-direction: row;
-        margin: 20px auto;
+        margin: 20px;
         border-radius: 8px;
         font-size: 1em;
-        width: 100%;
 
         ion-img {
           border-radius: 8px 0 0 8px;
@@ -44,7 +48,7 @@ ion-content {
           padding: 10px;
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
+          justify-content: space-evenly;
           min-height: 100%;
           width: 70%;
 
@@ -86,12 +90,11 @@ ion-content {
 
     ion-list {
 
-      ion-item {
+      div {
 
         ion-card {
 
           flex-direction: column;
-          width: 100%;
 
           ion-img {
 
@@ -103,9 +106,6 @@ ion-content {
           ion-card-content {
 
             width: 100%;
-
-            .card-description {
-            }
 
           }
 
@@ -125,7 +125,7 @@ ion-content {
 
     ion-list {
 
-      ion-item {
+      div {
 
         ion-card {
 

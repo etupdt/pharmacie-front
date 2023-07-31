@@ -2,53 +2,46 @@
 @import '../../app.component.scss';
 
 ion-content {
-  --padding-top: 70px;
-}
 
-// START - Mobile first style
-main {
+  img {
+    box-shadow: 10px 5px 10px lightgray;
+    border-radius: 8px;
+  }
+
+  --padding-top: 70px;
   margin-top: 15px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   padding: 1px 5px;
-}
 
-article {
-  margin: 0 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  article {
 
-.article-picture {
-  img {
-    width: 50vw;
+    display: flex;
+    flex-direction: column;
+
+    margin: 10px;
+    display: flex;
+
+    ul {
+      width: 100%;
+      padding-inline-start: 25px;
+    }
+
+    .content {
+
+      p {
+        width: 100%;
+        padding-left: 0;
+      }
+
+    }
+
   }
-}
 
-.article-picture:first-child {
-  margin-top: 10px;
-}
-
-.article-picture-last {
-  margin-bottom: 20px;
-}
-
-.content {
-  padding-left: 30px;
-}
-
-.events-picture {
-  padding-left: 10px;
-  img {
-    width: 100vw;
-  }
 }
 
 .opinion { // JE N'AI PAS TROUVÉ ENCORE COMMENT AJOUTER LES ETOILES //
   height: 50px;
-  background-color: lightgreen;
 //  display: flex;
   display: none;
   justify-content: center;
@@ -62,24 +55,47 @@ article {
 // END - Mobile first style
 
 @media screen and (min-width: 800px) {
+
+
+  ion-content {
+
+    article {
+
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+
+      margin: 30px;
+      display: flex;
+
+      li {
+        width: 320px;
+
+      }
+
+      .content {
+
+        p {
+          width: 280px;
+          padding: 30px;
+        }
+
+      }
+
+    }
+
+    article:first-child, article:last-child {
+      flex-direction: row;
+    }
+
+  }
+
   .events {
     display: flex;
     gap: 20px;
     flex-direction: row;
     align-items: center;
     margin: 20px auto;
-  }
-
-  .events-picture {
-    img {
-      width: 45vw;
-    }
-  }
-
-  .article-picture {
-    img {
-      width: 45vw;
-    }
   }
 
   .opinion {

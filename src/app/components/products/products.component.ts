@@ -86,9 +86,10 @@ export class ProductsComponent implements OnInit{
 
     this.productService.getProducts().subscribe({
       next: (res: any[]) => {
+        let products: Product[] = []
         res.forEach(p => {
           const brand = this.brands$.find(brand => brand.getId === p.brand.id)
-          return this.products.push(new Product(
+          products.push(new Product(
             p.id,
             p.productName,
             p.label,
@@ -100,6 +101,8 @@ export class ProductsComponent implements OnInit{
             p.type
           ));
         })
+        this.brandService.refresh.next(this.refresh$ + 1)
+        this.products = products
       },
       error: (error: { error: { message: any; }; }) => {
       }

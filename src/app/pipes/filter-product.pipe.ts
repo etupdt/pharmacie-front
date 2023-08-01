@@ -16,7 +16,7 @@ export class FilterProductPipe implements PipeTransform {
     if ((args[0] as Brand[]).length > 0) {
       brands = (args[0] as Brand[]).filter(brand => brand.checked)
     }
-
+console.log('brand', brands)
     let productTypes: ProductsType[] = []
     if ((args[1] as ProductsType[]).length > 0) {
       productTypes = (args[1] as ProductsType[]).filter(productType => productType.checked)

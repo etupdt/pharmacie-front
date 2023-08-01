@@ -15,7 +15,7 @@ export class ContactService {
 
   sendMail = (mail: MailContact): Observable<any> => {
     return this.http.post(
-      environment.useBackend + `/sendmail/contact`,
+      environment.useBackendMail + `/sendmail/contact`,
       mail
     )
   }

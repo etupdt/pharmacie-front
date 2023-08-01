@@ -3,6 +3,7 @@ import { BehaviorSubject, of } from 'rxjs';
 import { Brand } from '../entities/brand';
 import { ProductType } from '../enums/product-type';
 import { ProductsType } from '../interfaces/products-type.interface';
+import mockBrands from '../../assets/data/mockBrands.json'
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class BrandService {
 
   constructor() {
     this.listenBrands.subscribe((brands) => {this.brands$ = brands as Brand[]})
-    of(this.mockBrands).subscribe({
+    of(mockBrands).subscribe({
       next: (res: any[]) => {
         res.forEach(b => {
           return this.brands$.push(new Brand(
@@ -35,33 +36,5 @@ export class BrandService {
       }
     })
   }
-
-  mockBrands: {}[] = [
-    {
-      'id': 1,
-      'brandName': 'ZZZQUIL',
-      'imagePath': 'bioderma.png'
-    },
-    {
-      'id': 2,
-      'brandName': 'CERAVE',
-      'imagePath': 'avene.png'
-    },
-    {
-      'id': 3,
-      'brandName': 'ISDIN',
-      'imagePath': 'oenobiol.png'
-    },
-    {
-      'id': 4,
-      'brandName': 'VICHY',
-      'imagePath': 'nuxe.png'
-    },
-    {
-      'id': 5,
-      'brandName': 'HYLO',
-      'imagePath': 'svr.png'
-    },
-  ]
 
 }

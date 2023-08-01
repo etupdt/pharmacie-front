@@ -27,18 +27,6 @@ export class ProductsComponent implements OnInit{
 
   backendImages = environment.useBackendImages
 
-  filters: Filter[] = [
-    {
-      name: 'Prix',
-      unit: '€',
-      inf: 0,
-      sup: 60,
-      step: 5,
-      startValue: 0,
-      endValue: 60
-    },
-  ]
-
   refresh$: number = 0
 
   selectedLangage$!: string
@@ -127,5 +115,6 @@ export class ProductsComponent implements OnInit{
 
   get getAuth () {return this.authService.auth}
   get getDetail () {return this.productService.detail}
+  get getFilters() {return this.productService.filters}
 
 }

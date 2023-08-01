@@ -1,7 +1,7 @@
 
 <ion-content>
   <ion-list>
-    <div *ngFor="let product of products | filterProduct:brands$:productTypes$:filters:refresh$">
+    <div *ngFor="let product of products | filterProduct:brands$:productTypes$:getFilters:refresh$">
       <ion-card expand="block" (click)="showDetail(product)">
         <ion-img
           src="{{backendImages + '/products/' + product.getImagePath}}" alt="">

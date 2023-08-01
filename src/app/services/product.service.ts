@@ -5,6 +5,7 @@ import { Cart } from '../interfaces/cart.interface';
 import { MailCommand } from '../interfaces/mail-command.interface';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Filter } from '../interfaces/filter.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,18 @@ export class ProductService {
   listenCart = this.cart.asObservable()
 
   detail = false
+
+  filters: Filter[] = [
+    {
+      name: 'Prix',
+      unit: '€',
+      inf: 0,
+      sup: 60,
+      step: 5,
+      startValue: 0,
+      endValue: 60
+    },
+  ]
 
   constructor(
     private http: HttpClient,

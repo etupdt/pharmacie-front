@@ -2,7 +2,7 @@ import { Component, OnInit, Type } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductService } from './services/product.service';
 import { Cart } from './interfaces/cart.interface';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, RangeCustomEvent, ToastController } from '@ionic/angular';
 import { CartComponent } from './components/cart/cart.component';
 import { environment } from 'src/environments/environment';
 import { BrandService } from './services/brand.service';
@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
   productTypes$: ProductsType[] = []
   refresh$!: number
 
+  priceChecked: boolean = false;
   brandsChecked: boolean = false;
   productTypesChecked: boolean = false;
 
@@ -85,6 +86,20 @@ export class AppComponent implements OnInit {
     this.brandService.refresh.next(this.refresh$ + 1)
   }
 
+  onResetPrice = () => {
+    this.getFilters[0].startValue = this.getFilters[0].inf
+    this.getFilters[0].endValue = this.getFilters[0].sup
+    this.brandService.refresh.next(this.refresh$ + 1)
+    this.priceChecked = false
+  }
+
+  onTerminalsPriceChange = (event: Event) => {
+    console.log((event as RangeCustomEvent).detail.value)
+    this.getFilters[0].startValue = ((event as RangeCustomEvent).detail.value as {lower: number, upper: number}).lower
+    this.getFilters[0].endValue = ((event as RangeCustomEvent).detail.value as {lower: number, upper: number}).upper
+    this.brandService.refresh.next(this.refresh$ + 1)
+  }
+
   async presentToast(position: 'top' | 'middle' | 'bottom') {
     const toast = await this.toastController.create({
       message: 'Le panier est vide !',
@@ -121,5 +136,6 @@ export class AppComponent implements OnInit {
     this.cart$.detail.forEach(detail => total += detail.qte)
     return total === 0 ? '' : total
   }
+  get getFilters() {return this.productService.filters}
 
 }

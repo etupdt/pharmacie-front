@@ -37,7 +37,7 @@ export class FilterProductPipe implements PipeTransform {
 
         returnValue = false
 
-      }/*
+      }
       else {
 
         filters.forEach(filter => {
@@ -54,7 +54,7 @@ export class FilterProductPipe implements PipeTransform {
 
       })
 
-    }*/
+    }
 
       return returnValue
 

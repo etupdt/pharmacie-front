@@ -5,52 +5,68 @@ ion-content {
 
   --padding-top: 70px;
 
-  ion-list {
+  div {
 
-    width: 100%;
-    margin:auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
-    ion-item {
+    ion-list {
 
-      width: 70%;
-      margin: 10px auto;
+      width: 100%;
+      margin:auto;
 
-      ion-textarea {
-        height: 30vh;
-        --padding-start: 10px;
-      }
+      ion-item {
 
-      ion-button {
-        width: 50%;
-        height: 36px;
-        border: 0px;
-        border-radius: 5px;
-        text-align: center;
-        font-weight: bold;
-        margin: 20px auto;
+        width: 70%;
+        margin: 10px auto;
 
-        --color: black;
-        --background: rgba(var(--ion-color-primary-rgb), 0.14);
+        ion-textarea {
+          height: 30vh;
+          --padding-start: 10px;
+        }
+
+        ion-button {
+          width: 40%;
+          height: 36px;
+          border: 0px;
+          border-radius: 5px;
+          text-align: center;
+          font-weight: bold;
+          margin: 20px auto;
+
+          --color: black;
+          --background: rgba(var(--ion-color-primary-rgb), 0.14);
+
+        }
 
       }
 
     }
 
   }
+
 }
 
 @media screen and (max-width: 750px) {
 
   ion-content {
 
-    ion-list {
+    div {
 
-      ion-item {
+      height: initial;
 
-        width: 80%;
+      ion-list {
 
-        ion-textarea {
-          height: 50vh;
+        ion-item {
+
+          width: 80%;
+
+          ion-textarea {
+            height: 50vh;
+          }
+
         }
 
       }
@@ -65,14 +81,18 @@ ion-content {
 
   ion-content {
 
-    ion-list {
+    div {
 
-      ion-item {
+      ion-list {
 
-        width: 100%;
+        ion-item {
 
-        ion-textarea {
-          height: 70vh;
+          width: 100%;
+
+          ion-textarea {
+            height: 55vh;
+          }
+
         }
 
       }

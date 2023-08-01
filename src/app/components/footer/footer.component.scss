@@ -12,7 +12,7 @@ ul {
 }
 
 ol, ul {
-  margin: 0;
+  margin: 0px;
   list-style: none;
   padding-left: 0;
 }
@@ -157,13 +157,13 @@ a {
   }
 
   .footer_column_item_title {
-    margin: 3px 12px;
+    margin: 3px 0;
     font-size: 1.1em;
     font-style: italic;
   }
 
-  .footer_column_item_title:last-child {
-    margin: 3px 12px;
+  .layout_item:last-child .footer_column_item_title {
+    margin: 3px 16px;
   }
 
   .footer_column {

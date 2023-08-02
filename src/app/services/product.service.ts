@@ -12,11 +12,10 @@ import { ProductsType } from '../interfaces/products-type.interface';
 })
 export class ProductService {
 
-  cart = new BehaviorSubject<DisplayCart>({
+  cart: DisplayCart = {
     display: false,
     detail: []
-  })
-  listenCart = this.cart.asObservable()
+  }
 
   productTypes: ProductsType[] = []
 

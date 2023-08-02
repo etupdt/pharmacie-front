@@ -2,8 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { IonModal, ModalController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Product } from 'src/app/entities/product';
-import { Cart } from 'src/app/interfaces/displayCart.interface';
-import { AuthService } from 'src/app/services/auth.service';
+import { DisplayCart } from 'src/app/interfaces/displayCart.interface';
 import { ProductService } from 'src/app/services/product.service';
 import { environment } from 'src/environments/environment';
 import { CartComponent } from '../cart/cart.component';
@@ -17,8 +16,6 @@ export class ProductComponent implements OnInit {
 
   product!: Product
 
-  cart$!: Cart
-
   backendImages = environment.useBackendImages
 
   constructor (
@@ -29,7 +26,6 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productService.listenCart.subscribe((cart) => {this.cart$ = cart as Cart})
   }
 
   back = () => {
@@ -48,7 +44,7 @@ export class ProductComponent implements OnInit {
 
   async showCart() {
 
-    if (this.cart$.detail.length === 0) {
+    if (this.productService.cart.detail.length === 0) {
       this.presentToast("middle")
       return
     }
@@ -66,16 +62,16 @@ export class ProductComponent implements OnInit {
   }
 
   addProductToCart = (product: Product) => {
-    const index = this.cart$.detail.findIndex(detail => detail.product.getId === product.getId)
+    const index = this.productService.cart.detail.findIndex(detail => detail.product.getId === product.getId)
     if (index !== -1)
-      this.cart$.detail[index].qte++
+      this.productService.cart.detail[index].qte++
     else
-      this.cart$.detail.push({qte: 1, product: product})
+      this.productService.cart.detail.push({qte: 1, product: product})
   }
 
   get getCartTotalSize() {
     let total = 0
-    this.cart$.detail.forEach(detail => total += detail.qte)
+    this.productService.cart.detail.forEach(detail => total += detail.qte)
     return total === 0 ? '' : total
   }
 

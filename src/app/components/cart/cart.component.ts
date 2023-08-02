@@ -15,10 +15,6 @@ import { environment } from 'src/environments/environment';
 })
 export class CartComponent  implements OnInit {
 
-  cart$!: DisplayCart
-
-  client$!: Client
-
   backendImages = environment.useBackendImages
 
   constructor(
@@ -29,25 +25,25 @@ export class CartComponent  implements OnInit {
 
   ngOnInit(
   ) {
-    this.productService.listenCart.subscribe((cart) => {this.cart$ = cart as DisplayCart})
+
   }
 
   getCartTotal = () => {
     let total = 0
-    this.cart$.detail.forEach(detail => total += detail.product.getPrice * detail.qte)
+    this.productService.cart.detail.forEach(detail => total += detail.product.getPrice * detail.qte)
     return total
   }
 
   deleteCartProduct (product: Product) {
-    const index = this.cart$.detail.findIndex(detail => detail.product.getId === product.getId)
+    const index = this.productService.cart.detail.findIndex(detail => detail.product.getId === product.getId)
     if (index !== -1) {
-      if (this.cart$.detail[index].qte === 1) {
-        this.cart$.detail.splice(index, 1)
+      if (this.productService.cart.detail[index].qte === 1) {
+        this.productService.cart.detail.splice(index, 1)
       } else {
-        this.cart$.detail[index].qte--
+        this.productService.cart.detail[index].qte--
       }
     }
-    if (this.cart$.detail.length === 0)
+    if (this.productService.cart.detail.length === 0)
       this.back()
   }
 
@@ -55,11 +51,11 @@ export class CartComponent  implements OnInit {
 
     this.productService.sendMail({
       auth: this.clientService.client,
-      command: this.cart$.detail
+      command: this.productService.cart.detail
     }).subscribe({
       next: (res: any[]) => {
-        this.cart$.detail = []
-        this.cart$.display = false
+        this.productService.cart.detail = []
+        this.productService.cart.display = false
       },
       error: (error: { error: { message: any; }; }) => {
       }
@@ -71,4 +67,5 @@ export class CartComponent  implements OnInit {
     return this.modalCtrl.dismiss(null, 'return');
   }
 
+  get getCart () {return this.productService.cart}
 }

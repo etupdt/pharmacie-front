@@ -18,8 +18,6 @@ export class ContactComponent implements OnInit {
 
   isUpdated = false
 
-  client$!: Client
-
   constructor(
     private formBuilder: FormBuilder,
     private contactService: ContactService,

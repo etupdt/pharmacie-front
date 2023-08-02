@@ -20,8 +20,6 @@ import { LoginComponent } from './components/login/login.component';
 })
 export class AppComponent implements OnInit {
 
-  cart$!: DisplayCart
-
   brandsChecked: boolean = false;
   productTypesChecked: boolean = false;
 
@@ -40,7 +38,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productService.listenCart.subscribe((cart) => {this.cart$ = cart as DisplayCart})
 
     let index: number = 0
     for (let productTypeString in ProductType) {
@@ -101,7 +98,7 @@ export class AppComponent implements OnInit {
 
   async showCart() {
 
-    if (this.cart$.detail.length === 0) {
+    if (this.productService.cart.detail.length === 0) {
       this.presentToast("middle")
       return
     }
@@ -136,7 +133,7 @@ export class AppComponent implements OnInit {
   get getActiveRoute() {return this.router.url.split('/')[1]}
   get getCartTotalSize() {
     let total = 0
-    this.cart$.detail.forEach(detail => total += detail.qte)
+    this.productService.cart.detail.forEach(detail => total += detail.qte)
     return total === 0 ? '' : total
   }
   get getFilters() {return this.productService.filters}

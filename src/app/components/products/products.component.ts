@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit{
   products: Product[] = []
 
   productTypes$: ProductsType[] = []
-  cart$!: DisplayCart
+
   product!: Product
 
   backendImages = environment.useBackendImages
@@ -34,8 +34,6 @@ export class ProductsComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-
-    this.productService.listenCart.subscribe((cart) => {this.cart$ = cart as DisplayCart})
 
     this.getProducts()
 
@@ -59,16 +57,16 @@ export class ProductsComponent implements OnInit{
   }
 
   addProductToCart = (product: Product) => {
-    const index = this.cart$.detail.findIndex(detail => detail.product.getId === product.getId)
+    const index = this.productService.cart.detail.findIndex(detail => detail.product.getId === product.getId)
     if (index !== -1)
-      this.cart$.detail[index].qte++
+      this.productService.cart.detail[index].qte++
     else
-      this.cart$.detail.push({qte: 1, product: product})
+      this.productService.cart.detail.push({qte: 1, product: product})
   }
 
   getCartTotal = () => {
     let total = 0
-    this.cart$.detail.forEach(detail => total += detail.product.getPrice * detail.qte)
+    this.productService.cart.detail.forEach(detail => total += detail.product.getPrice * detail.qte)
     return total
   }
 

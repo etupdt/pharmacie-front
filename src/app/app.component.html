@@ -21,7 +21,7 @@
             <ion-menu-toggle auto-hide="false" *ngFor="let r of getRoutes; let i = index">
               <ion-item
                 routerDirection="root"
-                [routerLink]="[r.path]"
+                [routerLink]="[menuTabs[menuIndex].path + '/' + r.path]"
                 lines="none"
                 detail="false"
                 routerLinkActive="selected"
@@ -116,6 +116,22 @@
           </ion-toolbar>
         </ion-header>
         <ion-router-outlet></ion-router-outlet>
+        <ion-tabs>
+          <ion-tab-bar slot="bottom">
+            <ion-tab-button tab="VisiteurMenu" (click)="menuIndex = 0">
+              <ion-icon name="play-circle"></ion-icon>
+              Visiteur
+            </ion-tab-button>
+            <ion-tab-button tab="ClientMenu" (click)="menuIndex = 1">
+              <ion-icon name="radio"></ion-icon>
+              Client
+            </ion-tab-button>
+            <ion-tab-button tab="library" (click)="menuIndex = 2">
+              <ion-icon name="library"></ion-icon>
+              Admin
+            </ion-tab-button>
+          </ion-tab-bar>
+        </ion-tabs>
       </ion-content>
     </ion-split-pane>
   </ion-content>

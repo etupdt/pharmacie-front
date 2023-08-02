@@ -27,6 +27,14 @@ export class AppComponent implements OnInit {
 
   selectedLangage$!: string
 
+  menuIndex: number = 0
+
+  menuTabs: {path: string}[] = [
+    {path: 'VisiteurMenu'},
+    {path: 'ClientMenu'},
+    {path: 'AdminMenu'}
+  ]
+
   constructor(
     private router: Router,
     private modalCtrl: ModalController,
@@ -129,7 +137,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  get getRoutes() { return this.router.config.filter(r => r.path !== '**')}
+  get getRoutes() { return this.router.config[this.menuIndex].children!.filter(r => r.path !== '**')}
   get getActiveRoute() {return this.router.url.split('/')[1]}
   get getCartTotalSize() {
     let total = 0

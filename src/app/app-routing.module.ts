@@ -8,60 +8,75 @@ import { OnSiteServicesComponent } from './components/on-site-services/on-site-s
 import { ClientComponent } from './components/client/client.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { LoginComponent } from './components/login/login.component';
+import { VisitorMenuComponent } from './components/visitor-menu/visitor-menu.component';
+import { ClientMenuComponent } from './components/client-menu/client-menu.component';
 
 const routes: Routes = [
   {
-    path: 'Accueil',
-    component: HomePageComponent,
+    path: 'VisiteurMenu',
+    component: VisitorMenuComponent,
     data: {
       icon: 'archive',
     },
-    pathMatch: 'full'
-  },
-  {
-    path: 'Produits',
-    component: ProductsComponent,
-    data: {
-      icon: 'paper-plane',
-    },
     children: [
       {
-        path: 'Produit',
-        component: ProductComponent,
-      }
+        path: 'Accueil',
+        component: HomePageComponent,
+        data: {
+          icon: 'archive',
+        }
+      },
+      {
+        path: 'Produits',
+        component: ProductsComponent,
+        data: {
+          icon: 'paper-plane',
+        },
+        children: [
+          {
+            path: 'Produit',
+            component: ProductComponent,
+          }
+        ]
+      },
+      {
+        path: 'Evenements',
+        component: EvenementsPageComponent,
+        data: {
+          icon: 'trash',
+        }
+      },
+      {
+        path: 'Prestations',
+        component: OnSiteServicesComponent,
+        data: {
+          icon: 'trash',
+        }
+      },
     ]
   },
   {
-    path: 'Evenements',
-    component: EvenementsPageComponent,
+    path: 'ClientMenu',
+    component: ClientMenuComponent,
     data: {
-      icon: 'trash',
+      icon: 'archive',
     },
-    pathMatch: 'full'
-  },
-  {
-    path: 'Prestations',
-    component: OnSiteServicesComponent,
-    data: {
-      icon: 'trash',
-    },
-    pathMatch: 'full'
-  },
-  {
-    path: 'Compte',
-    component: ClientComponent,
-    data: {
-      icon: 'mail',
-    },
-    pathMatch: 'full'
-  },
-  {
-    path: 'Contact',
-    component: ContactComponent,
-    data: {
-      icon: 'mail',
-    },
-    pathMatch: 'full'
+    children: [
+      {
+        path: 'Compte',
+        component: ClientComponent,
+        data: {
+          icon: 'mail',
+        }
+      },
+      {
+        path: 'Contact',
+        component: ContactComponent,
+        data: {
+          icon: 'mail',
+        }
+      },
+    ]
   },
   {
     path: '**',

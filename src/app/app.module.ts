@@ -15,7 +15,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { CartComponent } from './components/cart/cart.component';
 import { EvenementsPageComponent } from './components/evenements-page/evenements-page.component';
 import { OnSiteServicesComponent } from './components/on-site-services/on-site-services.component';
-import { ClientComponent } from './components/client/client.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactComponent } from './components/contact/contact.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -23,6 +22,9 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoginComponent } from './components/login/login.component';
 import * as _ from 'lodash';
+import { VisitorMenuComponent } from './components/visitor-menu/visitor-menu.component';
+import { ClientMenuComponent } from './components/client-menu/client-menu.component';
+import { ClientComponent } from './components/client/client.component';
 
 @NgModule({
   declarations: [
@@ -35,10 +37,12 @@ import * as _ from 'lodash';
     CartComponent,
     EvenementsPageComponent,
     OnSiteServicesComponent,
-    ClientComponent,
     ContactComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    VisitorMenuComponent,
+    ClientMenuComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,

@@ -17,6 +17,7 @@ export class ProductService {
     detail: []
   }
 
+
   productTypes: ProductsType[] = []
 
   refresh: number = 0

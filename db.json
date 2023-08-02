@@ -37,7 +37,7 @@
   ],
   "product": [
     {
-      "id": 0,
+      "id": 9,
       "productName": "Fotoprotector Fusion Water",
       "label": "ISDIN Fotoprotector Fusion Water Magic SPF50 50ml",
       "description": "Photoprotecteur à texture ultra-légère",
@@ -47,7 +47,8 @@
         "id": 3
       },
       "imagePath": "Fotoprotector_Fusion_Water.webp",
-      "type": 0
+      "type": 0,
+      "deliveryTime": 6
     },
     {
       "id": 1,
@@ -60,7 +61,8 @@
         "id": 3
       },
       "imagePath": "Fotoprotector_Fusion_Spray.webp",
-      "type": 0
+      "type": 0,
+      "deliveryTime": 6
     },
     {
       "id": 2,
@@ -73,7 +75,8 @@
         "id": 4
       },
       "imagePath": "Traitement_Anti-transpirant.webp",
-      "type": 1
+      "type": 1,
+      "deliveryTime": 6
     },
     {
       "id": 3,
@@ -86,7 +89,8 @@
         "id": 2
       },
       "imagePath": "CeraVe_Gel_Moussant.webp",
-      "type": 2
+      "type": 2,
+      "deliveryTime": 4
     },
     {
       "id": 4,
@@ -99,7 +103,8 @@
         "id": 1
       },
       "imagePath": "ZzzQuil_Sommeil.webp",
-      "type": 1
+      "type": 1,
+      "deliveryTime": 4
     },
     {
       "id": 5,
@@ -112,7 +117,8 @@
         "id": 1
       },
       "imagePath": "Freestyle_Libre.webp",
-      "type": 1
+      "type": 1,
+      "deliveryTime": 2
     },
     {
       "id": 6,
@@ -125,7 +131,8 @@
         "id": 5
       },
       "imagePath": "Hylo-Dual_10ml.webp",
-      "type": 1
+      "type": 1,
+      "deliveryTime": 2
     },
     {
       "id": 7,
@@ -138,7 +145,8 @@
         "id": 5
       },
       "imagePath": "Bioderma_Sebium_Gel_Moussant.webp",
-      "type": 2
+      "type": 2,
+      "deliveryTime": 2
     },
     {
       "id": 8,
@@ -151,7 +159,8 @@
         "id": 5
       },
       "imagePath": "Nuxe_Reve_de_Miel.webp",
-      "type": 2
+      "type": 2,
+      "deliveryTime": 1
     }
   ],
   "onsiteservice": [
@@ -190,6 +199,460 @@
       "address2": "",
       "zip": "45000",
       "locality": "Bayonne"
+    }
+  ],
+  "command": [
+    {
+      "id": 1,
+      "paymentDate": "2023-07-31",
+      "dispatches": [
+        {
+          "id": 0,
+          "dispatchDate": "2023-07-31",
+          "receptionDate": "2023-07-31",
+          "dispatchLines": [
+            {
+              "id": 0,
+              "product": {
+                "id": 5,
+                "productName": "Freestyle Libre",
+                "label": "Freestyle Libre 2 Capteur",
+                "description": "Aide à mesurer la glycémie",
+                "price": 59.9,
+                "stock": 4,
+                "brand": {
+                  "id": 1,
+                  "brandName": "ZZZQUIL",
+                  "imagePath": "bioderma.png",
+                  "checked": false
+                },
+                "imagePath": "Freestyle_Libre.webp",
+                "type": 1,
+                "deliveryTime": 2
+              },
+              "payedPrice": 59.9,
+              "quantity": 2
+            }
+          ],
+          "dispatchState": 0
+        },
+        {
+          "id": 0,
+          "dispatchDate": "2023-07-31",
+          "receptionDate": "2023-07-31",
+          "dispatchLines": [
+            {
+              "id": 0,
+              "product": {
+                "id": 4,
+                "productName": "ZzzQuil Sommeil",
+                "label": "ZzzQuil Sommeil 60 Gommes",
+                "description": "Aide à réduire le temps d\"endormissement",
+                "price": 17.16,
+                "stock": 5,
+                "brand": {
+                  "id": 1,
+                  "brandName": "ZZZQUIL",
+                  "imagePath": "bioderma.png",
+                  "checked": false
+                },
+                "imagePath": "ZzzQuil_Sommeil.webp",
+                "type": 1,
+                "deliveryTime": 4
+              },
+              "payedPrice": 17.16,
+              "quantity": 3
+            },
+            {
+              "id": 0,
+              "product": {
+                "id": 3,
+                "productName": "CeraVe Gel Moussant",
+                "label": "CeraVe Gel Moussant 473ml",
+                "description": "Nettoie la peau sans altérer la barrière protectrice cutanée",
+                "price": 12,
+                "stock": 2,
+                "brand": {
+                  "id": 2,
+                  "brandName": "CERAVE",
+                  "imagePath": "avene.png",
+                  "checked": false
+                },
+                "imagePath": "CeraVe_Gel_Moussant.webp",
+                "type": 2,
+                "deliveryTime": 4
+              },
+              "payedPrice": 12,
+              "quantity": 1
+            }
+          ],
+          "dispatchState": 0
+        },
+        {
+          "id": 0,
+          "dispatchDate": "2023-07-31",
+          "receptionDate": "2023-07-31",
+          "dispatchLines": [
+            {
+              "id": 0,
+              "product": {
+                "id": 9,
+                "productName": "Fotoprotector Fusion Water",
+                "label": "ISDIN Fotoprotector Fusion Water Magic SPF50 50ml",
+                "description": "Photoprotecteur à texture ultra-légère",
+                "price": 18.21,
+                "stock": 3,
+                "brand": {
+                  "id": 3,
+                  "brandName": "ISDIN",
+                  "imagePath": "oenobiol.png",
+                  "checked": false
+                },
+                "imagePath": "Fotoprotector_Fusion_Water.webp",
+                "type": 0,
+                "deliveryTime": 6
+              },
+              "payedPrice": 18.21,
+              "quantity": 1
+            },
+            {
+              "id": 0,
+              "product": {
+                "id": 1,
+                "productName": "Fotoprotector Fusion Spray",
+                "label": "Isdin Fotoprotector Transparent Spray Wet Skin SPF50 250ml",
+                "description": "Contribue à protéger la peau du rayonnement solaire",
+                "price": 22.8,
+                "stock": 5,
+                "brand": {
+                  "id": 3,
+                  "brandName": "ISDIN",
+                  "imagePath": "oenobiol.png",
+                  "checked": false
+                },
+                "imagePath": "Fotoprotector_Fusion_Spray.webp",
+                "type": 0,
+                "deliveryTime": 6
+              },
+              "payedPrice": 22.8,
+              "quantity": 4
+            },
+            {
+              "id": 0,
+              "product": {
+                "id": 2,
+                "productName": "Traitement Anti-transpirant",
+                "label": "Vichy Traitement Anti-Transpirant 48h Roll-On 50ml",
+                "description": "Efficacité longue durée",
+                "price": 8.19,
+                "stock": 4,
+                "brand": {
+                  "id": 4,
+                  "brandName": "VICHY",
+                  "imagePath": "nuxe.png",
+                  "checked": false
+                },
+                "imagePath": "Traitement_Anti-transpirant.webp",
+                "type": 1,
+                "deliveryTime": 6
+              },
+              "payedPrice": 8.19,
+              "quantity": 1
+            }
+          ],
+          "dispatchState": 0
+        }
+      ],
+      "commandState": 0
+    },
+    {
+      "id": 2,
+      "paymentDate": "2023-07-31",
+      "dispatches": [
+        {
+          "id": 0,
+          "dispatchDate": "2023-07-31",
+          "receptionDate": "2023-07-31",
+          "dispatchLines": [
+            {
+              "id": 0,
+              "product": {
+                "id": 4,
+                "productName": "ZzzQuil Sommeil",
+                "label": "ZzzQuil Sommeil 60 Gommes",
+                "description": "Aide à réduire le temps d\"endormissement",
+                "price": 17.16,
+                "stock": 5,
+                "brand": {
+                  "id": 1,
+                  "brandName": "ZZZQUIL",
+                  "imagePath": "bioderma.png",
+                  "checked": false
+                },
+                "imagePath": "ZzzQuil_Sommeil.webp",
+                "type": 1,
+                "deliveryTime": 4
+              },
+              "payedPrice": 17.16,
+              "quantity": 2
+            }
+          ],
+          "dispatchState": 0
+        },
+        {
+          "id": 0,
+          "dispatchDate": "2023-07-31",
+          "receptionDate": "2023-07-31",
+          "dispatchLines": [
+            {
+              "id": 0,
+              "product": {
+                "id": 9,
+                "productName": "Fotoprotector Fusion Water",
+                "label": "ISDIN Fotoprotector Fusion Water Magic SPF50 50ml",
+                "description": "Photoprotecteur à texture ultra-légère",
+                "price": 18.21,
+                "stock": 3,
+                "brand": {
+                  "id": 3,
+                  "brandName": "ISDIN",
+                  "imagePath": "oenobiol.png",
+                  "checked": false
+                },
+                "imagePath": "Fotoprotector_Fusion_Water.webp",
+                "type": 0,
+                "deliveryTime": 6
+              },
+              "payedPrice": 18.21,
+              "quantity": 1
+            },
+            {
+              "id": 0,
+              "product": {
+                "id": 1,
+                "productName": "Fotoprotector Fusion Spray",
+                "label": "Isdin Fotoprotector Transparent Spray Wet Skin SPF50 250ml",
+                "description": "Contribue à protéger la peau du rayonnement solaire",
+                "price": 22.8,
+                "stock": 5,
+                "brand": {
+                  "id": 3,
+                  "brandName": "ISDIN",
+                  "imagePath": "oenobiol.png",
+                  "checked": false
+                },
+                "imagePath": "Fotoprotector_Fusion_Spray.webp",
+                "type": 0,
+                "deliveryTime": 6
+              },
+              "payedPrice": 22.8,
+              "quantity": 1
+            },
+            {
+              "id": 0,
+              "product": {
+                "id": 2,
+                "productName": "Traitement Anti-transpirant",
+                "label": "Vichy Traitement Anti-Transpirant 48h Roll-On 50ml",
+                "description": "Efficacité longue durée",
+                "price": 8.19,
+                "stock": 4,
+                "brand": {
+                  "id": 4,
+                  "brandName": "VICHY",
+                  "imagePath": "nuxe.png",
+                  "checked": false
+                },
+                "imagePath": "Traitement_Anti-transpirant.webp",
+                "type": 1,
+                "deliveryTime": 6
+              },
+              "payedPrice": 8.19,
+              "quantity": 1
+            }
+          ],
+          "dispatchState": 0
+        }
+      ],
+      "commandState": 0
+    },
+    {
+      "id": 3,
+      "paymentDate": "2023-07-31",
+      "dispatches": [
+        {
+          "id": 0,
+          "dispatchDate": "2023-07-31",
+          "receptionDate": "2023-07-31",
+          "dispatchLines": [
+            {
+              "id": 0,
+              "product": {
+                "id": 5,
+                "productName": "Freestyle Libre",
+                "label": "Freestyle Libre 2 Capteur",
+                "description": "Aide à mesurer la glycémie",
+                "price": 59.9,
+                "stock": 4,
+                "brand": {
+                  "id": 1,
+                  "brandName": "ZZZQUIL",
+                  "imagePath": "bioderma.png",
+                  "checked": false
+                },
+                "imagePath": "Freestyle_Libre.webp",
+                "type": 1,
+                "deliveryTime": 2
+              },
+              "payedPrice": 59.9,
+              "quantity": 1
+            }
+          ],
+          "dispatchState": 0
+        },
+        {
+          "id": 0,
+          "dispatchDate": "2023-07-31",
+          "receptionDate": "2023-07-31",
+          "dispatchLines": [
+            {
+              "id": 0,
+              "product": {
+                "id": 4,
+                "productName": "ZzzQuil Sommeil",
+                "label": "ZzzQuil Sommeil 60 Gommes",
+                "description": "Aide à réduire le temps d\"endormissement",
+                "price": 17.16,
+                "stock": 5,
+                "brand": {
+                  "id": 1,
+                  "brandName": "ZZZQUIL",
+                  "imagePath": "bioderma.png",
+                  "checked": false
+                },
+                "imagePath": "ZzzQuil_Sommeil.webp",
+                "type": 1,
+                "deliveryTime": 4
+              },
+              "payedPrice": 17.16,
+              "quantity": 1
+            }
+          ],
+          "dispatchState": 0
+        },
+        {
+          "id": 0,
+          "dispatchDate": "2023-07-31",
+          "receptionDate": "2023-07-31",
+          "dispatchLines": [
+            {
+              "id": 0,
+              "product": {
+                "id": 9,
+                "productName": "Fotoprotector Fusion Water",
+                "label": "ISDIN Fotoprotector Fusion Water Magic SPF50 50ml",
+                "description": "Photoprotecteur à texture ultra-légère",
+                "price": 18.21,
+                "stock": 3,
+                "brand": {
+                  "id": 3,
+                  "brandName": "ISDIN",
+                  "imagePath": "oenobiol.png",
+                  "checked": false
+                },
+                "imagePath": "Fotoprotector_Fusion_Water.webp",
+                "type": 0,
+                "deliveryTime": 6
+              },
+              "payedPrice": 18.21,
+              "quantity": 1
+            },
+            {
+              "id": 0,
+              "product": {
+                "id": 1,
+                "productName": "Fotoprotector Fusion Spray",
+                "label": "Isdin Fotoprotector Transparent Spray Wet Skin SPF50 250ml",
+                "description": "Contribue à protéger la peau du rayonnement solaire",
+                "price": 22.8,
+                "stock": 5,
+                "brand": {
+                  "id": 3,
+                  "brandName": "ISDIN",
+                  "imagePath": "oenobiol.png",
+                  "checked": false
+                },
+                "imagePath": "Fotoprotector_Fusion_Spray.webp",
+                "type": 0,
+                "deliveryTime": 6
+              },
+              "payedPrice": 22.8,
+              "quantity": 1
+            }
+          ],
+          "dispatchState": 0
+        }
+      ],
+      "commandState": 0
+    },
+    {
+      "id": 4,
+      "paymentDate": "2023-07-31",
+      "dispatches": [
+        {
+          "id": 0,
+          "dispatchDate": "2023-07-31",
+          "receptionDate": "2023-07-31",
+          "dispatchLines": [
+            {
+              "id": 0,
+              "product": {
+                "id": 9,
+                "productName": "Fotoprotector Fusion Water",
+                "label": "ISDIN Fotoprotector Fusion Water Magic SPF50 50ml",
+                "description": "Photoprotecteur à texture ultra-légère",
+                "price": 18.21,
+                "stock": 3,
+                "brand": {
+                  "id": 3,
+                  "brandName": "ISDIN",
+                  "imagePath": "oenobiol.png",
+                  "checked": false
+                },
+                "imagePath": "Fotoprotector_Fusion_Water.webp",
+                "type": 0,
+                "deliveryTime": 6
+              },
+              "payedPrice": 18.21,
+              "quantity": 1
+            },
+            {
+              "id": 0,
+              "product": {
+                "id": 1,
+                "productName": "Fotoprotector Fusion Spray",
+                "label": "Isdin Fotoprotector Transparent Spray Wet Skin SPF50 250ml",
+                "description": "Contribue à protéger la peau du rayonnement solaire",
+                "price": 22.8,
+                "stock": 5,
+                "brand": {
+                  "id": 3,
+                  "brandName": "ISDIN",
+                  "imagePath": "oenobiol.png",
+                  "checked": false
+                },
+                "imagePath": "Fotoprotector_Fusion_Spray.webp",
+                "type": 0,
+                "deliveryTime": 6
+              },
+              "payedPrice": 22.8,
+              "quantity": 1
+            }
+          ],
+          "dispatchState": 0
+        }
+      ],
+      "commandState": 0
     }
   ]
 }

@@ -1,4 +1,5 @@
 import { State } from "../enums/state"
+import { Client } from "./client"
 import { Dispatch } from "./dispatch"
 
 export class Command {
@@ -7,7 +8,8 @@ export class Command {
     private id: number,
     private paymentDate: string,
     private dispatches: Dispatch[],
-    private commandState: State
+    private commandState: State,
+    private client: Client
   ) {}
 
   get getId () { return this.id }

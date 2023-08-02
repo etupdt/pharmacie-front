@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { Client } from 'src/app/entities/client';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Product } from 'src/app/entities/product';
-import { DisplayCart } from 'src/app/interfaces/displayCart.interface';
-import { AuthService } from 'src/app/services/auth.service';
 import { ClientService } from 'src/app/services/client.service';
+import { CommandService } from 'src/app/services/command.service';
 import { ProductService } from 'src/app/services/product.service';
 import { environment } from 'src/environments/environment';
 
@@ -20,7 +18,9 @@ export class CartComponent  implements OnInit {
   constructor(
     private productService: ProductService,
     private modalCtrl: ModalController,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private commandService: CommandService,
+    private toastController: ToastController
   ) { }
 
   ngOnInit(
@@ -47,9 +47,27 @@ export class CartComponent  implements OnInit {
       this.back()
   }
 
+  deleteAllCartProducts () {
+    this.productService.cart = {
+      display: false,
+      detail: []
+    }
+  }
+
   createCommand = () => {
 
-    this.productService.sendMail({
+    this.commandService.postCommand(this.productService.cart).subscribe({
+      next: (res: any[]) => {
+        this.deleteAllCartProducts()
+        this.presentToast('middle', 'Commande enregistrée !', 800)
+        this.back()
+      },
+      error: (error: { error: { message: any; }; }) => {
+        this.presentToast('middle', 'Erreur lors de l\'enregistrement de la commande !', 3000)
+      }
+    })
+
+/*    this.productService.sendMail({
       auth: this.clientService.client,
       command: this.productService.cart.detail
     }).subscribe({
@@ -60,12 +78,23 @@ export class CartComponent  implements OnInit {
       error: (error: { error: { message: any; }; }) => {
       }
     })
-
+*/
   }
 
   back = () => {
     return this.modalCtrl.dismiss(null, 'return');
   }
 
+  async presentToast(position: 'top' | 'middle' | 'bottom', message: string, duration: number) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: duration,
+      position: position,
+    });
+
+    await toast.present();
+  }
+
   get getCart () {return this.productService.cart}
+
 }

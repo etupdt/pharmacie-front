@@ -1,5 +1,5 @@
 import { State } from "../enums/state";
-import { Product } from "./product";
+import { DispatchLine } from "./dispatch-line";
 
 export class Dispatch {
 
@@ -7,7 +7,7 @@ export class Dispatch {
     private id: number,
     private dispatchDate: string,
     private receptionDate: string,
-    private products: Product[],
+    private dispatchLines: DispatchLine[],
     private dispatchState: State
   ) {}
 
@@ -17,8 +17,8 @@ export class Dispatch {
   set setDispatchDate (dispatchDate: string) {this.dispatchDate = dispatchDate}
   get getReceptionDate () { return this.receptionDate }
   set setReceptionDate (receptionDate: string) {this.receptionDate = receptionDate}
-  get getProducts () { return this.products }
-  set setProducts (products: Product[]) {this.products = products}
+  get getDispatchLines () { return this.dispatchLines }
+  set setDispatchLines (dispatchLines: DispatchLine[]) {this.dispatchLines = dispatchLines}
   get getDispatchState () { return this.dispatchState }
   set setDispatchState (dispatchState: State) {this.dispatchState = dispatchState}
 

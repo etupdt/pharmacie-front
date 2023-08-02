@@ -19,9 +19,25 @@
         <ion-content>
           <ion-list id="menu-list">
             <ion-menu-toggle auto-hide="false" *ngFor="let r of getRoutes; let i = index">
-              <ion-item routerDirection="root" [routerLink]="[r.path]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-item
+                routerDirection="root"
+                [routerLink]="[r.path]"
+                lines="none"
+                detail="false"
+                routerLinkActive="selected"
+              >
                 <ion-icon aria-hidden="true" slot="start" [ios]="r.data!['icon'] + '-outline'" [md]="r.data!['icon'] + '-sharp'"></ion-icon>
                 <ion-label>{{ 'app.' + r.path | translate }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+            <ion-menu-toggle auto-hide="false">
+              <ion-item
+              lines="none"
+              detail="false"
+              (click)="showLogin()"
+            >
+                <ion-icon aria-hidden="true" slot="start" [ios]="'heart-outline'" [md]="'heart-sharp'"></ion-icon>
+                <ion-label>{{getAuthenticatedEmail ? 'Déconnexion' : 'Connexion'}}</ion-label>
               </ion-item>
             </ion-menu-toggle>
           </ion-list>
@@ -53,7 +69,7 @@
               [checked]="brandsChecked"
               >Marques
             </ion-toggle>
-            <ion-item *ngFor="let brand of brands$; let i = index" lines="none">
+            <ion-item *ngFor="let brand of getBrands; let i = index" lines="none">
               <ion-toggle
                 labelPlacement="end"
                 justify="start"
@@ -72,7 +88,7 @@
               [checked]="productTypesChecked"
               >Types
             </ion-toggle>
-            <ion-item *ngFor="let productType of productTypes$; let i = index" lines="none">
+            <ion-item *ngFor="let productType of getProductTypes; let i = index" lines="none">
               <ion-toggle
                 labelPlacement="end"
                 justify="start"
@@ -99,7 +115,6 @@
             </ion-item>
           </ion-toolbar>
         </ion-header>
-
         <ion-router-outlet></ion-router-outlet>
       </ion-content>
     </ion-split-pane>

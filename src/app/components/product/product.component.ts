@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { IonModal, ModalController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Product } from 'src/app/entities/product';
-import { Cart } from 'src/app/interfaces/cart.interface';
+import { Cart } from 'src/app/interfaces/displayCart.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 import { environment } from 'src/environments/environment';

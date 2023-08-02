@@ -1,28 +1,29 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Product } from '../entities/product';
-import { Filter } from '../interfaces/filter.interface';
-import { Cart } from '../interfaces/cart.interface';
 import { Brand } from '../entities/brand';
 import { ProductsType } from '../interfaces/products-type.interface';
+import { BrandService } from '../services/brand.service';
+import { ProductService } from '../services/product.service';
 
 @Pipe({
   name: 'filterProduct'
 })
 export class FilterProductPipe implements PipeTransform {
 
+  constructor (
+    private brandService: BrandService,
+    private productService: ProductService
+  ) {}
+
   transform(products: Product[], ...args: unknown[]): Product[] {
 
     let brands!: Brand[]
-    if ((args[0] as Brand[]).length > 0) {
-      brands = (args[0] as Brand[]).filter(brand => brand.checked)
-    }
-console.log('brand', brands)
-    let productTypes: ProductsType[] = []
-    if ((args[1] as ProductsType[]).length > 0) {
-      productTypes = (args[1] as ProductsType[]).filter(productType => productType.checked)
-    }
+    brands = this.brandService.brands.filter(brand => brand.checked)
 
-    const filters = args[2] as Filter[]
+    let productTypes: ProductsType[] = []
+    productTypes = this.productService.productTypes.filter(productType => productType.checked)
+
+    const filters = this.productService.filters
 
     return products.filter((product: Product) => {
 

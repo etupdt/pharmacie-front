@@ -28,12 +28,6 @@ export class FooterComponent implements OnInit {
     this.onglets = this.router.config.filter(onglet => onglet.path !== '**')
   }
 
-  callRoute = (target: number) =>  {
-    this.productService.detail = false
-    this.authService.lastSelectedTab = this.authService.selectedTab
-    this.authService.callRoute(target)
-  }
-
   setSelectedLangage = (langage: string) => {
     this.selectedLangage = langage
     this.authService.selectedLangage.next(langage)

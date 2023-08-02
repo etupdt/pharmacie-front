@@ -1,7 +1,7 @@
-import { Auth } from './auth';
+import { Client } from './client';
 
 describe('Auth', () => {
   it('should create an instance', () => {
-    expect(new Auth()).toBeTruthy();
+    expect(new Client()).toBeTruthy();
   });
 });

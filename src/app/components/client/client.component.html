@@ -1,9 +1,9 @@
 
-<ion-content [formGroup]="authForm">
+<ion-content *ngIf="clientForm" [formGroup]="clientForm">
   <div>
     <ion-list>
       <ion-item>
-        <h3>Saisissez vos coordonnées</h3>
+        <h3>Saisissez vos données personnelles</h3>
       </ion-item>
       <ion-item>
         <ion-input
@@ -82,13 +82,13 @@
           labelPlacement="stacked"
           placeholder="Localité"
           fill="solid"
-          type="number"
+          type="text"
           required
           clearInput
         ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-button (click)="saveAuth()">Enregistrer</ion-button>
+        <ion-button (click)="saveClient()">Enregistrer</ion-button>
       </ion-item>
     </ion-list>
   </div>

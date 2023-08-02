@@ -1,6 +1,6 @@
 import { Product } from "../entities/product";
 
-export interface Cart {
+export interface DisplayCart {
   display: boolean,
   detail: {
     qte: number,

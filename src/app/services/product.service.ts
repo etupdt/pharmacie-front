@@ -1,23 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { Product } from '../entities/product';
-import { Cart } from '../interfaces/cart.interface';
+import { DisplayCart } from '../interfaces/displayCart.interface';
 import { MailCommand } from '../interfaces/mail-command.interface';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Filter } from '../interfaces/filter.interface';
-import mockProducts from '../../assets/data/mockProducts.json'
+import { ProductsType } from '../interfaces/products-type.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  cart = new BehaviorSubject<Cart>({
+  cart = new BehaviorSubject<DisplayCart>({
     display: false,
     detail: []
   })
   listenCart = this.cart.asObservable()
+
+  productTypes: ProductsType[] = []
+
+  refresh: number = 0
 
   detail = false
 

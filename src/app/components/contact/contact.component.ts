@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContactService } from 'src/app/services/contact.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ClientService } from 'src/app/services/client.service';
+import { Client } from 'src/app/entities/client';
 
 @Component({
   selector: 'app-contact',
@@ -16,10 +18,12 @@ export class ContactComponent implements OnInit {
 
   isUpdated = false
 
+  client$!: Client
+
   constructor(
     private formBuilder: FormBuilder,
     private contactService: ContactService,
-    private authService: AuthService,
+    private clientService: ClientService,
   ) {
   }
 
@@ -64,7 +68,7 @@ export class ContactComponent implements OnInit {
   sendMail = () => {
 
     this.contactService.sendMail({
-      auth: this.authService.auth,
+      auth: this.clientService.client,
       message: this.getMessage
     }).subscribe({
       next: (res: any[]) => {

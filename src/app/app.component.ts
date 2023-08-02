@@ -1,7 +1,7 @@
-import { Component, OnInit, Type } from '@angular/core';
+import { Component, OnInit, Type, effect } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductService } from './services/product.service';
-import { Cart } from './interfaces/cart.interface';
+import { DisplayCart } from './interfaces/displayCart.interface';
 import { ModalController, RangeCustomEvent, ToastController } from '@ionic/angular';
 import { CartComponent } from './components/cart/cart.component';
 import { environment } from 'src/environments/environment';
@@ -11,6 +11,7 @@ import { ProductType } from './enums/product-type';
 import { ProductsType } from './interfaces/products-type.interface';
 import { AuthService } from './services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
+import { LoginComponent } from './components/login/login.component';
 
 @Component({
   selector: 'app-root',
@@ -19,13 +20,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent implements OnInit {
 
-  cart$!: Cart
+  cart$!: DisplayCart
 
-  brands$!: Brand[]
-  productTypes$: ProductsType[] = []
-  refresh$!: number
-
-  priceChecked: boolean = false;
   brandsChecked: boolean = false;
   productTypesChecked: boolean = false;
 
@@ -44,13 +40,12 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productService.listenCart.subscribe((cart) => {this.cart$ = cart as Cart})
-    this.brandService.listenBrands.subscribe((brands) => {this.brands$ = brands as Brand[]})
-    this.brandService.listenRefresh.subscribe((refresh: number) => {this.refresh$ = refresh})
+    this.productService.listenCart.subscribe((cart) => {this.cart$ = cart as DisplayCart})
+
     let index: number = 0
     for (let productTypeString in ProductType) {
       if (isNaN(Number(productTypeString))) {
-        this.productTypes$.push({productType: index, productTypeString: productTypeString, checked: false})
+        this.productService.productTypes.push({productType: index, productTypeString: productTypeString, checked: false})
         index++
       }
     }
@@ -61,43 +56,37 @@ export class AppComponent implements OnInit {
   }
 
   checkBrand = (index: number) => {
-    this.brands$[index].checked= !this.brands$[index].checked
-    this.brandService.brands.next(this.brands$)
-    this.brandService.refresh.next(this.refresh$ + 1)
+    this.brandService.brands[index].checked= !this.brandService.brands[index].checked
+    this.productService.refresh++
   }
 
   checkBrands = () => {
     this.brandsChecked = !this.brandsChecked
-    this.brands$.forEach(brand => brand.checked = this.brandsChecked)
-    this.brandService.brands.next(this.brands$)
-    this.brandService.refresh.next(this.refresh$ + 1)
+    this.brandService.brands.forEach(brand => brand.checked = this.brandsChecked)
+    this.productService.refresh++
   }
 
   checkProductTypes = () => {
     this.productTypesChecked = !this.productTypesChecked
-    this.productTypes$.forEach(productTypes => productTypes.checked = this.productTypesChecked)
-    this.brandService.productTypes.next(this.productTypes$)
-    this.brandService.refresh.next(this.refresh$ + 1)
+    this.productService.productTypes.forEach(productTypes => productTypes.checked = this.productTypesChecked)
+    this.productService.refresh++
   }
 
   checkType = (index: number) => {
-    this.productTypes$[index].checked= !this.productTypes$[index].checked
-    this.brandService.productTypes.next(this.productTypes$)
-    this.brandService.refresh.next(this.refresh$ + 1)
+    this.productService.productTypes[index].checked= !this.productService.productTypes[index].checked
+    this.productService.refresh++
   }
 
   onResetPrice = () => {
     this.getFilters[0].startValue = this.getFilters[0].inf
     this.getFilters[0].endValue = this.getFilters[0].sup
-    this.brandService.refresh.next(this.refresh$ + 1)
-    this.priceChecked = false
+    this.productService.refresh++
   }
 
   onTerminalsPriceChange = (event: Event) => {
-    console.log((event as RangeCustomEvent).detail.value)
     this.getFilters[0].startValue = ((event as RangeCustomEvent).detail.value as {lower: number, upper: number}).lower
     this.getFilters[0].endValue = ((event as RangeCustomEvent).detail.value as {lower: number, upper: number}).upper
-    this.brandService.refresh.next(this.refresh$ + 1)
+    this.productService.refresh++
   }
 
   async presentToast(position: 'top' | 'middle' | 'bottom') {
@@ -129,7 +118,21 @@ export class AppComponent implements OnInit {
     }
   }
 
-  get getRoutes() {return this.router.config.filter(r => r.path !== '**')}
+  async showLogin() {
+
+    const modal = await this.modalCtrl.create({
+      component: LoginComponent,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      console.log(`Hello, ${data}!`);
+    }
+  }
+
+  get getRoutes() { return this.router.config.filter(r => r.path !== '**')}
   get getActiveRoute() {return this.router.url.split('/')[1]}
   get getCartTotalSize() {
     let total = 0
@@ -137,5 +140,8 @@ export class AppComponent implements OnInit {
     return total === 0 ? '' : total
   }
   get getFilters() {return this.productService.filters}
+  get getAuthenticatedEmail() {return this.authService.email}
+  get getBrands() {return this.brandService.brands}
+  get getProductTypes() {return this.productService.productTypes}
 
 }

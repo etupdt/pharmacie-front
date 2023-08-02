@@ -1,14 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, effect } from '@angular/core';
 import { Product } from 'src/app/entities/product';
 import { ProductService } from 'src/app/services/product.service';
 import { BrandService } from 'src/app/services/brand.service';
-import { Brand } from 'src/app/entities/brand';
-import { Filter } from 'src/app/interfaces/filter.interface';
-import { Cart } from 'src/app/interfaces/cart.interface';
-import { AuthService } from 'src/app/services/auth.service';
+import { DisplayCart } from 'src/app/interfaces/displayCart.interface';
 import { environment } from 'src/environments/environment';
 import { InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
-import { Router } from '@angular/router';
 import { ProductComponent } from '../product/product.component';
 import { ProductsType } from 'src/app/interfaces/products-type.interface';
 
@@ -20,14 +16,14 @@ import { ProductsType } from 'src/app/interfaces/products-type.interface';
 export class ProductsComponent implements OnInit{
 
   products: Product[] = []
-  brands$: Brand[] = []
+
   productTypes$: ProductsType[] = []
-  cart$!: Cart
+  cart$!: DisplayCart
   product!: Product
 
   backendImages = environment.useBackendImages
 
-  refresh$: number = 0
+  refresh: number = 0
 
   selectedLangage$!: string
 
@@ -35,17 +31,11 @@ export class ProductsComponent implements OnInit{
     private productService: ProductService,
     private brandService: BrandService,
     private modalCtrl: ModalController,
-    private authService: AuthService,
-    private router: Router
   ) {}
 
   ngOnInit(): void {
 
-    this.productService.listenCart.subscribe((cart) => {this.cart$ = cart as Cart})
-
-    this.brandService.listenBrands.subscribe((brands) => {this.brands$ = brands as Brand[]})
-    this.brandService.listenProductTypes.subscribe((productTypes) => {this.productTypes$ = productTypes as ProductsType[]})
-    this.brandService.listenRefresh.subscribe((refresh: number) => {this.refresh$ = refresh})
+    this.productService.listenCart.subscribe((cart) => {this.cart$ = cart as DisplayCart})
 
     this.getProducts()
 
@@ -88,7 +78,7 @@ export class ProductsComponent implements OnInit{
       next: (res: any[]) => {
         let products: Product[] = []
         res.forEach(p => {
-          const brand = this.brands$.find(brand => brand.getId === p.brand.id)
+          const brand = this.brandService.brands.find(brand => brand.getId === p.brand.id)
           products.push(new Product(
             p.id,
             p.productName,
@@ -98,10 +88,11 @@ export class ProductsComponent implements OnInit{
             p.stock,
             brand!,
             p.imagePath,
-            p.type
+            p.type,
+            p.deliveryTime
           ));
         })
-        this.brandService.refresh.next(this.refresh$ + 1)
+//        this.brandService.refresh.next(this.refresh$ + 1)
         this.products = products
       },
       error: (error: { error: { message: any; }; }) => {
@@ -116,8 +107,8 @@ export class ProductsComponent implements OnInit{
     }, 500);
   }
 
-  get getAuth () {return this.authService.auth}
   get getDetail () {return this.productService.detail}
   get getFilters() {return this.productService.filters}
+  get getRefresh() {return this.productService.refresh}
 
 }

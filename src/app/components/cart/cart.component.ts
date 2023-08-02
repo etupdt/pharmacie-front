@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Client } from 'src/app/entities/client';
 import { Product } from 'src/app/entities/product';
-import { Cart } from 'src/app/interfaces/cart.interface';
+import { DisplayCart } from 'src/app/interfaces/displayCart.interface';
 import { AuthService } from 'src/app/services/auth.service';
+import { ClientService } from 'src/app/services/client.service';
 import { ProductService } from 'src/app/services/product.service';
 import { environment } from 'src/environments/environment';
 
@@ -13,19 +15,21 @@ import { environment } from 'src/environments/environment';
 })
 export class CartComponent  implements OnInit {
 
-  cart$!: Cart
+  cart$!: DisplayCart
+
+  client$!: Client
 
   backendImages = environment.useBackendImages
 
   constructor(
     private productService: ProductService,
     private modalCtrl: ModalController,
-    private authService: AuthService
+    private clientService: ClientService
   ) { }
 
   ngOnInit(
   ) {
-    this.productService.listenCart.subscribe((cart) => {this.cart$ = cart as Cart})
+    this.productService.listenCart.subscribe((cart) => {this.cart$ = cart as DisplayCart})
   }
 
   getCartTotal = () => {
@@ -47,12 +51,10 @@ export class CartComponent  implements OnInit {
       this.back()
   }
 
-  sendMail = () => {
-
-    let products: {qte: number, product: Product}[] = []
+  createCommand = () => {
 
     this.productService.sendMail({
-      auth: this.authService.auth,
+      auth: this.clientService.client,
       command: this.cart$.detail
     }).subscribe({
       next: (res: any[]) => {
@@ -64,7 +66,6 @@ export class CartComponent  implements OnInit {
     })
 
   }
-
 
   back = () => {
     return this.modalCtrl.dismiss(null, 'return');

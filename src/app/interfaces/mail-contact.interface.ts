@@ -1,6 +1,6 @@
-import { Auth } from "../entities/auth";
+import { Client } from "../entities/client";
 
 export interface MailContact {
-  auth: Auth,
+  auth: Client,
   message: string
 }

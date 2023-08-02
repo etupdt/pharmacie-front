@@ -5,8 +5,9 @@ import { ProductsComponent } from './components/products/products.component';
 import { ProductComponent } from './components/product/product.component';
 import { EvenementsPageComponent } from './components/evenements-page/evenements-page.component';
 import { OnSiteServicesComponent } from './components/on-site-services/on-site-services.component';
-import { AuthComponent } from './components/auth/auth.component';
+import { ClientComponent } from './components/client/client.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {
@@ -48,7 +49,7 @@ const routes: Routes = [
   },
   {
     path: 'Compte',
-    component: AuthComponent,
+    component: ClientComponent,
     data: {
       icon: 'mail',
     },

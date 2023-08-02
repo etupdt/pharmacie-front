@@ -1,40 +1,50 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Brand } from '../entities/brand';
 import { ProductType } from '../enums/product-type';
 import { ProductsType } from '../interfaces/products-type.interface';
 import mockBrands from '../../assets/data/mockBrands.json'
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BrandService {
 
-  brands = new BehaviorSubject<Brand[]>([])
-  listenBrands = this.brands.asObservable()
-  brands$!: Brand[]
+  brands: Brand[] = []
 
-  productTypes = new BehaviorSubject<ProductsType[]>([])
-  listenProductTypes = this.productTypes.asObservable()
+  signalBrandsUpdated = signal(this.brands)
 
-  refresh = new BehaviorSubject<number>(0)
-  listenRefresh = this.refresh.asObservable()
-
-  constructor() {
-    this.listenBrands.subscribe((brands) => {this.brands$ = brands as Brand[]})
-    of(mockBrands).subscribe({
+  constructor(
+    private http: HttpClient,
+  ) {
+    this.signalBrandsUpdated.set([])
+    this.getBrands().subscribe({
       next: (res: any[]) => {
+        let brands: Brand[] = []
         res.forEach(b => {
-          return this.brands$.push(new Brand(
+          return brands.push(new Brand(
             b.id,
             b.brandName,
             b.imagePath
           ));
         })
+        this.brands = brands
+        this.signalBrandsUpdated.set(brands)
       },
       error: (error: { error: { message: any; }; }) => {
+        console.log('erreur lecture brands')
       }
     })
+  }
+
+  getBrands = (): Observable<any> => {
+
+    return this.http.get(
+      environment.useBackendApi + `/brand`,
+    )
+
   }
 
 }

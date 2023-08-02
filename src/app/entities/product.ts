@@ -12,7 +12,8 @@ export class Product {
     private stock: number,
     private brand: Brand,
     private imagePath: string,
-    private type: ProductType
+    private type: ProductType,
+    private deliveryTime: number
   ) {}
 
   get getId () { return this.id }
@@ -33,6 +34,8 @@ export class Product {
   set setImagePath (imagePath: string) {this.imagePath = imagePath}
   get getType () { return this.type }
   set setType (type: ProductType) {this.type = type}
+  get getDeliveryTime () { return this.deliveryTime }
+  set setDeliveryTime (deliveryTime: number) {this.deliveryTime = deliveryTime}
 
   deserialize(data: any): Product {
 

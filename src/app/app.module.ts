@@ -15,12 +15,13 @@ import { HeaderComponent } from './components/header/header.component';
 import { CartComponent } from './components/cart/cart.component';
 import { EvenementsPageComponent } from './components/evenements-page/evenements-page.component';
 import { OnSiteServicesComponent } from './components/on-site-services/on-site-services.component';
-import { AuthComponent } from './components/auth/auth.component';
+import { ClientComponent } from './components/client/client.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactComponent } from './components/contact/contact.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +34,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     CartComponent,
     EvenementsPageComponent,
     OnSiteServicesComponent,
-    AuthComponent,
+    ClientComponent,
     ContactComponent,
     FooterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

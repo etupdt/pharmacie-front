@@ -1,8 +1,8 @@
-import { Auth } from "../entities/auth";
+import { Client } from "../entities/client";
 import { Product } from "../entities/product";
 
 export interface MailCommand {
-  auth: Auth,
+  auth: Client,
   command: {
     qte: number,
     product: Product

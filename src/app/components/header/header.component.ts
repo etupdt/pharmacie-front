@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { Cart } from 'src/app/interfaces/cart.interface';
-import { AuthService } from 'src/app/services/auth.service';
-import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-header',
@@ -15,8 +11,6 @@ export class HeaderComponent implements OnInit {
   burgerMenu = false
 
   onglets!: Route[]
-
-  cart$!: Cart
 
   selectedTabIndex$: number = 0
 

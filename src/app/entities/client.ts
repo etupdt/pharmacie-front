@@ -1,4 +1,4 @@
-export class Auth {
+export class Client {
 
   constructor (
     private id: number,

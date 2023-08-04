@@ -76,21 +76,8 @@ export class ProductsComponent implements OnInit{
       next: (res: any[]) => {
         let products: Product[] = []
         res.forEach(p => {
-          const brand = this.brandService.brands.find(brand => brand.getId === p.brand.id)
-          products.push(new Product(
-            p.id,
-            p.productName,
-            p.label,
-            p.description,
-            p.price,
-            p.stock,
-            brand!,
-            p.imagePath,
-            p.type,
-            p.deliveryTime
-          ));
+          products.push(new Product().deserialize(p));
         })
-//        this.brandService.refresh.next(this.refresh$ + 1)
         this.products = products
       },
       error: (error: { error: { message: any; }; }) => {

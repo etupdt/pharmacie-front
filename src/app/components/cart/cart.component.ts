@@ -18,7 +18,6 @@ export class CartComponent  implements OnInit {
   constructor(
     private productService: ProductService,
     private modalCtrl: ModalController,
-    private clientService: ClientService,
     private commandService: CommandService,
     private toastController: ToastController
   ) { }

@@ -102,16 +102,8 @@ export class LoginComponent implements OnInit {
           ).subscribe({
             next: (res: any) => {
               this.authService.email = this.loginForm.get("email")!.value
-              this.clientService.signalClientUpdated.set(new Client(
-                res.id,
-                res.email,
-                res.firstName,
-                res.lastName,
-                res.address1,
-                res.address2,
-                res.zip,
-                res.locality
-              ))
+              this.clientService.client = new Client().deserialize(res)
+              this.clientService.signalClientUpdated.set(this.clientService.client)
               return this.modalCtrl.dismiss(null, 'return');
             },
             error: (error: { error: { message: any; }; }) => {

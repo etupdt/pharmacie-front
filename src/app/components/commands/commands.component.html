@@ -1,0 +1,41 @@
+
+<ion-content>
+  <ion-list>
+      <ion-card *ngFor="let command of commands" class="command-line" expand="block">
+        <h4>Commande n° {{command.getId}} du {{command.getPaymentDate}}</h4>
+        <ion-card-content>
+          <p>Client : {{command.getClient.getFirstName}} {{command.getClient.getLastName}}</p>
+          <p>Etat : {{command.getCommandState}}</p>
+          <table>
+            <tr>
+              <th></th>
+              <th>Produit</th>
+              <th class="right">Qté.</th>
+              <th class="right">Prix u.</th>
+              <th class="right">Total</th>
+            </tr>
+            <ng-container *ngFor="let dispatch of command.getDispatches">
+              <tr class="space-line-large">
+                <td colspan="5">Envoi du : {{dispatch.getDispatchDate}}</td>
+              </tr>
+              <tr class="dispatchline-line" *ngFor="let dispatchLine of dispatch.getDispatchLines">
+                <td></td>
+                <td class="cadre">{{dispatchLine.getProduct.getProductName}}</td>
+                <td class="cadre right">{{dispatchLine.getQuantity}}</td>
+                <td class="cadre right">{{dispatchLine.getPayedPrice | number: '1.2-2'}}</td>
+                <td class="cadre right">{{dispatchLine.getQuantity * dispatchLine.getPayedPrice | number: '1.2-2'}} €</td>
+              </tr>
+            </ng-container>
+            <tr>
+              <td class="space-line-large" colspan="5"></td>
+            </tr>
+          <tr>
+              <td colspan="3"></td>
+              <td class="right">Total :</td>
+              <td class="cadre right">{{getTotalPriceCommand(command.getId) | number: '1.2-2'}}</td>
+            </tr>
+          </table>
+        </ion-card-content>
+      </ion-card>
+  </ion-list>
+</ion-content>

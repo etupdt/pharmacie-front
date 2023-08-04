@@ -11,7 +11,6 @@ import { ProductsComponent } from './components/products/products.component';
 import { FilterProductPipe } from './pipes/filter-product.pipe';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductComponent } from './components/product/product.component';
-import { HeaderComponent } from './components/header/header.component';
 import { CartComponent } from './components/cart/cart.component';
 import { EvenementsPageComponent } from './components/evenements-page/evenements-page.component';
 import { OnSiteServicesComponent } from './components/on-site-services/on-site-services.component';
@@ -25,6 +24,11 @@ import * as _ from 'lodash';
 import { VisitorMenuComponent } from './components/visitor-menu/visitor-menu.component';
 import { ClientMenuComponent } from './components/client-menu/client-menu.component';
 import { ClientComponent } from './components/client/client.component';
+import { CommandsComponent } from './components/commands/commands.component';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -33,7 +37,6 @@ import { ClientComponent } from './components/client/client.component';
     ProductsComponent,
     ProductComponent,
     FilterProductPipe,
-    HeaderComponent,
     CartComponent,
     EvenementsPageComponent,
     OnSiteServicesComponent,
@@ -42,7 +45,8 @@ import { ClientComponent } from './components/client/client.component';
     LoginComponent,
     VisitorMenuComponent,
     ClientMenuComponent,
-    ClientComponent
+    ClientComponent,
+    CommandsComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,10 @@ import { ClientComponent } from './components/client/client.component';
       }
     })
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: LOCALE_ID, useValue: 'fr-FR'},
+  ],
   bootstrap: [AppComponent],
 
 })

@@ -3,18 +3,20 @@ import { Brand } from "./brand"
 
 export class Product {
 
-  constructor (
-    private id: number,
-    private productName: string,
-    private label: string,
-    private description: string,
-    private price: number,
-    private stock: number,
-    private brand: Brand,
-    private imagePath: string,
-    private type: ProductType,
-    private deliveryTime: number
-  ) {}
+  private id!: number
+  private productName!: string
+  private label!: string
+  private description!: string
+  private price!: number
+  private stock!: number
+  private brand!: Brand
+  private imagePath!: string
+  private type!: ProductType
+  private preparationTime!: number
+  private commandTime!: number
+  private deliveryTime!: number
+
+  constructor () {}
 
   get getId () { return this.id }
   set setId (id: number) {this.id = id}
@@ -34,6 +36,10 @@ export class Product {
   set setImagePath (imagePath: string) {this.imagePath = imagePath}
   get getType () { return this.type }
   set setType (type: ProductType) {this.type = type}
+  get getPreparationTime () { return this.preparationTime }
+  set setPreparationTime (preparationTime: number) {this.preparationTime = preparationTime}
+  get getCommandTime () { return this.commandTime }
+  set setCommandTime (commandTime: number) {this.commandTime = commandTime}
   get getDeliveryTime () { return this.deliveryTime }
   set setDeliveryTime (deliveryTime: number) {this.deliveryTime = deliveryTime}
 
@@ -42,11 +48,15 @@ export class Product {
     this.id = data.id
     this.productName = data.productName
     this.label = data.label
+    this.description = data.description
     this.price = data.price
     this.stock = data.stock
     this.brand = data.brand
     this.imagePath = data.imagePath
     this.type = data.type
+    this.preparationTime = data.preparationTime
+    this.commandTime = data.commandTime
+    this.deliveryTime = data.deliveryTime
 
     return this
 

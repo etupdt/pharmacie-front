@@ -9,6 +9,8 @@ import { DisplayCart } from '../interfaces/displayCart.interface';
 import { State } from '../enums/state';
 import * as _ from 'lodash';
 import { ClientService } from './client.service';
+import { Client } from '../entities/client';
+import { formatDate } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -17,45 +19,56 @@ export class CommandService {
 
   constructor(
     private http: HttpClient,
-    private clientService: ClientService
+    private clientService: ClientService,
   ) { }
+
+  getCommands(client?: Client): Observable<any> {
+
+    return this.http.get(
+      environment.useBackendApi + `/command${client ? '/' + client.getId : ''}`
+    )
+
+  }
 
   postCommand = (cart: DisplayCart): Observable<any> => {
 
+    const dayDate = new Date()
+    let datePreparation = new Date()
+    let dateDelivery = new Date()
+
     let dispatchLines: DispatchLine[] = []
     cart.detail.forEach(detail => {
-      dispatchLines.push(new DispatchLine(
-        0,
-        detail.product,
-        detail.product.getPrice,
-        detail.qte
-      ))
+
+      dispatchLines.push(new DispatchLine().deserialize({
+        id: 0,
+        product: detail.product,
+        payedPrice: detail.product.getPrice,
+        quantity: detail.qte
+      }))
     })
 
-    let dispatchGroup = _.groupBy(dispatchLines, 'product.deliveryTime')
-
-//    console.log(dispatchGroup)
-
+    let dispatchGroup = _.groupBy(dispatchLines, 'product.preparationTime')
+console.log(dispatchGroup)
     let dispatches: Dispatch[] = []
     Object.entries(dispatchGroup).forEach(([key, value], index) => {
-      dispatches.push(new Dispatch(
-        0,
-        '2023-07-31',
-        '2023-07-31',
-        value,
-        State.PAYEE
-      ))
+      datePreparation.setDate(dayDate.getDate() + value[0].getProduct.getPreparationTime)
+      dateDelivery.setDate(datePreparation.getDate() + 1)
+      dispatches.push(new Dispatch().deserialize({
+        id: 0,
+        dispatchDate: formatDate(datePreparation,'dd/MM/yyyy', 'fr'),
+        receptionDate: formatDate(dateDelivery,'dd/MM/yyyy', 'fr'),
+        dispatchLines: value,
+        dispatchState: State.PAYEE
+      }))
     })
 
-//    console.log(dispatches)
-
-    let command = new Command(
-      0,
-      '2023-07-31',
-      dispatches,
-      State.PAYEE,
-      this.clientService.client
-    )
+    let command = new Command().deserialize({
+      id: 0,
+      paymentDate: formatDate(dayDate,'dd/MM/yyyy', 'fr'),
+      dispatches: dispatches,
+      commandState: State.PAYEE,
+      client: this.clientService.client
+    })
 
     console.log(command)
 

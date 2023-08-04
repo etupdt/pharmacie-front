@@ -10,6 +10,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { LoginComponent } from './components/login/login.component';
 import { VisitorMenuComponent } from './components/visitor-menu/visitor-menu.component';
 import { ClientMenuComponent } from './components/client-menu/client-menu.component';
+import { CommandsComponent } from './components/commands/commands.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,13 @@ const routes: Routes = [
       {
         path: 'Compte',
         component: ClientComponent,
+        data: {
+          icon: 'mail',
+        }
+      },
+      {
+        path: 'Commandes',
+        component: CommandsComponent,
         data: {
           icon: 'mail',
         }

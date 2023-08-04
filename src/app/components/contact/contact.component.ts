@@ -26,7 +26,7 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    console.log('contact')
     this.message = ''
 
     this.initForm(this.message)

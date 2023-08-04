@@ -31,7 +31,7 @@ export class ClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    console.log('client')
   }
 
   initForm = (client: Client) => {
@@ -123,16 +123,16 @@ export class ClientComponent implements OnInit {
 
   saveClient = () => {
 
-    this.clientService.client = new Client(
-      this.clientService.client.getId,
-      this.clientForm.get("email")!.value,
-      this.clientForm.get("firstname")!.value,
-      this.clientForm.get("lastname")!.value,
-      this.clientForm.get("address1")!.value,
-      this.clientForm.get("address2")!.value,
-      this.clientForm.get("zip")!.value,
-      this.clientForm.get("locality")!.value
-    )
+    this.clientService.client = new Client().deserialize({
+      id: this.clientService.client.getId,
+      email: this.clientForm.get("email")!.value,
+      firstname: this.clientForm.get("firstname")!.value,
+      lastname: this.clientForm.get("lastname")!.value,
+      address1: this.clientForm.get("address1")!.value,
+      address2: this.clientForm.get("address2")!.value,
+      zip: this.clientForm.get("zip")!.value,
+      locality: this.clientForm.get("locality")!.value
+    })
     this.clientService.signalClientUpdated.set(this.clientService.client)
 
     this.clientService.putClient(this.clientService.client).subscribe({

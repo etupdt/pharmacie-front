@@ -2,7 +2,7 @@ import { Component, OnInit, Type, effect } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductService } from './services/product.service';
 import { DisplayCart } from './interfaces/displayCart.interface';
-import { ModalController, RangeCustomEvent, ToastController } from '@ionic/angular';
+import { MenuController, ModalController, RangeCustomEvent, ToastController } from '@ionic/angular';
 import { CartComponent } from './components/cart/cart.component';
 import { environment } from 'src/environments/environment';
 import { BrandService } from './services/brand.service';
@@ -20,6 +20,8 @@ import { LoginComponent } from './components/login/login.component';
 })
 export class AppComponent implements OnInit {
 
+  option = 2
+
   brandsChecked: boolean = false;
   productTypesChecked: boolean = false;
 
@@ -29,10 +31,10 @@ export class AppComponent implements OnInit {
 
   menuIndex: number = 0
 
-  menuTabs: {path: string}[] = [
-    {path: 'VisiteurMenu'},
-    {path: 'ClientMenu'},
-    {path: 'AdminMenu'}
+  menuTabs: {path: string, option: number}[] = [
+    {path: 'VisiteurMenu', option: 0},
+    {path: 'ClientMenu', option: 0},
+    {path: 'AdminMenu', option: 0}
   ]
 
   constructor(
@@ -42,7 +44,8 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private brandService: BrandService,
     private translate: TranslateService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private menuCtrl: MenuController
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +61,7 @@ export class AppComponent implements OnInit {
       this.translate.use(selectedLangage);
       this.selectedLangage$ = selectedLangage
     })
+    this.navigateTo(0)
   }
 
   checkBrand = (index: number) => {
@@ -92,6 +96,13 @@ export class AppComponent implements OnInit {
     this.getFilters[0].startValue = ((event as RangeCustomEvent).detail.value as {lower: number, upper: number}).lower
     this.getFilters[0].endValue = ((event as RangeCustomEvent).detail.value as {lower: number, upper: number}).upper
     this.productService.refresh++
+  }
+
+  navigateTo = (index: number) => {
+    this.menuIndex = index
+    this.menuCtrl.enable(true, 'menu')
+    this.menuCtrl.open('menu')
+    this.router.navigate([this.menuTabs[this.menuIndex].path + '/' + this.getRoutes[this.menuTabs[this.menuIndex].option].path])
   }
 
   async presentToast(position: 'top' | 'middle' | 'bottom') {
@@ -138,7 +149,7 @@ export class AppComponent implements OnInit {
   }
 
   get getRoutes() { return this.router.config[this.menuIndex].children!.filter(r => r.path !== '**')}
-  get getActiveRoute() {return this.router.url.split('/')[1]}
+  get getActiveRoute() {return this.router.url.split('/')[2]}
   get getCartTotalSize() {
     let total = 0
     this.productService.cart.detail.forEach(detail => total += detail.qte)

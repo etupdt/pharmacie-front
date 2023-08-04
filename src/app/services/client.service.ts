@@ -9,7 +9,16 @@ import { Client } from '../entities/client';
 })
 export class ClientService {
 
-  clientInit = new Client(0, '', '', '', '', '', '', '')
+  clientInit = new Client().deserialize({
+    id: 0,
+    email: '',
+    firstName: '',
+    lastName: '',
+    address1: '',
+    address2: '',
+    zip: '',
+    locality: ''
+  })
 
   client!: Client
   signalClientUpdated = signal(this.client)

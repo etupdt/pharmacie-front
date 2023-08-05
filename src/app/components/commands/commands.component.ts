@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Client } from 'src/app/entities/client';
 import { Command } from 'src/app/entities/command';
+import { State } from 'src/app/enums/state';
 import { ClientService } from 'src/app/services/client.service';
 import { CommandService } from 'src/app/services/command.service';
 
@@ -14,6 +15,8 @@ export class CommandsComponent  implements OnInit {
 
   commands: Command[] = []
 
+  states: string[] = []
+
   constructor(
     private clientService: ClientService,
     private commandService: CommandService,
@@ -21,8 +24,15 @@ export class CommandsComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('commands')
+
+    for (let state in State) {
+      if (isNaN(Number(state))) {
+        this.states.push(state)
+      }
+    }
+
     this.getCommands(this.clientService.client)
+
   }
 
   getCommands = (client?: Client) => {

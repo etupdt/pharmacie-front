@@ -2,9 +2,20 @@
   "login": [
     {
       "id": 1,
+      "email": "marie.dubois@test.fr",
       "token": "token",
       "roles": [
         "ROLE_CLIENT"
+      ]
+    },
+    {
+      "id": 2,
+      "email": "xavier.dupont@test.fr",
+      "token": "token",
+      "roles": [
+        "ROLE_CLIENT",
+        "ROLE_EMPLOYEE",
+        "ROLE_ADMIN"
       ]
     }
   ],
@@ -234,7 +245,25 @@
       "address1": "12 rue de la Paix",
       "address2": "",
       "zip": "45000",
-      "locality": "Bayonne"
+      "locality": "Bayonne",
+      "roles": [
+        "ROLE_CLIENT"
+      ]
+    },
+    {
+      "id": 2,
+      "email": "xavier.dupont@test.fr",
+      "firstName": "Xavier",
+      "lastName": "Dupont",
+      "address1": "12 rue de la Craffe",
+      "address2": "",
+      "zip": "62000",
+      "locality": "Montreux",
+      "roles": [
+        "ROLE_CLIENT",
+        "ROLE_EMPLOYEE",
+        "ROLE_ADMIN"
+      ]
     }
   ],
   "command": [
@@ -491,7 +520,10 @@
         "address1": "",
         "address2": "",
         "zip": "",
-        "locality": ""
+        "locality": "",
+        "roles": [
+          "ROLE_CLIENT"
+        ]
       }
     },
     {
@@ -570,7 +602,10 @@
         "address1": "12 rue de la Paix",
         "address2": "",
         "zip": "45000",
-        "locality": "Bayonne"
+        "locality": "Bayonne",
+        "roles": [
+          "ROLE_CLIENT"
+        ]
       }
     }
   ]

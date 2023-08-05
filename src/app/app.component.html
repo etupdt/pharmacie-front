@@ -21,11 +21,11 @@
             <ion-menu-toggle auto-hide="false" *ngFor="let r of getRoutes; let i = index">
               <ion-item
                 routerDirection="root"
-                [routerLink]="[menuTabs[menuIndex].path + '/' + r.path]"
+                [routerLink]="[getMenuTabs[getMenuIndex].path + '/' + r.path]"
                 lines="none"
                 detail="false"
-                class="{{menuTabs[menuIndex].option === i ? 'selected' : ''}}"
-                (click)="menuTabs[menuIndex].option = i"
+                class="{{getMenuTabs[getMenuIndex].option === i ? 'selected' : ''}}"
+                (click)="getMenuTabs[getMenuIndex].option = i"
               >
                 <ion-icon aria-hidden="true" slot="start" [ios]="r.data!['icon'] + '-outline'" [md]="r.data!['icon'] + '-sharp'"></ion-icon>
                 <ion-label>{{r.path}}</ion-label>
@@ -102,7 +102,7 @@
             <ion-buttons slot="start">
               <ion-menu-button auto-hide="true"></ion-menu-button>
             </ion-buttons>
-            <ion-title>{{getRoutes[menuTabs[menuIndex].option].path}}</ion-title>
+            <ion-title>{{getRoutes[getMenuTabs[getMenuIndex].option].path}}</ion-title>
             <ion-item slot="end" (click)="showCart()">
               <ion-icon
                 aria-hidden="true"
@@ -119,11 +119,19 @@
               <ion-icon name="play-circle"></ion-icon>
               Visiteur
             </ion-tab-button>
-            <ion-tab-button tab="ClientMenu" (click)="navigateTo(1)">
+            <ion-tab-button
+              *isclient="getRole"
+              tab="ClientMenu"
+              (click)="navigateTo(1)"
+            >
               <ion-icon name="radio"></ion-icon>
               Client
             </ion-tab-button>
-            <ion-tab-button tab="library" (click)="navigateTo(2)">
+            <ion-tab-button
+              *isemployee="getRole"
+              tab="AdminMenu"
+              (click)="navigateTo(2)"
+            >
               <ion-icon name="library"></ion-icon>
               Admin
             </ion-tab-button>

@@ -2,10 +2,10 @@
 <ion-content *ngIf="clientForm" [formGroup]="clientForm">
   <div>
     <ion-list>
-      <ion-item>
+      <ion-item lines="none">
         <h3>Saisissez vos données personnelles</h3>
       </ion-item>
-      <ion-item>
+      <ion-item lines="none">
         <ion-input
           formControlName="email"
           label="Email"
@@ -17,7 +17,7 @@
           clearInput
         ></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item lines="none">
         <ion-input
           formControlName="firstname"
           label="Prénom"
@@ -29,7 +29,7 @@
           clearInput
         ></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item lines="none">
         <ion-input
           formControlName="lastname"
           label="Nom"
@@ -41,7 +41,7 @@
           clearInput
         ></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item lines="none">
         <ion-input
           formControlName="address1"
           label="Adresse"
@@ -53,7 +53,7 @@
           clearInput
         ></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item lines="none">
         <ion-input
           formControlName="address2"
           label="Complément d'adresse"
@@ -63,7 +63,7 @@
           type="text"
         ></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item lines="none">
         <ion-input
           formControlName="zip"
           label="Code postal"
@@ -75,7 +75,7 @@
           clearInput
         ></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item lines="none">
         <ion-input
           formControlName="locality"
           label="Localité"
@@ -87,7 +87,7 @@
           clearInput
         ></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item lines="none">
         <ion-button (click)="saveClient()">Enregistrer</ion-button>
       </ion-item>
     </ion-list>

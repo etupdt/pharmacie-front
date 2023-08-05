@@ -10,7 +10,7 @@
 <ion-content fullscreen [formGroup]="loginForm">
   <div>
     <ion-list>
-      <ion-item>
+      <ion-item lines="none">
         <h3>{{
           getAuthenticatedEmail ?
             'Confirmez la déconnexion' :
@@ -53,7 +53,7 @@
           clearInput
         ></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item lines="none">
         <ion-button (click)="connect()">{{getAuthenticatedEmail ? 'Déconnexion' : 'Connexion'}}</ion-button>
       </ion-item>
     </ion-list>

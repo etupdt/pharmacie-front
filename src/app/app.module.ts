@@ -28,6 +28,10 @@ import { CommandsComponent } from './components/commands/commands.component';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { IsAdminDirective } from './directives/is-admin.directive';
+import { IsEmployeeDirective } from './directives/is-employee.directive';
+import { IsClientDirective } from './directives/is-client.directive';
+import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -44,9 +48,13 @@ registerLocaleData(localeFr);
     FooterComponent,
     LoginComponent,
     VisitorMenuComponent,
+    AdminMenuComponent,
     ClientMenuComponent,
     ClientComponent,
-    CommandsComponent
+    CommandsComponent,
+    IsAdminDirective,
+    IsEmployeeDirective,
+    IsClientDirective
   ],
   imports: [
     BrowserModule,

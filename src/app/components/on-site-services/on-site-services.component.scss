@@ -21,6 +21,27 @@ ion-content {
     flex-direction: row;
     flex-wrap: wrap;
 
+    > ion-item {
+
+      width: 100%;
+
+      ion-button {
+
+        width: 20%;
+        height: 36px;
+        border: 0px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+        margin: 20px auto;
+
+        --color: black;
+        --background: rgba(var(--ion-color-primary-rgb), 0.14);
+
+      }
+
+    }
+
     div {
 
       width: 100%;

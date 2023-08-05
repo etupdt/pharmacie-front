@@ -30,9 +30,9 @@ export class ClientService {
     this.signalClientUpdated.set(this.clientInit)
   }
 
-  getClient = (email: string): Observable<any> => {
+  getClient = (id: number): Observable<any> => {
     return this.http.get(
-      environment.useBackendApi + `/client/${email}`,
+      environment.useBackendApi + `/client/${id}`,
     )
   }
 

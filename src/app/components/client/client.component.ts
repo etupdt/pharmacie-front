@@ -31,7 +31,7 @@ export class ClientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('client')
+
   }
 
   initForm = (client: Client) => {

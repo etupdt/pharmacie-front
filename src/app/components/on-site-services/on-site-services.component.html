@@ -1,13 +1,31 @@
 
 <ion-content>
   <ion-list>
+    <ion-item
+      *isadmin="getRole"
+      lines="none"
+    >
+      <ion-button slot="end">Ajouter</ion-button>
+    </ion-item>
     <div class="onsiteservice" *ngFor="let onSiteService of onSiteServices">
       <ion-card>
         <ion-img
           src="{{backendImages + '/onsiteservices/' + onSiteService.getImagePath}}" alt=""
         ></ion-img>
         <ion-card-content>
-          <ion-card-title class="ion-text-wrap">{{ 'prestations.service.' + onSiteService.getOnSiteServiceName + '.h3' | translate }}</ion-card-title>
+          <ion-item lines="none">
+            <ion-card-title class="ion-text-wrap">{{ 'prestations.service.' + onSiteService.getOnSiteServiceName + '.h3' | translate }}</ion-card-title>
+            <ion-icon
+              *isadmin="getRole"
+              slot="end"
+              name="pencil-outline"
+            ></ion-icon>
+            <ion-icon
+              *isadmin="getRole"
+              slot="end"
+              name="trash-outline"
+            ></ion-icon>
+          </ion-item>
           <p class="card-description">{{onSiteService.getDescription}}</p>
           <div class="card-tarif">
             <span class="card-price">{{onSiteService.getPrice}} €</span>

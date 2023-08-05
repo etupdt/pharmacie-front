@@ -12,6 +12,7 @@ import { ProductsType } from './interfaces/products-type.interface';
 import { AuthService } from './services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginComponent } from './components/login/login.component';
+import { Role } from './enums/role';
 
 @Component({
   selector: 'app-root',
@@ -20,22 +21,12 @@ import { LoginComponent } from './components/login/login.component';
 })
 export class AppComponent implements OnInit {
 
-  option = 2
-
   brandsChecked: boolean = false;
   productTypesChecked: boolean = false;
 
   backendImages = environment.useBackendImages
 
   selectedLangage$!: string
-
-  menuIndex: number = 0
-
-  menuTabs: {path: string, option: number}[] = [
-    {path: 'VisiteurMenu', option: 0},
-    {path: 'ClientMenu', option: 0},
-    {path: 'AdminMenu', option: 0}
-  ]
 
   constructor(
     private router: Router,
@@ -46,7 +37,15 @@ export class AppComponent implements OnInit {
     private translate: TranslateService,
     private toastController: ToastController,
     private menuCtrl: MenuController
-  ) {}
+  ) {
+    effect(() => {
+      this.authService.signalRoleUpdated()
+    });
+    effect(() => {
+      this.authService.signalMenuIndexUpdated()
+      this.router.navigate([this.getMenuTabs[this.getMenuIndex].path + '/' + this.getRoutes[this.getMenuTabs[this.getMenuIndex].option].path])
+    });
+  }
 
   ngOnInit(): void {
 
@@ -99,10 +98,11 @@ export class AppComponent implements OnInit {
   }
 
   navigateTo = (index: number) => {
-    this.menuIndex = index
+    this.authService.menuIndex = index
+    this.authService.signalMenuIndexUpdated.set(index)
     this.menuCtrl.enable(true, 'menu')
     this.menuCtrl.open('menu')
-    this.router.navigate([this.menuTabs[this.menuIndex].path + '/' + this.getRoutes[this.menuTabs[this.menuIndex].option].path])
+    this.router.navigate([this.getMenuTabs[this.getMenuIndex].path + '/' + this.getRoutes[this.getMenuTabs[this.getMenuIndex].option].path])
   }
 
   async presentToast(position: 'top' | 'middle' | 'bottom') {
@@ -148,7 +148,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  get getRoutes() { return this.router.config[this.menuIndex].children!.filter(r => r.path !== '**')}
+  get getRoutes() { return this.router.config[this.authService.menuIndex].children!.filter(r => r.path !== '**')}
   get getActiveRoute() {return this.router.url.split('/')[2]}
   get getCartTotalSize() {
     let total = 0
@@ -156,8 +156,11 @@ export class AppComponent implements OnInit {
     return total === 0 ? '' : total
   }
   get getFilters() {return this.productService.filters}
+  get getRole() {return this.authService.role}
   get getAuthenticatedEmail() {return this.authService.email}
   get getBrands() {return this.brandService.brands}
   get getProductTypes() {return this.productService.productTypes}
+  get getMenuIndex() {return this.authService.menuIndex}
+  get getMenuTabs() {return this.authService.menuTabs}
 
 }

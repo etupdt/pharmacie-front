@@ -57,4 +57,6 @@ export class OnSiteServicesComponent implements OnInit {
 
   }
 
+  get getRole() {return this.authService.role}
+
 }

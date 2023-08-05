@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonModal, ModalController } from '@ionic/angular';
+import { IonModal, ModalController, ToastController } from '@ionic/angular';
 import { Client } from 'src/app/entities/client';
 import { AuthService } from 'src/app/services/auth.service';
 import { ClientService } from 'src/app/services/client.service';
@@ -22,12 +22,13 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private clientService: ClientService,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    private toastController: ToastController
   ) {
   }
 
   ngOnInit(): void {
-    this.initForm('marie.dubois@test.fr')
+    this.initForm('xavier.dupont@test.fr')
   }
 
   initForm = (email: string) => {
@@ -87,27 +88,31 @@ export class LoginComponent implements OnInit {
   connect = () => {
 
     if (this.getAuthenticatedEmail) {
+      this.authService.setRole = []
+      this.authService.signalRoleUpdated.set(this.authService.role)
       this.authService.email = undefined
       this.clientService.signalClientUpdated.set(this.clientService.clientInit)
-      return this.modalCtrl.dismiss(null, 'return');
+      this.authService.menuIndex = 0
+      this.authService.signalMenuIndexUpdated.set(0)
+      this.back()
     } else {
       this.authService.login(
         this.loginForm.get("email")!.value,
         this.loginForm.get("password")!.value
       ).subscribe({
         next: (res: any) => {
-          this.clientService.getClient(
-            "1"
-            // this.loginForm.get("email")!.value
-          ).subscribe({
+          this.clientService.getClient(res[0].id).subscribe({
             next: (res: any) => {
               this.authService.email = this.loginForm.get("email")!.value
+              this.authService.setRole = res.roles
+              this.authService.signalRoleUpdated.set(this.authService.role)
               this.clientService.client = new Client().deserialize(res)
               this.clientService.signalClientUpdated.set(this.clientService.client)
-              return this.modalCtrl.dismiss(null, 'return');
+              this.presentToast('middle', 'Vous êtes maintenant authentifié', 1500)
+              this.back()
             },
             error: (error: { error: { message: any; }; }) => {
-              return
+              this.presentToast('middle', error.error.message, 800)
             }
           })
         },
@@ -123,6 +128,16 @@ export class LoginComponent implements OnInit {
 
   back = () => {
     return this.modalCtrl.dismiss(null, 'return');
+  }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom', message: string, duration: number) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: duration,
+      position: position,
+    });
+
+    await toast.present();
   }
 
   get getEmail () {return this.loginForm.get("email")!.value}

@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { VisitorMenuComponent } from './components/visitor-menu/visitor-menu.component';
 import { ClientMenuComponent } from './components/client-menu/client-menu.component';
 import { CommandsComponent } from './components/commands/commands.component';
+import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
 
 const routes: Routes = [
   {
@@ -80,6 +81,22 @@ const routes: Routes = [
       {
         path: 'Contact',
         component: ContactComponent,
+        data: {
+          icon: 'mail',
+        }
+      },
+    ]
+  },
+  {
+    path: 'AdminMenu',
+    component: AdminMenuComponent,
+    data: {
+      icon: 'archive',
+    },
+    children: [
+      {
+        path: 'Commandes',
+        component: CommandsComponent,
         data: {
           icon: 'mail',
         }

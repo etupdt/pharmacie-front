@@ -48,7 +48,7 @@ export class CommandService {
     })
 
     let dispatchGroup = _.groupBy(dispatchLines, 'product.preparationTime')
-console.log(dispatchGroup)
+
     let dispatches: Dispatch[] = []
     Object.entries(dispatchGroup).forEach(([key, value], index) => {
       datePreparation.setDate(dayDate.getDate() + value[0].getProduct.getPreparationTime)
@@ -58,7 +58,7 @@ console.log(dispatchGroup)
         dispatchDate: formatDate(datePreparation,'dd/MM/yyyy', 'fr'),
         receptionDate: formatDate(dateDelivery,'dd/MM/yyyy', 'fr'),
         dispatchLines: value,
-        dispatchState: State.PAYEE
+        dispatchState: State.EN_COURS
       }))
     })
 
@@ -66,7 +66,7 @@ console.log(dispatchGroup)
       id: 0,
       paymentDate: formatDate(dayDate,'dd/MM/yyyy', 'fr'),
       dispatches: dispatches,
-      commandState: State.PAYEE,
+      commandState: State.EN_COURS,
       client: this.clientService.client
     })
 

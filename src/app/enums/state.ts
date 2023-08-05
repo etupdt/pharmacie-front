@@ -1,6 +1,6 @@
 
 export enum State {
-  PAYEE,
+  EN_COURS,
   EXPEDIEE,
   RECEPTIONNEE
 }

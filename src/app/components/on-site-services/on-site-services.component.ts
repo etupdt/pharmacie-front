@@ -4,6 +4,8 @@ import { OnSiteServiceService } from 'src/app/services/on-site-service.service';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-on-site-services',
@@ -12,51 +14,68 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class OnSiteServicesComponent implements OnInit {
 
-  onSiteServices: OnSiteService[] = []
-
   backendImages = environment.useBackendImages
 
   selectedLangage$!: string
 
   constructor (
-    private onSiteService: OnSiteServiceService,
+    private onSiteServiceService: OnSiteServiceService,
     private authService: AuthService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router,
+    private toastController: ToastController
   ) {
   }
 
   ngOnInit(): void {
-    this.authService.listenSelectedLangage.subscribe((selectedLangage) => {
-      this.selectedLangage$ = selectedLangage
-    })
-    this.getOnSiteServices();
+
+    this.getPrestations();
     this.authService.listenSelectedLangage.subscribe((selectedLangage) => {
       this.translate.use(selectedLangage);
       this.selectedLangage$ = selectedLangage
     })
-}
-
-  getOnSiteServices = () => {
-
-    this.onSiteService.getOnSiteServices().subscribe({
-      next: (res: any[]) => {
-        res.forEach(p => {
-          return this.onSiteServices.push(new OnSiteService(
-            p.id,
-            p.onSiteServiceName,
-            p.description,
-            p.price,
-            p.duree,
-            p.imagePath
-          ));
-        })
-      },
-      error: (error: { error: { message: any; }; }) => {
-      }
-    })
 
   }
 
+  addOnSiteService = () => {
+    this.router.navigateByUrl('VisiteurMenu/Prestation', {state: new OnSiteService().deserialize({
+      id: 0,
+      onSiteServiceName: '',
+      description: '',
+      price: 0,
+      duree: 0,
+      imagePath: ''
+    })})
+  }
+
+  getPrestations = () => {
+
+    this.onSiteServiceService.getOnSiteServices().subscribe({
+      next: (res: any[]) => {
+        res.forEach(p => {
+          return this.onSiteServiceService.onSiteServices.push(new OnSiteService().deserialize(p))
+        })
+      },
+        error: (error: { error: { message: any; }; }) => {
+          this.presentToast('middle', error.error.message, 800)
+        }
+      }
+    )
+
+  }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom', message: string, duration: number) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: duration,
+      position: position,
+    });
+
+    await toast.present();
+  }
+
   get getRole() {return this.authService.role}
+  get getRefreshUpdate() {return this.onSiteServiceService.refreshUpdate}
+  get getOnSiteServices() {return this.onSiteServiceService.onSiteServices}
 
 }

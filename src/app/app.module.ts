@@ -32,6 +32,12 @@ import { IsAdminDirective } from './directives/is-admin.directive';
 import { IsEmployeeDirective } from './directives/is-employee.directive';
 import { IsClientDirective } from './directives/is-client.directive';
 import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
+import { OnSiteServicesCardComponent } from './components/on-site-services-card/on-site-services-card.component';
+import { OnSiteServiceComponent } from './components/on-site-service/on-site-service.component';
+import { IsUpdatedPipe } from './pipes/is-updated.pipe';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { CropperComponent } from './components/cropper/cropper.component';
+
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -54,7 +60,11 @@ registerLocaleData(localeFr);
     CommandsComponent,
     IsAdminDirective,
     IsEmployeeDirective,
-    IsClientDirective
+    IsClientDirective,
+    OnSiteServicesCardComponent,
+    OnSiteServiceComponent,
+    IsUpdatedPipe,
+    CropperComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +72,7 @@ registerLocaleData(localeFr);
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ImageCropperModule,
     ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {

@@ -1,0 +1,90 @@
+
+.cache {
+  display: none;
+}
+
+ion-card {
+
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  border-radius: 8px;
+  font-size: 1em;
+
+  ion-img {
+    width: 350px;
+    border-radius: 8px 0 0 8px;
+  }
+
+  ion-card-content {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+    width: 80%;
+
+    ion-card-title {
+      margin: 10px;
+      margin-top: 5px;
+    }
+
+    p {
+      margin: 0 10px;
+    }
+
+    .card-tarif {
+
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: right;
+      margin-top: 10px;
+
+      .card-price {
+        color: rgb(243, 63, 171);
+        font-weight: 550;
+      }
+
+      span {
+        margin: auto 10px;
+      }
+      
+    }
+
+  }
+
+}
+
+@media screen and (max-width: 750px) {
+
+  ion-card {
+
+    flex-direction: column;
+
+    ion-img {
+      width: 50%;
+      margin:auto;
+    }
+
+    ion-card-content {
+
+      width: 100%;
+
+    }
+
+  }
+
+}
+
+@media screen and (max-width: 550px) {
+
+  ion-card {
+
+    ion-img {
+      width: 100%;
+    }
+
+  }
+
+}
+

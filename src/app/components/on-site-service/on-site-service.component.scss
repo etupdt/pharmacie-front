@@ -1,0 +1,171 @@
+
+@import '../../app.component.scss';
+
+ion-content {
+
+  ion-card {
+    box-shadow: 10px 5px 10px lightgray;
+    border-radius: 8px;
+  }
+
+//  --background: var(--ion-color-primary-bkg);
+  --padding-top: 70px;
+
+  > div {
+
+    height: 100%;
+
+    ion-list {
+
+      width: 100%;
+
+      .image-setting {
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 0;
+
+      .image-buttons {
+
+          display: flex;
+          flex-direction: column;
+
+        }
+
+      }
+
+      > ion-item {
+
+        width: 80%;
+        margin: 10px auto;
+
+        > div {
+
+          display:flex;
+          flex-direction: row;
+
+        }
+
+        h3 {
+          font-weight: bold;
+        }
+
+        ion-img {
+          width: 350px;
+          border-radius: 8px 0 0 8px;
+          margin: auto 10px;
+        }
+
+        ion-input {
+          --padding-start: 12px;
+          margin-left: 15px0px;
+          margin-right: 5px;
+        }
+
+        ion-textarea {
+          height: 12vh;
+          --padding-start: 10px;
+          margin-left: 15px0px;
+          margin-right: 5px;
+        }
+
+        > div {
+
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          width: 100%;
+
+          ion-button {
+            margin: 20px 0;
+            width: 40%;
+          }
+
+        }
+
+      }
+
+      ion-button {
+        height: 36px;
+        border: 0px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+        margin: 0;
+
+        --color: black;
+        --background: rgba(var(--ion-color-primary-rgb), 0.14);
+
+      }
+
+    }
+
+  }
+
+}
+
+@media screen and (max-width: 750px) {
+
+  ion-content {
+
+    div {
+
+      height: initial;
+
+      ion-list {
+
+        .image-setting {
+
+          margin: auto;
+          width: 70%;
+
+          .image-buttons {
+
+            width: 40%;
+            margin: auto;
+          }
+
+        }
+
+        > ion-item {
+
+          width: 70%;
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+@media screen and (max-width: 550px) {
+
+  ion-content {
+
+    div {
+
+      ion-list {
+
+        .image-setting {
+
+          width: 100%;
+
+        }
+
+        ion-item {
+
+          width: 100%;
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

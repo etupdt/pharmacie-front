@@ -1,3 +1,34 @@
-<p>
-  on-site-services-card works!
-</p>
+<ion-card *ngIf="onSiteServiceCard">
+  <ion-img
+    *ngIf="onSiteServiceCard.getImagePath !== ''"
+    src="{{backendImages + '/onsiteservices/' + onSiteServiceCard.getImagePath}}" alt=""
+    src="{{
+      onSiteServiceCard.getImagePath.indexOf('data:image') === 0
+        ? onSiteServiceCard.getImagePath
+        : backendImages + '/onsiteservices/' + onSiteServiceCard.getImagePath}}" alt=""
+    ></ion-img>
+  <ion-card-content>
+    <ion-item lines="none">
+      <ion-card-title
+        class="ion-text-wrap"
+      >{{ onSiteServiceCard.getOnSiteServiceName | isUpdated:getRefreshUpdate }}</ion-card-title>
+      <ion-icon [ngClass]="displayIcon"
+        *isadmin="getRole"
+        slot="end"
+        name="pencil-outline"
+        (click)="updateOnSiteService()"
+      ></ion-icon>
+      <ion-icon [ngClass]="displayIcon"
+        *isadmin="getRole"
+        slot="end"
+        name="trash-outline"
+        (click)="deteteOnSiteService(onSiteServiceCard.getId)"
+      ></ion-icon>
+    </ion-item>
+    <p class="card-description">{{onSiteServiceCard.getDescription}}</p>
+    <div class="card-tarif">
+      <span class="card-price">{{onSiteServiceCard.getPrice | number: '1.2-2'}} €</span>
+      <span>{{onSiteServiceCard.getDuree}} minutes => </span>
+    </div>
+  </ion-card-content>
+</ion-card>

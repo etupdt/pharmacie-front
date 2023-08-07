@@ -1,0 +1,98 @@
+
+<ion-content *ngIf="onSiteService">
+  <div class="onsiteservice">
+    <app-on-site-services-card [onSiteServiceCard]="onSiteService"></app-on-site-services-card>
+      <ion-list>
+        <ion-item lines="none">
+          <h3>Saisissez les données de la prestation</h3>
+        </ion-item>
+        <div class="image-setting">
+          <ion-item lines="none" slot="start">
+            <image-cropper
+              [imageChangedEvent]="imageChangedEvent"
+              [output]="'base64'"
+              [imageURL]="imageURL"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="467 / 318"
+              [resizeToWidth]="256"
+              [cropperMinWidth]="128"
+              [onlyScaleDown]="true"
+              [roundCropper]="false"
+              [alignImage]="'left'"
+              [style.display]="showCropper ? null : 'none'"
+              format="png"
+              (imageCropped)="imageCropped($event)"
+              (imageLoaded)="imageLoaded()"
+              (cropperReady)="cropperReady($event)"
+              (loadImageFailed)="loadImageFailed()"
+            ></image-cropper>
+          </ion-item>
+          <div lines="none" class="image-buttons">
+              <ion-button (click)="fileInput.click()">Image
+                <input type="file" #fileInput (change)="fileChangeEvent($event)" hidden/>
+              </ion-button>
+              <ion-button (click)="replaceImage()">Rogner</ion-button>
+              <ion-button (click)="reinitImage()">Reset</ion-button>
+          </div>
+        </div>
+        <ion-item lines="none">
+          <ion-input
+            [value]="onSiteService.getOnSiteServiceName"
+            (ionInput)="onChangeName($event)"
+            label="Nom"
+            labelPlacement="stacked"
+            placeholder="Nom de la prestation"
+            fill="solid"
+            type="ttext"
+            required
+            clearInput
+          ></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-textarea
+            [value]="onSiteService.getDescription"
+            (ionInput)="onChangeDescription($event)"
+            label="Message"
+            labelPlacement="stacked"
+            fill="solid"
+            placeholder="Message"
+            required
+            clearInput
+          ></ion-textarea>
+        </ion-item>
+        <ion-item lines="none">
+          <div class="price-infos">
+            <ion-input
+              [value]="onSiteService.getDuree === 0 ? '' : onSiteService.getDuree"
+              (ionInput)="onChangeDuree($event)"
+              label="Durée"
+              labelPlacement="stacked"
+              placeholder="Durée"
+              fill="solid"
+              type="text"
+              required
+              clearInput
+            ></ion-input>
+            <ion-input
+              [value]="onSiteService.getPrice === 0 ? '' : onSiteService.getPrice"
+              (ionInput)="onChangePrice($event)"
+              label="Prix"
+              labelPlacement="stacked"
+              placeholder="Prix"
+              fill="solid"
+              type="text"
+              required
+              clearInput
+            ></ion-input>
+          </div>
+        </ion-item>
+        <ion-item lines="none">
+          <div class="page-buttons">
+            <ion-button lines="none" (click)="saveOnSiteService()">Enregistrer</ion-button>
+            <ion-button lines="none" [routerLink]="['/VisiteurMenu/Prestations']">Abandonner</ion-button>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+

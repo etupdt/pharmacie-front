@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-home-page',
@@ -13,7 +14,9 @@ export class HomePageComponent implements OnInit {
 
   constructor (
     private authService: AuthService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private renderer: Renderer2,
+    private imageService: ImageService
   ) {
   }
 

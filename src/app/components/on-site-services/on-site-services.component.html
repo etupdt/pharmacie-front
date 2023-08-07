@@ -5,34 +5,13 @@
       *isadmin="getRole"
       lines="none"
     >
-      <ion-button slot="end">Ajouter</ion-button>
+      <ion-button slot="end" (click)="addOnSiteService()">Ajouter</ion-button>
     </ion-item>
-    <div class="onsiteservice" *ngFor="let onSiteService of onSiteServices">
-      <ion-card>
-        <ion-img
-          src="{{backendImages + '/onsiteservices/' + onSiteService.getImagePath}}" alt=""
-        ></ion-img>
-        <ion-card-content>
-          <ion-item lines="none">
-            <ion-card-title class="ion-text-wrap">{{ 'prestations.service.' + onSiteService.getOnSiteServiceName + '.h3' | translate }}</ion-card-title>
-            <ion-icon
-              *isadmin="getRole"
-              slot="end"
-              name="pencil-outline"
-            ></ion-icon>
-            <ion-icon
-              *isadmin="getRole"
-              slot="end"
-              name="trash-outline"
-            ></ion-icon>
-          </ion-item>
-          <p class="card-description">{{onSiteService.getDescription}}</p>
-          <div class="card-tarif">
-            <span class="card-price">{{onSiteService.getPrice}} €</span>
-            <span>{{onSiteService.getDuree}} minutes => </span>
-          </div>
-        </ion-card-content>
-      </ion-card>
+    <div class="onsiteservice" *ngFor="let onSiteService of getOnSiteServices | isUpdated:getRefreshUpdate">
+      <app-on-site-services-card
+      [onSiteServiceCard]="onSiteService"
+      displayIcon=""
+      ></app-on-site-services-card>
     </div>
   </ion-list>
 </ion-content>

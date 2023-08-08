@@ -1,12 +1,11 @@
 <ion-card *ngIf="onSiteServiceCard">
-  <ion-img
+  <img
     *ngIf="onSiteServiceCard.getImagePath !== ''"
-    src="{{backendImages + '/onsiteservices/' + onSiteServiceCard.getImagePath}}" alt=""
     src="{{
       onSiteServiceCard.getImagePath.indexOf('data:image') === 0
         ? onSiteServiceCard.getImagePath
         : backendImages + '/onsiteservices/' + onSiteServiceCard.getImagePath}}" alt=""
-    ></ion-img>
+    />
   <ion-card-content>
     <ion-item lines="none">
       <ion-card-title

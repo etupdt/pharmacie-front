@@ -18,19 +18,21 @@
         <ion-note>pharmacie.dupont@test.fr</ion-note>
         <ion-content>
           <ion-list id="menu-list">
-            <ion-menu-toggle auto-hide="false" *ngFor="let r of getRoutes; let i = index">
-              <ion-item
-                routerDirection="root"
-                [routerLink]="[getMenuTabs[getMenuIndex].path + '/' + r.path]"
-                lines="none"
-                detail="false"
-                class="{{getMenuTabs[getMenuIndex].option === i ? 'selected' : ''}}"
-                (click)="getMenuTabs[getMenuIndex].option = i"
-              >
-                <ion-icon aria-hidden="true" slot="start" [ios]="r.data!['icon'] + '-outline'" [md]="r.data!['icon'] + '-sharp'"></ion-icon>
-                <ion-label>{{r.path}}</ion-label>
-              </ion-item>
-            </ion-menu-toggle>
+            <ng-container *ngFor="let r of getRoutes; let i = index">
+              <ion-menu-toggle auto-hide="false" *ngIf="r.data">
+                <ion-item
+                  routerDirection="root"
+                  [routerLink]="[getMenuTabs[getMenuIndex].path + '/' + r.path]"
+                  lines="none"
+                  detail="false"
+                  class="{{getMenuTabs[getMenuIndex].option === i ? 'selected' : ''}}"
+                  (click)="getMenuTabs[getMenuIndex].option = i"
+                >
+                  <ion-icon aria-hidden="true" slot="start" [ios]="r.data!['icon'] + '-outline'" [md]="r.data!['icon'] + '-sharp'"></ion-icon>
+                  <ion-label>{{r.path}}</ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ng-container>
             <ion-menu-toggle auto-hide="false">
               <ion-item
               lines="none"

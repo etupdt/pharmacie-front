@@ -6,17 +6,22 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Filter } from '../interfaces/filter.interface';
 import { ProductsType } from '../interfaces/products-type.interface';
+import { Product } from '../entities/product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
+  refreshUpdate: number = 0
+  signalRefresUpdateUpdated = signal(this.refreshUpdate)
+
+  products: Product[] = []
+
   cart: DisplayCart = {
     display: false,
     detail: []
   }
-
 
   productTypes: ProductsType[] = []
 
@@ -46,6 +51,32 @@ export class ProductService {
 
     return this.http.get(
       environment.useBackendApi + `/product`,
+    )
+
+  }
+
+  putProduct(product: Product): Observable<any> {
+
+    return this.http.put(
+      environment.useBackendApi + `/product/${product.getId}`,
+      product
+    )
+
+  }
+
+  postProduct(product: Product): Observable<any> {
+
+    return this.http.post(
+      environment.useBackendApi + `/product`,
+      product
+    )
+
+  }
+
+  deleteProduct(id: number): Observable<any> {
+
+    return this.http.delete(
+      environment.useBackendApi + `/product/${id}`,
     )
 
   }

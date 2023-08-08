@@ -29,7 +29,7 @@ export class OnSiteServicesComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getPrestations();
+    this.getOnSiteServices();
     this.authService.listenSelectedLangage.subscribe((selectedLangage) => {
       this.translate.use(selectedLangage);
       this.selectedLangage$ = selectedLangage
@@ -48,7 +48,7 @@ export class OnSiteServicesComponent implements OnInit {
     })})
   }
 
-  getPrestations = () => {
+  getOnSiteServices = () => {
 
     this.onSiteServiceService.getOnSiteServices().subscribe({
       next: (res: any[]) => {
@@ -76,6 +76,6 @@ export class OnSiteServicesComponent implements OnInit {
 
   get getRole() {return this.authService.role}
   get getRefreshUpdate() {return this.onSiteServiceService.refreshUpdate}
-  get getOnSiteServices() {return this.onSiteServiceService.onSiteServices}
+  get getOnSiteServicesFromService() {return this.onSiteServiceService.onSiteServices}
 
 }

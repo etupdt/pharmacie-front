@@ -37,6 +37,8 @@ import { OnSiteServiceComponent } from './components/on-site-service/on-site-ser
 import { IsUpdatedPipe } from './pipes/is-updated.pipe';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { CropperComponent } from './components/cropper/cropper.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import { ProductViewComponent } from './components/product-view/product-view.component';
 
 registerLocaleData(localeFr);
 
@@ -64,7 +66,9 @@ registerLocaleData(localeFr);
     OnSiteServicesCardComponent,
     OnSiteServiceComponent,
     IsUpdatedPipe,
-    CropperComponent
+    CropperComponent,
+    ProductCardComponent,
+    ProductViewComponent
   ],
   imports: [
     BrowserModule,

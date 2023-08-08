@@ -1,22 +1,15 @@
 
-<ion-content>
+<ion-content *ngIf="getProductsFromService">
   <h2>Les meilleurs produits de beauté, santé et bien-être</h2>
   <ion-list>
-    <div *ngFor="let product of (products | filterProduct:getRefresh)">
-      <ion-card expand="block" (click)="showDetail(product)">
-        <ion-img
-          src="{{backendImages + '/products/' + product.getImagePath}}" alt="">
-        </ion-img>
-        <ion-card-content>
-          <ion-card-title>{{product.getProductName}}</ion-card-title>
-          <ion-card-subtitle>{{product.getPrice | number: '1.2-2'}} €</ion-card-subtitle>
-          <div>
-            <ion-button
-              (click)="addProductToCart(product);$event.stopPropagation()"
-            >Ajouter</ion-button>
-          </div>
-        </ion-card-content>
-      </ion-card>
+    <ion-item
+      *isadmin="getRole"
+      lines="none"
+    >
+      <ion-button slot="end" (click)="addProduct()">Ajouter</ion-button>
+    </ion-item>
+    <div *ngFor="let product of (getProductsFromService | filterProduct:getRefresh)">
+      <app-product-card [productCard]="product" [displayIcon]="''"></app-product-card>
     </div>
   </ion-list>
 </ion-content>

@@ -10,13 +10,14 @@
           <ion-item lines="none" slot="start">
             <image-cropper
               [imageChangedEvent]="imageChangedEvent"
-              [output]="'base64'"
-              [imageURL]="imageURL"
+              [output]="'blob'"
+              [imageFile]="imageFile"
               [maintainAspectRatio]="true"
               [aspectRatio]="467 / 318"
-              [resizeToWidth]="256"
+              [resizeToWidth]="500"
               [cropperMinWidth]="128"
               [onlyScaleDown]="true"
+              [transform]="transform"
               [roundCropper]="false"
               [alignImage]="'left'"
               [style.display]="showCropper ? null : 'none'"
@@ -32,6 +33,8 @@
                 <input type="file" #fileInput (change)="fileChangeEvent($event)" hidden/>
               </ion-button>
               <ion-button (click)="replaceImage()">Rogner</ion-button>
+              <ion-button (click)="zoomIn()">Zoom +</ion-button>
+              <ion-button (click)="zoomOut()">Zoom -</ion-button>
               <ion-button (click)="reinitImage()">Reset</ion-button>
           </div>
         </div>

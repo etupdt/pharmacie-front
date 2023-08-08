@@ -24,11 +24,7 @@ export class BrandService {
       next: (res: any[]) => {
         let brands: Brand[] = []
         res.forEach(b => {
-          return brands.push(new Brand(
-            b.id,
-            b.brandName,
-            b.imagePath
-          ));
+          return brands.push(new Brand().deserialize(b))
         })
         this.brands = brands
         this.signalBrandsUpdated.set(brands)

@@ -7,6 +7,8 @@ import { environment } from 'src/environments/environment';
 import { InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
 import { ProductComponent } from '../product/product.component';
 import { ProductsType } from 'src/app/interfaces/products-type.interface';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -14,8 +16,6 @@ import { ProductsType } from 'src/app/interfaces/products-type.interface';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit{
-
-  products: Product[] = []
 
   productTypes$: ProductsType[] = []
 
@@ -29,8 +29,9 @@ export class ProductsComponent implements OnInit{
 
   constructor (
     private productService: ProductService,
-    private brandService: BrandService,
-    private modalCtrl: ModalController,
+    private router: Router,
+    private toastController: ModalController,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -39,35 +40,29 @@ export class ProductsComponent implements OnInit{
 
   }
 
-  async showDetail(product: Product) {
-    this.product = product
-    const modal = await this.modalCtrl.create({
-      component: ProductComponent,
-      componentProps: {
-        product: product
-      }
-    });
-    modal.present();
-
-    const { data, role } = await modal.onWillDismiss();
-
-    if (role === 'confirm') {
-      console.log(`Hello, ${data}!`);
-    }
-  }
-
-  addProductToCart = (product: Product) => {
-    const index = this.productService.cart.detail.findIndex(detail => detail.product.getId === product.getId)
-    if (index !== -1)
-      this.productService.cart.detail[index].qte++
-    else
-      this.productService.cart.detail.push({qte: 1, product: product})
-  }
-
   getCartTotal = () => {
     let total = 0
     this.productService.cart.detail.forEach(detail => total += detail.product.getPrice * detail.qte)
     return total
+  }
+
+  addProduct = () => {
+    this.router.navigateByUrl('VisiteurMenu/Produit', {state: new Product().deserialize({
+      id: 0,
+      productName: '',
+      label: '',
+      description: '',
+      price: 0,
+      stock: 0,
+      brand: {
+        id: 0
+      },
+      imagePath: '',
+      type: 0,
+      preparationTime: 0,
+      commandTime: 0,
+      deliveryTime: 0,
+    })})
   }
 
   getProducts = () => {
@@ -78,7 +73,7 @@ export class ProductsComponent implements OnInit{
         res.forEach(p => {
           products.push(new Product().deserialize(p));
         })
-        this.products = products
+        this.productService.products = products
       },
       error: (error: { error: { message: any; }; }) => {
       }
@@ -95,5 +90,7 @@ export class ProductsComponent implements OnInit{
   get getDetail () {return this.productService.detail}
   get getFilters() {return this.productService.filters}
   get getRefresh() {return this.productService.refresh}
+  get getProductsFromService() {return this.productService.products}
+  get getRole() {return this.authService.role}
 
 }

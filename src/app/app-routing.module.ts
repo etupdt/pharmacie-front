@@ -13,6 +13,7 @@ import { ClientMenuComponent } from './components/client-menu/client-menu.compon
 import { CommandsComponent } from './components/commands/commands.component';
 import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
 import { OnSiteServiceComponent } from './components/on-site-service/on-site-service.component';
+import { ProductViewComponent } from './components/product-view/product-view.component';
 
 const routes: Routes = [
   {
@@ -35,12 +36,10 @@ const routes: Routes = [
         data: {
           icon: 'paper-plane',
         },
-        children: [
-          {
-            path: 'Produit',
-            component: ProductComponent,
-          }
-        ]
+      },
+      {
+        path: 'Produit',
+        component: ProductComponent,
       },
       {
         path: 'Evenements',
@@ -59,9 +58,6 @@ const routes: Routes = [
       {
         path: 'Prestation',
         component: OnSiteServiceComponent,
-        data: {
-          icon: 'trash',
-        }
       },
     ]
   },

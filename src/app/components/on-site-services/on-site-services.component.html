@@ -7,7 +7,7 @@
     >
       <ion-button slot="end" (click)="addOnSiteService()">Ajouter</ion-button>
     </ion-item>
-    <div class="onsiteservice" *ngFor="let onSiteService of getOnSiteServices | isUpdated:getRefreshUpdate">
+    <div class="onsiteservice" *ngFor="let onSiteService of getOnSiteServicesFromService | isUpdated:getRefreshUpdate">
       <app-on-site-services-card
       [onSiteServiceCard]="onSiteService"
       displayIcon=""

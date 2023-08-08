@@ -51,7 +51,7 @@ export class Product {
     this.description = data.description
     this.price = data.price
     this.stock = data.stock
-    this.brand = data.brand
+    this.brand = new Brand().deserialize(data.brand)
     this.imagePath = data.imagePath
     this.type = data.type
     this.preparationTime = data.preparationTime

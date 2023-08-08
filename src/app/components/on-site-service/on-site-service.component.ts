@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { InputCustomEvent, ToastController } from '@ionic/angular';
-import { Dimensions, ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
+import { Dimensions, ImageCroppedEvent, ImageCropperComponent, ImageTransform } from 'ngx-image-cropper';
 import { OnSiteService } from 'src/app/entities/on-site-service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageService } from 'src/app/services/image.service';
@@ -21,26 +21,48 @@ export class OnSiteServiceComponent  implements OnInit {
   backendImages = environment.useBackendImages
 
   showCropper = true;
-  imageChangedEvent: any = '';
+  imageChangedEvent: any;
   croppedImage: any = '';
   imageURL: string = ''
+  rotation = 0;
+  scale = 1;
+  transform: ImageTransform = {};
 
-  imageSaved: string = ''
-
-  image: string = ''
+  imageSaved: any
+  imageURLSaved: any
+  imageFile: any
+  image: any
 
   fileChangeEvent(event: any): void {
-    this.imageChangedEvent = event;
+    if (!event || event.target.files[0])
+      this.imageFile = event.target.files[0]
+//      this.imageChangedEvent = event;
   }
 
   imageCropped(event: ImageCroppedEvent) {
-    this.image = event.base64 as string
-    this.croppedImage = event.base64;
+    this.croppedImage = event.blob;
+    console.log('cropped', this.croppedImage)
   }
 
   imageLoaded() {
       this.showCropper = true;
   }
+
+  zoomOut() {
+    this.scale -= .1;
+    this.transform = {
+        ...this.transform,
+        scale: this.scale
+    };
+  }
+
+  zoomIn() {
+    this.scale += .1;
+    this.transform = {
+        ...this.transform,
+        scale: this.scale
+    };
+}
 
   cropperReady(sourceImageDimensions: Dimensions) {
       console.log('Cropper ready', sourceImageDimensions);
@@ -54,31 +76,44 @@ export class OnSiteServiceComponent  implements OnInit {
     private onSiteServiceService: OnSiteServiceService,
     private toastController: ToastController,
     private router: Router,
+    private imageService: ImageService
   ) { }
 
   ngOnInit() {
+
     if (!this.onSiteService)
       this.onSiteService = new OnSiteService().deserialize(history.state)
+
+    this.imageURLSaved = this.backendImages + '/onsiteservices/' + this.onSiteService.getImagePath
+
     if (this.onSiteService.getImagePath !== '') {
-      this.imageSaved = this.onSiteService.getImagePath
-      this.imageURL = this.backendImages + '/onsiteservices/' + this.onSiteService.getImagePath
+      this.imageService.getImage( this.backendImages + '/onsiteservices/' + this.onSiteService.getImagePath).subscribe({
+        next: (res: Blob) => {
+          this.imageFile = res
+          this.imageSaved = res
+          var reader = new FileReader();
+          reader.readAsDataURL(res);
+          reader.onload = () => {
+            this.image = reader.result as string
+          }
+        }
+      })
     }
+
   }
 
   replaceImage = () => {
-    this.onSiteService.setImagePath = this.image
+    var reader = new FileReader();
+    reader.readAsDataURL(this.croppedImage);
+    reader.onload = () => {
+      this.onSiteService.setImagePath = reader.result as string
+    }
     this.refresh()
   }
 
   reinitImage = () => {
-//    this.fileChangeEvent(null)
-    this.fileChangeEvent(null)
-    this.croppedImage = ''
-    this.onSiteService.setImagePath = this.imageSaved
-    this.imageURL = ''
-    this.imageURL = this.backendImages + '/onsiteservices/' + this.onSiteService.getImagePath
-    this.imageLoaded()
-    this.refresh()
+    this.imageFile = this.imageSaved
+    this.onSiteService.setImagePath = this.image
   }
 
   saveOnSiteService = () => {
@@ -88,7 +123,7 @@ export class OnSiteServiceComponent  implements OnInit {
       this.onSiteServiceService.postOnSiteService(this.onSiteService).subscribe({
         next: (res: any) => {
             this.presentToast('middle', 'La prestation a été créée', 800)
-            this.onSiteServiceService.onSiteServices.push(new OnSiteService().deserialize(res))          
+            this.onSiteServiceService.onSiteServices.push(new OnSiteService().deserialize(res))
             this.router.navigate(['/VisiteurMenu/Prestations'])
         },
         error: (error: { error: { message: any; }; }) => {
@@ -115,7 +150,6 @@ export class OnSiteServiceComponent  implements OnInit {
       })
 
     }
-
 
   }
 

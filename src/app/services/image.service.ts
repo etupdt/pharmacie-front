@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { ElementRef, Injectable, Renderer2 } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +15,9 @@ export class ImageService {
   image: any
   imageSrc: string = ''
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+  ) { }
 
   canvasW!: number
   canvasH!: number
@@ -81,7 +86,15 @@ export class ImageService {
 
     this.ctx.strokeRect(this.x, this.y, this.w, this.h);
 
-}
+  }
+
+  getImage(url: string): Observable<Blob> {
+
+    return this.http.get<Blob>(
+      url, { observe: 'body', responseType: 'blob' as 'json' }
+    )
+
+  }
 
   mouseDown = (e: MouseEvent) => {
 

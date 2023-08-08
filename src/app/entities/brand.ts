@@ -1,11 +1,11 @@
 export class Brand {
 
   checked: boolean = false
+  private id!: number
+  private brandName!: string
+  private imagePath!: string
 
   constructor (
-    private id: number,
-    private brandName: string,
-    private imagePath: string,
   ) {}
 
   get getId () { return this.id }
@@ -14,5 +14,15 @@ export class Brand {
   set setBrandName (brandName: string) {this.brandName = brandName}
   get getImagePath () { return this.imagePath }
   set setImagePath (imagePath: string) {this.imagePath = imagePath}
+
+  deserialize(data: any): Brand {
+
+    this.id = data.id
+    this.brandName = data.brandName
+    this.imagePath = data.imagePath
+
+    return this
+
+  }
 
 }

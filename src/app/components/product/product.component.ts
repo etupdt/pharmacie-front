@@ -1,11 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { IonModal, ModalController, ToastController } from '@ionic/angular';
+import { InputCustomEvent, IonModal, ModalController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Product } from 'src/app/entities/product';
 import { DisplayCart } from 'src/app/interfaces/displayCart.interface';
 import { ProductService } from 'src/app/services/product.service';
 import { environment } from 'src/environments/environment';
 import { CartComponent } from '../cart/cart.component';
+import { Router } from '@angular/router';
+import { ImageService } from 'src/app/services/image.service';
+import { Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
+import { BrandService } from 'src/app/services/brand.service';
 
 @Component({
   selector: 'app-product',
@@ -15,66 +19,202 @@ import { CartComponent } from '../cart/cart.component';
 export class ProductComponent implements OnInit {
 
   product!: Product
+  brandSelectId!: number
 
   backendImages = environment.useBackendImages
+
+  showCropper = true;
+  imageChangedEvent: any;
+  croppedImage: any = '';
+  imageURL: string = ''
+  rotation = 0;
+  scale = 1;
+  transform: ImageTransform = {};
+
+  imageSaved: any
+  imageURLSaved: any
+  imageFile: any
+  image: any
+
+  fileChangeEvent(event: any): void {
+    if (!event || event.target.files[0])
+      this.imageFile = event.target.files[0]
+//      this.imageChangedEvent = event;
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.blob;
+  }
+
+  imageLoaded() {
+      this.showCropper = true;
+  }
+
+  zoomOut() {
+    this.scale -= .1;
+    this.transform = {
+        ...this.transform,
+        scale: this.scale
+    };
+  }
+
+  zoomIn() {
+    this.scale += .1;
+    this.transform = {
+        ...this.transform,
+        scale: this.scale
+    };
+}
+
+  cropperReady(sourceImageDimensions: Dimensions) {
+      console.log('Cropper ready', sourceImageDimensions);
+  }
+
+  loadImageFailed() {
+      console.log('Load failed');
+  }
 
   constructor (
     private productService: ProductService,
     private toastController: ToastController,
-    private modalCtrl: ModalController
+    private router: Router,
+    private imageService: ImageService,
+    private brandService: BrandService
   ) {
   }
 
   ngOnInit(): void {
+    if (!this.product) {
+      this.product = new Product().deserialize(history.state)
+      this.brandSelectId = this.product.getBrand.getId
+      console.log(this.product.getBrand.getId)
+    }
+
+    this.imageURLSaved = this.backendImages + '/products/' + this.product.getImagePath
+
+    if (this.product.getImagePath !== '') {
+      this.imageService.getImage( this.backendImages + '/products/' + this.product.getImagePath).subscribe({
+        next: (res: Blob) => {
+          this.imageFile = res
+          this.imageSaved = res
+          var reader = new FileReader();
+          reader.readAsDataURL(res);
+          reader.onload = () => {
+            this.image = reader.result as string
+          }
+        }
+      })
+    }
+
   }
 
-  back = () => {
-    return this.modalCtrl.dismiss(null, 'return');
+  replaceImage = () => {
+    var reader = new FileReader();
+    reader.readAsDataURL(this.croppedImage);
+    reader.onload = () => {
+      this.product.setImagePath = reader.result as string
+    }
+    this.refresh()
   }
 
-  async presentToast(position: 'top' | 'middle' | 'bottom') {
+  reinitImage = () => {
+    this.imageFile = this.imageSaved
+    this.product.setImagePath = this.image
+  }
+
+  saveProduct = () => {
+
+    if (this.product.getId === 0) {
+
+      this.productService.postProduct(this.product).subscribe({
+        next: (res: any) => {
+            this.presentToast('middle', 'La prestation a été créée', 800)
+            this.productService.products.push(new Product().deserialize(res))
+            this.router.navigate(['/VisiteurMenu/Produits'])
+        },
+        error: (error: { error: { message: any; }; }) => {
+          this.presentToast('middle', error.error.message, 800)
+        }
+      })
+
+    } else {
+
+      this.productService.putProduct(this.product).subscribe({
+        next: (res: any) => {
+            this.presentToast('middle', 'La prestation a été mise à jour', 800)
+            let index = this.productService.products.findIndex(onSiteService => onSiteService.getId === res.id)
+            this.productService.products[index].setProductName = res.productName
+            this.productService.products[index].setLabel = res.label
+            this.productService.products[index].setDescription = res.description
+            this.productService.products[index].setPrice = res.price
+            this.productService.products[index].setStock = res.stock
+            this.productService.products[index].setImagePath = res.imagePath
+            this.router.navigate(['/VisiteurMenu/Prestations'])
+        },
+        error: (error: { error: { message: any; }; }) => {
+          this.presentToast('middle', error.error.message, 800)
+        }
+      })
+
+    }
+
+  }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom', message: string, duration: number) {
     const toast = await this.toastController.create({
-      message: 'Le panier est vide !',
-      duration: 800,
+      message: message,
+      duration: duration,
       position: position,
     });
 
     await toast.present();
   }
 
-  async showCart() {
-
-    if (this.productService.cart.detail.length === 0) {
-      this.presentToast("middle")
-      return
-    }
-
-    const modal = await this.modalCtrl.create({
-      component: CartComponent,
-    });
-    modal.present();
-
-    const { data, role } = await modal.onWillDismiss();
-
-    if (role === 'confirm') {
-      console.log(`Hello, ${data}!`);
-    }
+  onChangeName = (event: Event) => {
+    this.product.setProductName = (event as InputCustomEvent).detail.value!
+    this.refresh()
   }
 
-  addProductToCart = (product: Product) => {
-    const index = this.productService.cart.detail.findIndex(detail => detail.product.getId === product.getId)
-    if (index !== -1)
-      this.productService.cart.detail[index].qte++
-    else
-      this.productService.cart.detail.push({qte: 1, product: product})
+  onChangeDescription = (event: Event) => {
+    this.product.setDescription = (event as InputCustomEvent).detail.value!
+    this.refresh()
   }
 
-  get getCartTotalSize() {
-    let total = 0
-    this.productService.cart.detail.forEach(detail => total += detail.qte)
-    return total === 0 ? '' : total
+  onChangeLabel = (event: Event) => {
+    this.product.setLabel = (event as InputCustomEvent).detail.value!
+    this.refresh()
   }
 
-  set setDetail (detail: boolean) {this.productService.detail = detail}
+  onChangePrice = (event: Event) => {
+    this.product.setPrice = +(event as InputCustomEvent).detail.value!
+    this.refresh()
+  }
+
+  onChangeStock = (event: Event) => {
+    this.product.setStock = +(event as InputCustomEvent).detail.value!
+    this.refresh()
+  }
+
+  onChangePreparationTime = (event: Event) => {
+    this.product.setPreparationTime = +(event as InputCustomEvent).detail.value!
+    this.refresh()
+  }
+
+  onChangeCommandTime = (event: Event) => {
+    this.product.setCommandTime = +(event as InputCustomEvent).detail.value!
+    this.refresh()
+  }
+
+  onChangeDeliveryTime = (event: Event) => {
+    this.product.setDeliveryTime = +(event as InputCustomEvent).detail.value!
+    this.refresh()
+  }
+
+  refresh = () => {
+    this.productService.refreshUpdate++
+    this.productService.signalRefresUpdateUpdated.set(this.productService.refreshUpdate)
+  }
+
+  get getBrands() {return this.brandService.brands}
 
 }

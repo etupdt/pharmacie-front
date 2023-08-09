@@ -35,15 +35,15 @@ ion-content {
 
   --padding-top: 50px;
 
-  ion-list {
+  h2 {
+    margin-left: 20px;
+  }
+
+ion-list {
 
 //    --background: var(--ion-color-primary-bkg);
 
     width: 100%;
-    margin:auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
 
     > ion-item {
 
@@ -51,7 +51,7 @@ ion-content {
 
       ion-button {
 
-        width: 20%;
+        width: 140px;
         height: 36px;
         border: 0px;
         border-radius: 5px;
@@ -66,10 +66,21 @@ ion-content {
 
     }
 
-    div {
+    > div {
 
-      --padding-start: 0;
-      padding: 8px;
+      margin:auto;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+
+      > div {
+
+        --padding-start: 0;
+        padding: 8px;
+
+      }
 
     }
 
@@ -83,36 +94,35 @@ ion-content {
 
     ion-list {
 
-      div {
+      > div {
 
-        ion-card {
+        > div {
 
-          display: flex;
-          flex-direction: row;
-          margin: 0px;
-          width: 100%;
-          height: auto;
+          ion-card {
 
-          ion-img {
-            height: 120px;
-          }
+            display: flex;
+            flex-direction: row;
+            margin: 0px;
+            width: 100%;
+            height: auto;
 
-          ion-card-content {
-
-            ion-card-title {
-              text-align: left;
+            ion-img {
+              height: 120px;
             }
 
-            ion-card-subtitle {
-              text-align: right;
-              font-size: 1rem;
-              font-weight: 550;
-              padding: 5px 0;
-            }
+            ion-card-content {
 
-            ion-button {
-              width: 280px;
-              text-align: right;
+              ion-card-title {
+                text-align: left;
+              }
+
+              ion-card-subtitle {
+                text-align: right;
+                font-size: 1rem;
+                font-weight: 550;
+                padding: 5px 0;
+              }
+
             }
 
           }
@@ -140,23 +150,6 @@ ion-content {
       display: flex;
       flex-direction: column;
       align-items: center;
-
-      div {
-
-        ion-card {
-
-          ion-card-content {
-
-            ion-button {
-              width: 160px;
-              text-align: right;
-            }
-
-          }
-
-        }
-
-      }
 
     }
 

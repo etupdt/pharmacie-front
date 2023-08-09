@@ -6,11 +6,11 @@
         ? onSiteServiceCard.getImagePath
         : backendImages + '/onsiteservices/' + onSiteServiceCard.getImagePath}}" alt=""
     />
-  <ion-card-content>
+  <ion-list>
     <ion-item lines="none">
-      <ion-card-title
-        class="ion-text-wrap"
-      >{{ onSiteServiceCard.getOnSiteServiceName | isUpdated:getRefreshUpdate }}</ion-card-title>
+      <ion-card-title class="ion-text-wrap">
+        {{ onSiteServiceCard.getOnSiteServiceName | isUpdated:getRefreshUpdate }}
+      </ion-card-title>
       <ion-icon [ngClass]="displayIcon"
         *isadmin="getRole"
         slot="end"
@@ -29,5 +29,5 @@
       <span class="card-price">{{onSiteServiceCard.getPrice | number: '1.2-2'}} €</span>
       <span>{{onSiteServiceCard.getDuree}} minutes => </span>
     </div>
-  </ion-card-content>
+  </ion-list>
 </ion-card>

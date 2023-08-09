@@ -38,11 +38,13 @@ export class ProductViewComponent  implements OnInit {
 
   addProductToCart = (product: Product) => {
     if (this.product) {
-      const index = this.productService.cart.detail.findIndex(detail => detail.product.getId === product.getId)
-      if (index !== -1)
-        this.productService.cart.detail[index].qte++
-      else
-        this.productService.cart.detail.push({qte: 1, product: product})
+      if (this.product) {
+        const index = this.productService.cart.detail.findIndex(detail => detail.product.getId === product.getId)
+        if (index !== -1)
+          this.productService.cart.detail[index].qte++
+        else
+          this.productService.cart.detail.push({qte: 1, product: product})
+      }
     }
   }
 

@@ -1,5 +1,6 @@
 import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IonModal, ModalController, ToastController } from '@ionic/angular';
 import { Client } from 'src/app/entities/client';
 import { AuthService } from 'src/app/services/auth.service';
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private clientService: ClientService,
     public modalCtrl: ModalController,
+    private router: Router,
     private toastController: ToastController
   ) {
   }
@@ -94,6 +96,7 @@ export class LoginComponent implements OnInit {
       this.clientService.signalClientUpdated.set(this.clientService.clientInit)
       this.authService.menuIndex = 0
       this.authService.signalMenuIndexUpdated.set(0)
+      this.router.navigate([this.getMenuTabs[this.getMenuIndex].path + '/' + this.getRoutes[this.getMenuTabs[this.getMenuIndex].option].path])
       this.back()
     } else {
       this.authService.login(
@@ -143,5 +146,8 @@ export class LoginComponent implements OnInit {
   get getEmail () {return this.loginForm.get("email")!.value}
   get getPassword () {return this.loginForm.get("password")!.value}
   get getAuthenticatedEmail() {return this.authService.email}
+  get getMenuIndex() {return this.authService.menuIndex}
+  get getMenuTabs() {return this.authService.menuTabs}
+  get getRoutes() { return this.router.config[this.authService.menuIndex].children!.filter(r => r.path !== '**')}
 
 }

@@ -8,8 +8,10 @@
     >
       <ion-button slot="end" (click)="addProduct()">Ajouter</ion-button>
     </ion-item>
-    <div *ngFor="let product of (getProductsFromService | filterProduct:getRefresh)">
-      <app-product-card [productCard]="product" [displayIcon]="''"></app-product-card>
+    <div>
+      <div *ngFor="let product of (getProductsFromService | filterProduct:getRefresh)">
+        <app-product-card [productCard]="product" [displayIcon]="''"></app-product-card>
+      </div>
     </div>
   </ion-list>
 </ion-content>

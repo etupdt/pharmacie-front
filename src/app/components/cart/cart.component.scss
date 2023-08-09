@@ -47,6 +47,21 @@ ion-list {
       padding: 0;
     }
 
+    > ion-button {
+
+      width: 50%;
+      height: 36px;
+      border: 0px;
+      border-radius: 5px;
+      margin: 30px auto;
+      text-align: center;
+      font-weight: bold;
+
+      --color: black;
+      --background: rgba(var(--ion-color-primary-rgb), 0.14);
+
+    }
+
   }
 
   .product-price {
@@ -56,21 +71,6 @@ ion-list {
     text-align: right;
     margin-left: 0;
   }
-
-}
-
-ion-button {
-
-  width: 50%;
-  height: 36px;
-  border: 0px;
-  border-radius: 5px;
-  margin: 30px auto;
-  text-align: center;
-  font-weight: bold;
-
-  --color: black;
-  --background: rgba(var(--ion-color-primary-rgb), 0.14);
 
 }
 

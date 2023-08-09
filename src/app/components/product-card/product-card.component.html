@@ -1,18 +1,18 @@
 <ion-card expand="block" (click)="showDetail()">
-  <ion-item lines="none" style="position: absolute">
-    <ion-icon [ngClass]="displayIcon"
-      *isadmin="getRole"
-      slot="end"
+  <div
+    *isadmin="getRole"
+  >
+    <ion-icon
+      [ngClass]="displayIcon"
       name="pencil-outline"
       (click)="updateProduct();$event.stopPropagation()"
     ></ion-icon>
-    <ion-icon [ngClass]="displayIcon"
-      *isadmin="getRole"
-      slot="end"
+    <ion-icon
+      [ngClass]="displayIcon"
       name="trash-outline"
       (click)="deteteProduct(productCard.getId);$event.stopPropagation()"
     ></ion-icon>
-  </ion-item>
+  </div>
   <ion-img
     *ngIf="productCard.getImagePath !== ''"
     src="{{
